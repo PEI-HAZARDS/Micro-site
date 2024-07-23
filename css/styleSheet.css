@@ -1,8 +1,9 @@
-
+/* Estilos Gerais */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Roboto", sans-serif;;
 }
 
 body {
@@ -12,5 +13,17 @@ body {
 
 .interface {
     max-width: 1280px;
-    
+    margin: 0 auto;
+
+}
+
+/* Estilo Cabeçalho */
+header {
+    padding: 50px 5%;
+}
+
+header > .interface {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
