@@ -39,6 +39,8 @@ body {
 
 .flex {
     display: flex;
+     align-items: center;
+    justify-content: space-between; 
 }
 
 /* Estilo Cabeçalho */
@@ -62,6 +64,7 @@ header > .interface {
 }
 
 header a {
+    font-size: medium;
     display: inline-block;
     transition: .3s;
     color: blue;
@@ -84,13 +87,18 @@ header nav ul li {
 
 /* Corpo Página Inicial */
 section .topo-site {
-    padding: 20px 4%;
+    padding: 40px 4%;
 }
 
 section .topo-site .flex {
     align-items: center;
     justify-content: center;
-    gap: 90px;
+}
+
+.txt-topo > .btn-contacto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .txt-topo > .btn-contacto button {
@@ -122,7 +130,7 @@ section .topo-site .flex {
 .txt-topo p {
     font-size: 20px;
     color: aliceblue;
-    padding: 20px 0;
+    padding: 50px 100px;
 }
 
 .txt-topo p span {
@@ -132,7 +140,6 @@ section .topo-site .flex {
 
 #sp1 {
     font-size: 40px;
-    padding-top: 20px;
 }
 
 .img-top {
