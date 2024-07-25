@@ -7,14 +7,38 @@
 }
 
 body {
-    background-color: lightskyblue;
+    background-color: black;
     height: 100vh;
+    
 }
 
 .interface {
     max-width: 1280px;
     margin: 0 auto;
 
+}
+
+.btn-contacto button {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    padding: 20px, 40px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: blue;
+    border: 0;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-contacto button:hover {
+    transform: scale(1.1);
+    background-color: lightskyblue;
+}
+
+.flex {
+    display: flex;
 }
 
 /* Estilo Cabeçalho */
@@ -30,9 +54,111 @@ header > .interface {
 
 .logo-img {
     display: block;
-    transition: opacity 3s ease;
+    transition: opacity .3s ease;
 }
 
 .logo a:hover .logo-img {
     content: url('/images/logo1.png');
+}
+
+header a {
+    display: inline-block;
+    transition: .3s;
+    color: blue;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: lightskyblue;
+    transform: scale(1.05);
+}
+
+header nav ul {
+    list-style-type: none;
+}
+header nav ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0 40px;
+}
+
+/* Corpo Página Inicial */
+section .topo-site {
+    padding: 20px 4%;
+}
+
+section .topo-site .flex {
+    align-items: center;
+    justify-content: center;
+    gap: 90px;
+}
+
+.txt-topo > .btn-contacto button {
+    width: 300px;
+    height: 80px;
+    font-size: 20px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.txt-topo > .btn-contacto button:hover {
+    transform: scale(1.1);
+    font-size: 30px;
+    background-color: lightskyblue;
+}
+
+
+.txt-topo h1 {
+    color: aliceblue;
+    font-weight: 800;
+    font-size: 45px;
+}
+
+.txt-topo h1 span {
+    color: aqua;
+    font-size: 50px;
+}
+
+.txt-topo p {
+    font-size: 20px;
+    color: aliceblue;
+    padding: 20px 0;
+}
+
+.txt-topo p span {
+    font-size: 24px;
+    color: aqua;
+}
+
+#sp1 {
+    font-size: 40px;
+    padding-top: 20px;
+}
+
+.img-top {
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 320px;
+    background-color: lightblue;
+    border: 0;
+    border-radius: 20%;
+    animation: flutuar 2s ease-in-out infinite alternate;
+    position: relative;
+}
+
+.img-top img {
+    width: 100%;
+    height: auto;
+}
+
+@keyframes flutuar {
+    0% { 
+        top: 0;
+    }
+    100% {
+        top: 30px;
+    }
 }
