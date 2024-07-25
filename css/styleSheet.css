@@ -27,3 +27,12 @@ header > .interface {
     align-items: center;
     justify-content: space-between;
 }
+
+.logo-img {
+    display: block;
+    transition: opacity 3s ease;
+}
+
+.logo a:hover .logo-img {
+    content: url('/images/logo1.png');
+}
