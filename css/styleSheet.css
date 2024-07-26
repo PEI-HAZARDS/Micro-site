@@ -76,6 +76,11 @@ header a:hover {
     transform: scale(1.05);
 }
 
+header a.active {
+    color: lightskyblue;
+    transform: scale(1.05);
+}
+
 header nav ul {
     list-style-type: none;
 }
