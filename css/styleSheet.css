@@ -9,13 +9,11 @@
 body {
     background-color: black;
     height: 100vh;
-    
 }
 
 .interface {
     max-width: 1280px;
     margin: 0 auto;
-
 }
 
 .btn-contacto button {
@@ -34,13 +32,30 @@ body {
 
 .btn-contacto button:hover {
     transform: scale(1.1);
-    background-color: lightskyblue;
+    background: linear-gradient(-150deg, #3194f1 35%, blue 65%);
+    display: inline-block;
+    background-color: lightblue;
 }
 
 .flex {
     display: flex;
-     align-items: center;
-    justify-content: space-between; 
+}
+
+section {
+    margin-top: auto;
+    margin-bottom: 50px;
+}
+
+h2.titulo {
+    font-size: 42px;
+    text-align: center;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 /* Estilo Cabeçalho */
@@ -72,13 +87,25 @@ header a {
 }
 
 header a:hover {
-    color: lightskyblue;
-    transform: scale(1.05);
+    transform: scale(1.2);
+    background: linear-gradient(-100deg, #3194f1 45%, blue 55%);
+    display: inline-block;
+
+    /*Recorte o fundo até o texto*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 header a.active {
-    color: lightskyblue;
-    transform: scale(1.05);
+    transform: scale(1.1);
+    background: linear-gradient(-100deg, #3194f1 45%, blue 55%);
+    display: inline-block;
+
+    /*Recorte o fundo até o texto*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 header nav ul {
@@ -91,11 +118,11 @@ header nav ul li {
 }
 
 /* Corpo Página Inicial */
-section .topo-site {
+section.topo-site {
     padding: 40px 4%;
 }
 
-section .topo-site .flex {
+section.topo-site.flex {
     align-items: center;
     justify-content: center;
 }
@@ -122,25 +149,37 @@ section .topo-site .flex {
 
 
 .txt-topo h1 {
-    color: aliceblue;
+    color: white;
     font-weight: 800;
     font-size: 45px;
 }
 
 .txt-topo h1 span {
-    color: aqua;
     font-size: 50px;
+    background: linear-gradient(-100deg, #3194f1 45%, blue 55%);
+    display: inline-block;
+
+    /*Recorte o fundo até o texto*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .txt-topo p {
     font-size: 20px;
     color: aliceblue;
-    padding: 50px 100px;
+    padding: 20px 100px;
 }
 
 .txt-topo p span {
     font-size: 24px;
-    color: aqua;
+    background: linear-gradient(-100deg, #3194f1 45%, blue 55%);
+    display: inline-block;
+
+    /*Recorte o fundo até o texto*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 #sp1 {
@@ -154,7 +193,7 @@ section .topo-site .flex {
     justify-content: center;
     width: 300px;
     height: 320px;
-    background-color: lightblue;
+    background-color: rgb(251, 247, 247);
     border: 0;
     border-radius: 20%;
     animation: flutuar 2s ease-in-out infinite alternate;
@@ -173,4 +212,60 @@ section .topo-site .flex {
     100% {
         top: 30px;
     }
+}
+
+/* Estilo Especialidades */
+section.especialidades {
+    padding: 40px 4%;
+    color: white;
+}
+
+section.especialidades .flex {
+    margin-top: 50px;
+    gap: 60px;
+}
+
+.especialidades span {
+    background: linear-gradient(-150deg, #3194f1 30%, blue 70%);
+    display: inline-block;
+
+    /*Recorte o fundo até o texto*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    transition: .3s;
+}
+
+.especialidades .especialidades-box  {
+    width: 33.33%;
+    border:2px solid #fff;
+    font-size: 32px;
+    padding: 40px;
+    border-radius: 20%;
+}
+
+.especialidades .especialidades-box:hover  {
+    transform: scale(1.1);
+   box-shadow: 0 0 20px #ffffff83;
+}
+
+.especialidades .especialidades-box i {
+    display: inline-block;
+    background: linear-gradient(-120deg, #3194f1 30%, blue 70%);
+
+    /*Recorte o fundo até o texto*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
+    font-size: 70px;
+}
+
+.especialidades .especialidades-box p {
+    font-size: 24px;
+}
+
+.especialidades .especialidades-box h3 {
+    padding: 20px;
 }
