@@ -275,6 +275,11 @@ section.sobre {
     padding: 40px 4px;
 }
 
+section.sobre .flex {
+    align-items: center;
+    gap: 60px;
+}
+
 .sobre .img-sobre img {
     width: 80%;
     border-radius: 10%;
@@ -282,7 +287,7 @@ section.sobre {
 
 .sobre .txt-sobre {
     color: #fff;
-    font-size: 24px
+    font-size: 20px
 }
 
 .txt-sobre span {
@@ -293,5 +298,44 @@ section.sobre {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+.sobre .txt-sobre .txt-sec .btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
+    gap: 180px;
+    padding: 40px 0;
+}
+.sobre .txt-sobre .txt-sec .btn-social button {
+    border: 0;
+    background-color: lightblue;
+    border-radius: 30%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.sobre .txt-sobre .txt-sec .btn-social button {
+    border: 0;
+    background-color: rgb(72, 133, 219);
+    border-radius: 30%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.sobre .txt-sobre .txt-sec .btn-social button:hover {
+    transform: scale(1.5);
+
+    background: linear-gradient(-150deg, #3194f1 30%, blue 70%);
+    display: inline-block;
+
+    /*Recorte o fundo até o texto*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
