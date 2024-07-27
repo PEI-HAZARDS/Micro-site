@@ -47,8 +47,19 @@ section {
 }
 
 h2.titulo {
+    color: white;
     font-size: 42px;
     text-align: center;
+}
+
+h2.titulo span {
+    background: linear-gradient(-130deg, #3194f1 45%, blue 55%);
+    display: inline-block;
+
+    /*Recorte o fundo até o texto*/
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .icon {
@@ -338,4 +349,32 @@ section.sobre .flex {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+/* Estilo Projetos */
+section.projetos {
+    padding: 80px 4%;
+    box-shadow: 0 0 40px 10px #1d1e2b;
+}
+
+section.projetos .flex {
+    justify-content: space-around;
+}
+
+.img-proj {
+    width: 360px;
+    height: 460px;
+    background-size: cover;
+}
+
+#p1 {
+    background-image: url();
+}
+
+#p2 {
+    background-image: url();
+}
+
+#p3 {
+    background-image: url();
 }
