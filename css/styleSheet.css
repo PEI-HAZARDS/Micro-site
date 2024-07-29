@@ -368,13 +368,13 @@ section.projetos .flex {
 }
 
 #p1 {
-    background-image: url();
+    background-image: url(/images/python.png);
 }
 
 #p2 {
-    background-image: url();
+    background-image: url(/images/HTML.png);
 }
 
 #p3 {
-    background-image: url();
+    background-image: url(/images/JAVA.png);
 }
