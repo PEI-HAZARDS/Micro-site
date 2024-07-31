@@ -41,11 +41,6 @@ body {
     display: flex;
 }
 
-section {
-    margin-top: auto;
-    margin-bottom: 50px;
-}
-
 h2.titulo {
     margin: 20px;
     color: white;
@@ -72,7 +67,7 @@ h2.titulo span {
 
 /* Estilo Cabeçalho */
 header {
-    padding: 50px 5%;
+    padding: 40px 2%;
 }
 
 header > .interface {
@@ -134,7 +129,7 @@ section.topo-site {
     padding: 40px 4%;
 }
 
-section.topo-site.flex {
+section.topo-site .flex {
     align-items: center;
     justify-content: center;
 }
@@ -160,13 +155,14 @@ section.topo-site.flex {
 }
 
 
-.txt-topo h1 {
+.topo-site .txt-topo h1 {
+    line-height: 40px;
     color: white;
     font-weight: 800;
-    font-size: 45px;
+    font-size: 42px;
 }
 
-.txt-topo h1 span {
+.topo-site .txt-topo h1 span {
     font-size: 50px;
     background: linear-gradient(-100deg, #3194f1 45%, blue 55%);
     display: inline-block;
@@ -177,13 +173,13 @@ section.topo-site.flex {
     color: transparent;
 }
 
-.txt-topo p {
+.topo-site .txt-topo p {
     font-size: 20px;
     color: aliceblue;
     padding: 20px 100px;
 }
 
-.txt-topo p span {
+.topo-site .txt-topo p span {
     font-size: 24px;
     background: linear-gradient(-100deg, #3194f1 45%, blue 55%);
     display: inline-block;
@@ -198,7 +194,7 @@ section.topo-site.flex {
     font-size: 40px;
 }
 
-.img-top {
+.topo-site .img-top {
     float: right;
     display: flex;
     align-items: center;
@@ -218,12 +214,8 @@ section.topo-site.flex {
 }
 
 @keyframes flutuar {
-    0% { 
-        top: 0;
-    }
-    100% {
-        top: 30px;
-    }
+    0% { transform: translateY(0); }
+    100% {  transform: translateY(-10px); }
 }
 
 /* Estilo Especialidades */
@@ -511,10 +503,63 @@ footer .btn-social button:hover {
     /* Geral */
     .flex {
         flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+
+    h2.titulo {
+        text-align: center;
+    }
+
     /* Nav-Bar */
     .menu-PC, .btn-contacto {
         display: none;
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0; 
+        padding-bottom: 0;
+    }
+
+    header img {
+        display: inline-block;
+    }
+    
+    main {
+        margin-top: 0; 
+        padding-top: 0;
+    }
+    
+    /* topo site */
+    .topo-site .flex {
+        flex-direction: column-reverse;
+    }
+    .txt-topo > h1 {
+        transform: scale(0.7);
+        text-align: center;
+    }
+    
+    .topo-site .txt-topo > p {
+        font-size: 16px;
+        text-align: center; 
+    }
+
+    #sp1 {
+        text-align: center;
+        transform: scale(0.9);
+    }
+
+    .btn-contacto  {
+        transform: scale(0.8);
+    }
+
+    .topo-site .img-top {
+        width: 200px;
+        height: 200px;
     }
 }
 
