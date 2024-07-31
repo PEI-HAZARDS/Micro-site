@@ -245,7 +245,7 @@ section.especialidades {
     border: 0;
     border-radius: 25px;
     box-shadow: #ffffff4f 0 0 10px 5px;
-    margin: 100px;
+    margin: 80px;
     padding: 40px 4%;
     color: white;
 }
@@ -741,6 +741,9 @@ footer .btn-social button:hover {
     }
 
     /* Especialidades */
+    section.especialidades {
+        margin: 20px;
+    }
     section.especialidades .flex {
         flex-direction: column;
     }
