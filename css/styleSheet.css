@@ -222,13 +222,21 @@ section.topo-site .flex {
 
 /* Estilo Especialidades */
 section.especialidades {
+    background-color: #3937a318;
+    border: 0;
+    border-radius: 25px;
+    box-shadow: #ffffff4f 0 0 10px 5px;
+    margin: 40px;
     padding: 40px 4%;
     color: white;
 }
 
 section.especialidades .flex {
+    justify-content: center;
+    flex-direction: row   ;
+    align-items: center;
     margin-top: 50px;
-    gap: 60px;
+    gap: 40px;
 }
 
 .especialidades span {
@@ -244,6 +252,7 @@ section.especialidades .flex {
 }
 
 .especialidades .especialidades-box  {
+    margin-bottom: 20px;
     width: 33.33%;
     border:2px solid #fff;
     font-size: 32px;
@@ -253,7 +262,7 @@ section.especialidades .flex {
 
 .especialidades .especialidades-box:hover  {
     transform: scale(1.1);
-   box-shadow: 0 0 20px #ffffff83;
+    box-shadow: 0 0 20px #ffffff83;
 }
 
 .especialidades .especialidades-box i {
@@ -284,6 +293,10 @@ section.sobre {
 section.sobre .flex {
     align-items: center;
     gap: 60px;
+}
+
+.greeting {
+    padding-top: 50px;
 }
 
 .sobre .img-sobre img {
@@ -485,6 +498,11 @@ footer .line-footer a:hover {
     width: 110px;
 }
 
+.logo-footer img:hover {
+    content: url('/images/logo1.png');
+    transform: scale(1.1);
+}
+
 footer .btn-social button {
     width: 50px;
     height: 50px;
@@ -511,6 +529,7 @@ footer .btn-social button:hover {
     }
 
     h2.titulo {
+        font-size: 32px;
         text-align: center;
     }
 
@@ -565,12 +584,13 @@ footer .btn-social button:hover {
     }
 
     /* Especialidades */
-    .especialidades .flex {
+    section.especialidades .flex {
         flex-direction: column;
     }
 
     .especialidades .especialidades-box {
-        width: 90%;
+        flex-direction: column;
+        width: 100%;
         margin-bottom: 20px;
     }
 
@@ -636,15 +656,5 @@ footer .btn-social button:hover {
         width: 50px;
         height: 50px;
     }
-
-    footer .btn-social button:hover {
-        transform: scale(1.4);
-        background: linear-gradient(-150deg, #3194f1 30%, blue 70%);
-        display: inline-block;
-        /*Recorte o fundo até o texto*/
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    } 
 }
 
