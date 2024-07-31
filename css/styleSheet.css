@@ -6,6 +6,10 @@
     font-family: "Roboto", sans-serif;;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: black;
     height: 100vh;
@@ -67,7 +71,21 @@ h2.titulo span {
 
 /* Estilo Cabeçalho */
 header {
-    padding: 40px 2%;
+    margin: 0;
+    padding: 0;
+    transition: padding 0.3s ease;
+
+    background-color: rgba(0, 0, 0, 0.985);
+    box-shadow: #ffffffaf 0 0 10px 1px;
+    position: fixed;
+    z-index: 99999999;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+header:hover {
+    padding: 20px 10%;
 }
 
 header > .interface {
@@ -118,6 +136,7 @@ header a.active {
 header nav ul {
     list-style-type: none;
 }
+
 header nav.menu-PC ul li {
     display: inline-block;
     padding: 0 40px;
@@ -125,7 +144,8 @@ header nav.menu-PC ul li {
 
 /* Corpo Página Inicial */
 section.topo-site {
-    padding: 40px 4%;
+    padding-top: 250px;
+    padding-bottom: 80px;
 }
 
 section.topo-site .flex {
@@ -225,7 +245,7 @@ section.especialidades {
     border: 0;
     border-radius: 25px;
     box-shadow: #ffffff4f 0 0 10px 5px;
-    margin: 40px;
+    margin: 100px;
     padding: 40px 4%;
     color: white;
 }
@@ -335,7 +355,6 @@ section.sobre .flex {
     cursor: pointer;
     font-size: 30px;
 }
-
 
 .btn-social button:hover {
     transform: scale(1.5);
@@ -508,125 +527,42 @@ footer .btn-social button {
 }
 
 footer .btn-social button:hover {
-    transform: scale(1.4);
-    background: linear-gradient(-150deg, #3194f1 30%, blue 70%);
-    display: inline-block;
-    /*Recorte o fundo até o texto*/
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
+        transform: scale(1.4);
+        background: linear-gradient(-150deg, #3194f1 30%, blue 70%);
+        display: inline-block;
+        /*Recorte o fundo até o texto*/
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
 
-/* Estilo Menu Mobile */
-.menu-mobile {
-    display: none;
-    height: 100vh;
-    width: 60%;
-    background-color: #292ccd71;
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 99999;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.menu-mobile-ativo {
-    display: block;
-}
-
-.menu-mobile .interface {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 4%;
-}
-
-.menu-mobile .btn-fechar {
-    width: 10%;
-    height: 0;
-    display: flex;
-    align-items: left;
-    justify-content: left;
-}
-
-.menu-mobile .btn-fechar input {
-   opacity: 0;
-}
-
-.menu-mobile .btn-fechar i{
-    cursor: pointer;
-    font-size: 40px;
-    color: white;
-}
-
-.menu-mobile .btn-fechar i:hover {
-    text-shadow: #ffffff 0 0 10px;
-    font-weight: 500;
-}
-
-.btn-abrir .flex {
-    height: 0;
-    align-items: right;
-    justify-content: right;
-}
-.btn-abrir input {
-   opacity: 0;
-}
-.btn-abrir i {
-    cursor: pointer;
-    font-size: 50px;
-    color: white;
-}
-
-.btn-abrir i:hover {
-    font-weight: 500;
-    text-shadow: #ffffff 0 0 10px;
-}
-
-.menu-mobile nav ul {
-    padding: 50px 0;
-    text-align: right;
-    display: block;    
-    flex-direction: column;
-    gap: 20px;
-}
-
-.menu-mobile nav ul li {
-    padding: 20px 4%;
-    color: white;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.menu-mobile nav ul li:hover {
-    background-color: #4f4fdc55;
-    border-radius: 10px;
-}
-
-.menu-mobile nav ul li a {
-    display: block;
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
-}
-
-.overlay-menu {
-    display: none;
-    background-color: #1d1e2b;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index:88888;
-
-}
+    .menu-mobile {
+        width: 0%;
+        display: none;
+    }
 
 /* Responsividade */
 @media screen and (max-width: 1020px) {
     /* Geral */
+    body {
+        padding-top: 100px;
+    }
+
+    .interface {
+        padding: 0 4%;
+    }
+
+    header > .interface {
+        height: 10%;
+        background-color: rgba(45, 50, 88, 0.985);
+        box-shadow: #ffffffaf 0 0 20px 2px;
+        position: fixed;
+        z-index: 99999999;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+
     .flex {
         flex-direction: column;
         display: flex;
@@ -642,6 +578,114 @@ footer .btn-social button:hover {
     /* Nav-Bar */
     .menu-PC, .btn-contacto {
         display: none;
+    }
+
+    /* Estilo Menu Mobile */
+    .menu-mobile {
+        display: none;
+        height: 100vh;
+        width: 60%;
+        background-color: #292ccd71;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 99999;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .menu-mobile-ativo {
+        display: block;
+    }
+
+    .menu-mobile .interface {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 4%;
+    }
+
+    .menu-mobile .btn-fechar {
+        width: 10%;
+        height: 0;
+        display: flex;
+        align-items: left;
+        justify-content: left;
+    }
+
+    .menu-mobile .btn-fechar i{
+        cursor: pointer;
+        font-size: 40px;
+        color: white;
+    }
+
+    .menu-mobile .btn-fechar i:hover {
+        text-shadow: #ffffff 0 0 10px;
+        font-weight: 500;
+    }
+
+    .btn-abrir .flex {
+        height: 0;
+        align-items: right;
+        justify-content: right;
+    }
+    
+    .btn-abrir input {
+        opacity: 0;
+    }
+
+    .btn-abrir i {
+        cursor: pointer;
+        font-size: 50px;
+        color: white;
+    }
+
+    .btn-abrir i:hover {
+        font-weight: 500;
+        text-shadow: #ffffff 0 0 10px;
+    }
+
+    .menu-mobile nav ul {
+        padding: 50px 0;
+        text-align: right;
+        display: block;    
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .menu-mobile nav ul li {
+        padding: 20px 4%;
+        color: white;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .menu-mobile nav ul li:hover {
+        background-color: #4f4fdc55;
+        border-radius: 10px;
+    }
+
+    .menu-mobile nav ul li a {
+        display: block;
+        color: white;
+        font-size: 20px;
+        text-decoration: none;
+    }
+
+    .overlay-menu {
+        display: none;
+        background-color: #0b072f99;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index:8888;
+    }
+
+    .overlay-ativo {
+        display: block;
     }
 
     .btn-abrir {
