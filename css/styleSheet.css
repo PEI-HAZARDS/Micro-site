@@ -509,6 +509,7 @@ form p {
 }
 
 .sucesso-mensagem {
+    font-size: 50px;
     display: none;
     margin: 0;
     padding: 0;
