@@ -195,14 +195,17 @@
         <section class="forms" id="section 5">
             <div class="interface">
                 <div class="flex">
-                    <form action="">
+                    <form id="form" action="">
                         <h2 class="titulo">Fala <span>Comigo.</span></h2>
+                        <p>Se tens alguma questão ou sugestão, não hesites em contactar-me!</p>
 
                         <input type="text" name="nome" placeholder="Nome" required>
-                        <input type="text" name="email" placeholder="Email" required>
-                        <input type="text" name="num tel" placeholder="Número Telemóvel">
-                        <textarea type="text" name="msg" placeholder="Mensagem" required></textarea>
-                        <div class="btn-enviar"><input type="submit" value="ENVIAR"></input></div>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea type="message" name="msg" placeholder="Mensagem" required></textarea>
+                        <div class="erro-mensagem" id="msg-erro">Campos obrigatórios por preencher</div>
+                        <div class="load-envio"><i class="bi bi-arrow-clockwise"></i></div>
+                        <div class="sucesso-mensagem" id="msg-succes">Mensagem enviada com sucesso!</i></div>
+                        <div class="btn-enviar" id="btn-envio-form"><input type="submit" value="ENVIAR"></input></div>
                     </form>
                 </div>
             </div>
