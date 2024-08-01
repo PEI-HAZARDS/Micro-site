@@ -100,7 +100,7 @@ header > .interface {
 }
 
 .logo a:hover .logo-img {
-    content: url('./images/logo1.png');
+    content: url('../images/logo.png');
 }
 
 header a {
