@@ -67,9 +67,25 @@ submitButton.addEventListener("click", function (event) {
     // Adicionar um pequeno atraso antes de enviar o formulário
     setTimeout(() => {
         msgSucces.classList.add("active");
-        loadIcon.classList.remove("active-load")
-      form.submit();
+        loadIcon.classList.remove("active-load");
+        /* Envio de dados */
+        fetch("https://api.sheetmonkey.io/form/BuwLjT1wcaLkFiqDt1gnu", {
+            method: "post",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                Nome: formInputs[0].value,
+                Email: formInputs[1].value,
+                Assunto: formInputs[2].value,
+            }),
+        });
     }, 2000);
+    setTimeout(() => {
+        msgSucces.classList.remove("active");
+        form.reset();
+    }, 800);
   }
 });
 
