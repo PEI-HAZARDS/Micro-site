@@ -628,7 +628,7 @@ footer .btn-social button:hover {
 
     header > .interface {
         height: 10%;
-        background-color: rgba(45, 50, 88, 0.985);
+        background-color: rgba(0, 0, 0, 0.956);
         box-shadow: #ffffffaf 0 0 20px 2px;
         position: fixed;
         z-index: 99999999;
@@ -656,20 +656,21 @@ footer .btn-social button:hover {
 
     /* Estilo Menu Mobile */
     .menu-mobile {
-        display: none;
+        display: block;
         height: 100vh;
         width: 60%;
-        background-color: #292ccd71;
+        background-color: #5b64ce43;
         position: fixed;
-        top: 0;
+        top: -100vh;
         right: 0;
         z-index: 99999;
         border-radius: 10px;
         cursor: pointer;
+        transition: top 0.5s ease;
     }
 
     .menu-mobile-ativo {
-        display: block;
+        top: 0;
     }
 
     .menu-mobile .interface {
@@ -687,7 +688,7 @@ footer .btn-social button:hover {
         justify-content: left;
     }
 
-    .menu-mobile .btn-fechar i{
+    .menu-mobile .btn-fechar i {
         cursor: pointer;
         font-size: 40px;
         color: white;
@@ -737,10 +738,12 @@ footer .btn-social button:hover {
 
     .menu-mobile nav ul li:hover {
         background-color: #4f4fdc55;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .menu-mobile nav ul li a {
+        width: 100%;
+        text-align: center;
         display: block;
         color: white;
         font-size: 20px;

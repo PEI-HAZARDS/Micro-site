@@ -28,8 +28,6 @@ submitButton.addEventListener("click", function (event) {
     formInputs.forEach((input) => {
       if (input.type !== "submit") {
         form.classList.add("shake");
-        // Declare msgErro variable
-        let msgErro = document.getElementById("msg-erro");
         msgErro.classList.add("active");
         if (input.type === "email") {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -51,16 +49,17 @@ submitButton.addEventListener("click", function (event) {
         }
       }
     });
-
+    
     setTimeout(() => {
       form.classList.remove("shake");
-    }, 500);
+      msgErro.classList.remove("active");
+    }, 1500);
   } else {
-    msgErro.classList.remove("active");
     formInputs.forEach((input) => {
       input.classList.remove("por-preencher");
       input.classList.remove("preenchido");
     });
+
     const load = document.getElementById("load-envio");
     const loadIcon = load.querySelector("i");
     
@@ -68,7 +67,7 @@ submitButton.addEventListener("click", function (event) {
       loadIcon.classList.add("active-load");
     }
     
-    // Adicionar um pequeno atraso antes de enviar o formulário
+    /* Delay */
     setTimeout(() => {
         msgSucces.classList.add("active");
         loadIcon.classList.remove("active-load");
