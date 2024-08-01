@@ -100,7 +100,7 @@ header > .interface {
 }
 
 .logo a:hover .logo-img {
-    content: url('/images/logo1.png');
+    content: url('images/logo1.png');
 }
 
 header a {
@@ -389,15 +389,15 @@ section.projetos .flex {
     background-position: 100% 100%;
 }
 #p1 {
-    background-image: url(/images/python.png);
+    background-image: url(images/python.png);
 }
 
 #p2 {
-    background-image: url(/images/HTML.png);
+    background-image: url(images/HTML.png);
 }
 
 #p3 {
-    background-image: url(/images/JAVA.png);
+    background-image: url(images/JAVA.png);
 }
 
 .overlay {
@@ -595,7 +595,7 @@ footer .line-footer a:hover {
 }
 
 .logo-footer img:hover {
-    content: url('/images/logo1.png');
+    content: url('images/logo1.png');
     transform: scale(1.1);
 }
 
