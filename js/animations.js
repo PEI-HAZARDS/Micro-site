@@ -67,8 +67,11 @@ submitButton.addEventListener("click", function (event) {
 
     // Adicionar um pequeno atraso antes de enviar o formulário
     setTimeout(() => {
+        setTimeout(() => {
+            loadIcon.classList.remove("active-load")
+        }, 500)
       form.submit();
-    }, 500);
+    }, 2000);
   }
 });
 

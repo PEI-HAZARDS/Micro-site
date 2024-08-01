@@ -531,11 +531,11 @@ form p {
 }
 
 
-.load-envio i {
-    display: none;
+.load-envio {
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
+    font-size: 0px;
     color: #292ccd;
     transform-origin: center;
     background-size: cover;
@@ -543,7 +543,7 @@ form p {
 }
 
 .active-load {
-    display: flex;
+    font-size: 40px;
 }
 
 @keyframes rodar {
