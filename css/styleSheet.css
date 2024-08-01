@@ -544,10 +544,6 @@ footer .btn-social button:hover {
 /* Responsividade */
 @media screen and (max-width: 1020px) {
     /* Geral */
-    body {
-        padding-top: 100px;
-    }
-
     .interface {
         padding: 0 4%;
     }
@@ -696,26 +692,22 @@ footer .btn-social button:hover {
         display: none;
     }
 
-    header {
-        margin-bottom: 0; 
-        padding-bottom: 0;
-    }
-
     header img {
         padding: 10px;
         width:100px;
         display: inline-block;
     }
     
-    main {
-        margin-top: 0; 
-        padding-top: 0;
-    }
-    
     /* topo site */
+    section.topo-site {
+        padding-top: 200px;
+        padding-bottom: 80px;
+    }
+
     .topo-site .flex {
         flex-direction: column-reverse;
     }
+    
     .txt-topo > h1 {
         transform: scale(0.7);
         text-align: center;
