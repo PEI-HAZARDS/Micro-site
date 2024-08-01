@@ -49,6 +49,7 @@ submitButton.addEventListener("click", function (event) {
         }
       }
     });
+
     setTimeout(() => {
       form.classList.remove("shake");
     }, 500);
@@ -60,6 +61,7 @@ submitButton.addEventListener("click", function (event) {
     });
     const load = document.getElementById("load-envio");
     const loadIcon = load.querySelector("i");
+    
     if (loadIcon) {
       loadIcon.classList.add("active-load");
     }
@@ -82,6 +84,7 @@ submitButton.addEventListener("click", function (event) {
             }),
         });
     }, 2000);
+    
     setTimeout(() => {
         msgSucces.classList.remove("active");
         form.reset();
@@ -92,25 +95,25 @@ submitButton.addEventListener("click", function (event) {
 /* Validação */
 formInputs.forEach((input) => {
     if (input.type !== "submit") {
-        input.addEventListener("input", () => {
-          if (input.type === "email") {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(input.value)) {
-              input.classList.add("por-preencher");
-              input.classList.remove("preenchido");
-            } else {
-              input.classList.remove("por-preencher");
-              input.classList.add("preenchido");
-            }
+      input.addEventListener("input", () => {
+        if (input.type === "email") {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(input.value)) {
+            input.classList.add("por-preencher");
+            input.classList.remove("preenchido");
           } else {
-            if (!input.checkValidity()) {
-              input.classList.add("por-preencher");
-              input.classList.remove("preenchido");
-            } else {
-              input.classList.remove("por-preencher");
-              input.classList.add("preenchido");
-            }
+            input.classList.remove("por-preencher");
+            input.classList.add("preenchido");
           }
-        });
+        } else {
+          if (!input.checkValidity()) {
+            input.classList.add("por-preencher");
+            input.classList.remove("preenchido");
+          } else {
+            input.classList.remove("por-preencher");
+            input.classList.add("preenchido");
+          }
+        }
+      });
     }
 });
