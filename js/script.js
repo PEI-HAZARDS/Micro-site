@@ -28,6 +28,8 @@ submitButton.addEventListener("click", function (event) {
     formInputs.forEach((input) => {
       if (input.type !== "submit") {
         form.classList.add("shake");
+        // Declare msgErro variable
+        let msgErro = document.getElementById("msg-erro");
         msgErro.classList.add("active");
         if (input.type === "email") {
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -70,25 +72,26 @@ submitButton.addEventListener("click", function (event) {
     setTimeout(() => {
         msgSucces.classList.add("active");
         loadIcon.classList.remove("active-load");
+
         /* Envio de dados */
         fetch("https://api.sheetmonkey.io/form/BuwLjT1wcaLkFiqDt1gnu", {
-            method: "post",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                Nome: formInputs[0].value,
-                Email: formInputs[1].value,
-                Assunto: formInputs[2].value,
-            }),
+          method: "post",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Nome: formInputs[0].value,
+            Email: formInputs[1].value,
+            Assunto: formInputs[2].value,
+          }),
         });
     }, 2000);
     
     setTimeout(() => {
         msgSucces.classList.remove("active");
         form.reset();
-    }, 800);
+    }, 3000);
   }
 });
 
