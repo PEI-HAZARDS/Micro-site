@@ -178,6 +178,15 @@ linksClick.forEach((link) => {
 });
 
 /* Hiper Link Especialidades*/
+document.querySelectorAll(".btn-social a").forEach((link) => {
+  console.log("Adding click event listener to link:", link);
+  link.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log("Link clicked:", this.href);
+    window.open(this.href);
+  });
+});
+
 document.querySelectorAll(".especialidades-box").forEach((box) => {
   box.addEventListener("click", function () {
     const link = this.querySelector("a");
