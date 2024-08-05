@@ -123,7 +123,7 @@ formInputs.forEach((input) => {
 /* Animação Scroll */
 let sections = document.querySelectorAll("section");
 let links = document.querySelectorAll("nav a");
-let header = document.querySelector("header");
+let header = document.querySelector("header nav");
 let scrollPosition = window.scrollY;
 let scrollLinks = Array.from(links);
 
@@ -143,17 +143,36 @@ window.addEventListener("scroll", function () {
 });
 
 /* Scroll Suave */
-let linksClick = document.querySelectorAll("section");
+let linksclick = document.querySelectorAll("section");
+let linksClick = Array.from(linksclick);
+
 linksClick.forEach((link) => {
   link.addEventListener("click", function (event) {
     event.preventDefault();
     let target = document.querySelector(link.getAttribute("href"));
+    let topSite = document.querySelector("topo-site");
+    let header = document.querySelector("header nav");
     if (target) {
       window.scrollTo({
-        top: target.offsetTop - header.offsetHeight,
+        top:
+          target.offsetTop -
+          (topSite ? topSite.offsetHeight : header.offsetHeight),
         behavior: "smooth",
       });
-    } else {
+    }
+    let buttonContact = document.querySelector("#btn-contacto-Click");
+
+    if (buttonContact) {
+      buttonContact.addEventListener("click", function (event) {
+        event.preventDefault();
+        let target = document.querySelector("#section5");
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop,
+            behavior: "smooth",
+          });
+        }
+      });
     }
   });
 });
