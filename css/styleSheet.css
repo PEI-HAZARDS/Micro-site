@@ -112,7 +112,7 @@ header a {
 }
 
 header a:hover {
-    transform: scale(1.2);
+    transform: scale(1.5);
     background: linear-gradient(-100deg, #3194f1 45%, blue 55%);
     display: inline-block;
 
@@ -122,10 +122,11 @@ header a:hover {
     color: transparent;
 }
 
-header a.active {
-    transform: scale(1.1);
+.active-inline {
+    transform: scale(1.2);
     background: linear-gradient(-100deg, #3194f1 45%, blue 55%);
     display: inline-block;
+    font-weight: 500;
 
     /*Recorte o fundo até o texto*/
     -webkit-background-clip: text;
@@ -270,6 +271,11 @@ section.especialidades .flex {
     transition: .3s;
 }
 
+.especialidades .especialidades-box a {
+    text-decoration: none;
+    color: white;
+}
+
 .especialidades .especialidades-box  {
     margin-bottom: 20px;
     width: 33.33%;
@@ -282,6 +288,7 @@ section.especialidades .flex {
 .especialidades .especialidades-box:hover  {
     transform: scale(1.1);
     box-shadow: 0 0 20px #ffffff83;
+    cursor: pointer;
 }
 
 .especialidades .especialidades-box i {
@@ -297,6 +304,7 @@ section.especialidades .flex {
 }
 
 .especialidades .especialidades-box p {
+    text-align: center;
     font-size: 24px;
 }
 

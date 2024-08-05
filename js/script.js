@@ -119,3 +119,51 @@ formInputs.forEach((input) => {
       });
     }
 });
+
+/* Animação Scroll */
+let sections = document.querySelectorAll("section");
+let links = document.querySelectorAll("nav a");
+let header = document.querySelector("header");
+let scrollPosition = window.scrollY;
+let scrollLinks = Array.from(links);
+
+window.addEventListener("scroll", function () {
+  scrollPosition = window.scrollY;
+  sections.forEach((section) => {
+    if (scrollPosition >= section.offsetTop - header.offsetHeight) {
+      links.forEach((link) => {
+        link.classList.remove("active-inline");
+      });
+      scrollLinks = Array.from(links);
+      scrollLinks
+      .find((link) => link.getAttribute("href") === `#${section.id}`)
+      .classList.add("active-inline");
+    }
+  });
+});
+
+/* Scroll Suave */
+let linksClick = document.querySelectorAll("section");
+linksClick.forEach((link) => {
+  link.addEventListener("click", function (event) {
+    event.preventDefault();
+    let target = document.querySelector(link.getAttribute("href"));
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop - header.offsetHeight,
+        behavior: "smooth",
+      });
+    } else {
+    }
+  });
+});
+
+/* Hiper Link Especialidades*/
+document.querySelectorAll(".especialidades-box").forEach((box) => {
+  box.addEventListener("click", function () {
+    const link = this.querySelector("a");
+    if (link) {
+      window.open(link.href, "_blank");
+    }
+  });
+});
