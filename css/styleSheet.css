@@ -260,7 +260,6 @@ section.especialidades {
 }
 
 section.especialidades .flex {
-    margin:auto;
     justify-content: center;
     flex-direction: row;
     align-items: center;
@@ -285,12 +284,10 @@ section.especialidades .flex {
 }
 
 .especialidades .especialidades-box  {
-    flex-direction: column;
     margin-top: 20px;
     box-sizing: border-box;
     padding: 25px;
     width: 33.33%;
-    height: 100%;
     border:2px solid #fff;
     font-size: 32px;
     border-radius: 20%;
@@ -639,7 +636,31 @@ footer .btn-social button:hover {
     }
 
 /* Responsividade */
+
 @media screen and (max-width: 1320px) {
+    /* Especialidades */
+    .especialidades .especialidades-box {
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 30px;
+    }
+
+    .especialidades .especialidades-box i {
+        font-size: 50px;
+    }
+
+    .especialidades .especialidades-box p {
+        font-size: 18px;
+    }
+
+    .especialidades .especialidades-box h3 {
+        font-size: 20px;
+    }
+    
+}
+
+@media screen and (max-width: 1020px) {
     /* Geral */
     .interface {
         padding: 0 4%;
