@@ -121,20 +121,23 @@ formInputs.forEach((input) => {
 });
 
 /* Animação Scroll */
-let sections = document.querySelectorAll("section");
-let links = document.querySelectorAll("nav a");
-let header = document.querySelector("header nav");
-let scrollPosition = window.scrollY;
-let scrollLinks = Array.from(links);
-
 window.addEventListener("scroll", function () {
-  scrollPosition = window.scrollY;
+  const scrollPosition = window.scrollY;
+  const header = document.querySelector("header");
+  const sections = document.querySelectorAll("section");
+  const links = document.querySelectorAll("nav a");
+
+  
   sections.forEach((section) => {
-    if (scrollPosition >= section.offsetTop - header.offsetHeight) {
+    if (
+      scrollPosition >= section.offsetTop - header.offsetHeight &&
+      scrollPosition <
+      section.offsetTop + section.offsetHeight - header.offsetHeight
+    ) {
+      const scrollLinks = Array.from(links);
       links.forEach((link) => {
         link.classList.remove("active-inline");
       });
-      scrollLinks = Array.from(links);
       scrollLinks
       .find((link) => link.getAttribute("href") === `#${section.id}`)
       .classList.add("active-inline");
@@ -160,22 +163,24 @@ linksClick.forEach((link) => {
         behavior: "smooth",
       });
     }
-    let buttonContact = document.querySelector("#btn-contacto-Click");
+  });
+});
 
-    if (buttonContact) {
-      buttonContact.addEventListener("click", function (event) {
-        event.preventDefault();
-        let target = document.querySelector("#section5");
-        if (target) {
-          window.scrollTo({
-            top: target.offsetTop,
-            behavior: "smooth",
-          });
-        }
+/* Botão Contacto */
+let buttonContact = document.querySelector("#btn-contacto-Click");
+
+if (buttonContact) {
+  buttonContact.addEventListener("click", function (event) {
+    event.preventDefault();
+    let target = document.querySelector("#section5");
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop,
+        behavior: "smooth",
       });
     }
   });
-});
+}
 
 /* Hiper Link Especialidades*/
 document.querySelectorAll(".btn-social a").forEach((link) => {
