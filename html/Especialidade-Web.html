@@ -1,11 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href=".././css/styleSheet.css">
+    <!--Bootsrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Scripts -->
+    <script src=".././js/script.js" defer></script>
+    <title>Programação Web</title>
 </head>
+
 <body>
-    
+    <header>
+        <div class="interface">
+            <!--Logo-->
+            <div class="logo">
+                <a href="index.html">
+                    <img src=".././images/logo.png" alt="Logo" class="logo-img">
+                </a>
+            </div>
+
+            <nav class="menu-PC">
+                <ul>
+                    <li><a href="#section 1" class="active-inline">Página Inicial</a></li>
+                    <li><a href="#section 2">Especialidades</a></li>
+                    <li><a href="#section 3">Sobre Mim</a></li>
+                    <li><a href="#section 4">Projetos</a></li>
+                </ul>
+            </nav>
+
+            <div class="btn-abrir" id="btn-menu">
+                <i class="bi bi-three-dots"></i>
+            </div>
+
+            <div class="btn-contacto">
+                <a title="email" href="mailto:pauladascardoso@gmail.com">
+                    <button type="button">Contacto</button>
+                </a>
+            </div>
+
+            <div class="menu-mobile" id="btn-mobile">
+                <div class="btn-fechar">
+                    <i class="bi bi-x"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#section 1">Página Inicial</a></li>
+                        <li><a href="#section 2">Especialidades</a></li>
+                        <li><a href="#section 3">Sobre Mim</a></li>
+                        <li><a href="#section 4">Projetos</a></li>
+                        <li><a title="email" href="mailto:pauladascardoso@gmail.com">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="overlay-menu" id="overlay-mobile"></div>
+
+        </div>
+    </header>
 </body>
+
 </html>

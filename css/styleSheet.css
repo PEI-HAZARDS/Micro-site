@@ -100,6 +100,7 @@ header > .interface {
 }
 
 .logo a:hover .logo-img {
+    width: 80%;
     content: url('../images/logo1.png');
 }
 
@@ -783,8 +784,13 @@ footer .btn-social button:hover {
 
     header img {
         padding: 10px;
-        width:100px;
+        width: 90px;
         display: inline-block;
+    }
+
+    header img:hover {
+        content: url('../images/logo1.png');
+        transform: scale(0.8);
     }
     
     /* topo site */
