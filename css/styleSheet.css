@@ -629,7 +629,7 @@ footer .btn-social button:hover {
     }
 
 /* Responsividade */
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 1320px) {
     /* Geral */
     .interface {
         padding: 0 4%;
