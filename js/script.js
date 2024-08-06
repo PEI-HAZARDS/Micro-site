@@ -190,8 +190,11 @@ document.querySelectorAll(".btn-social a").forEach((link) => {
 document.querySelectorAll(".especialidades-box").forEach((box) => {
   box.addEventListener("click", function () {
     const link = this.querySelector("a");
-    if (link) {
-      window.open(link.href, "_blank");
+    if (!link.href.includes("ua")) { 
+      window.location.href = link.href;
+    }
+    else {
+      window.open(link.href);
     }
   });
 });
