@@ -284,13 +284,14 @@ section.especialidades .flex {
     color: white;
 }
 
-section.especialidades .especialidades-box  {
-    justify-content: center;
+.especialidades .especialidades-box  {
     flex-direction: column;
     margin-top: 20px;
-    padding: 25px;
+    box-sizing: border-box;
+    padding: 20px;
     width: 33.33%;
-    border: 2px solid #fff;
+    height: 100%;
+    border:2px solid #fff;
     font-size: 32px;
     border-radius: 20%;
 }
@@ -319,7 +320,6 @@ section.especialidades .especialidades-box  {
 }
 
 .especialidades .especialidades-box h3 {
-    text-align: left;
     padding: 20px;
 }
 
