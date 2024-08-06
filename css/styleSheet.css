@@ -833,6 +833,7 @@ footer .btn-social button:hover {
         flex-direction: column;
         width: 100%;
         margin-bottom: 20px;
+        border-radius: 30px;
     }
 
     .especialidades .especialidades-box i {
