@@ -69,28 +69,22 @@ submitButton.addEventListener("click", function (event) {
     
     /* Delay */
     setTimeout(() => {
-        msgSucces.classList.add("active");
-        loadIcon.classList.remove("active-load");
-
         /* Envio de dados */
-        fetch("https://api.sheetmonkey.io/form/BuwLjT1wcaLkFiqDt1gnu", {
-          method: "post",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            Nome: formInputs[0].value,
-            Email: formInputs[1].value,
-            Assunto: formInputs[2].value,
-          }),
-        });
+        const scriptURL =
+          "https://script.google.com/macros/s/AKfycbxhTuQNHgFC2MhHuDdErKG46-zmvp5_iLLOM4GQ8LGhASzP0kUJY6qYdoEWx-3-3wzI/exec";
+        
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then(() =>
+            form.submit(),
+            msgSucces.classList.add("active"),
+            loadIcon.classList.remove("active-load"),
+            alert("Formulário enviado com sucesso! Obrigado pelo seu contacto."),
+        )
+        .then(() => {
+            form.reset();
+          })
+          .catch((error) => console.error("Error!", error.message));
     }, 2000);
-    
-    setTimeout(() => {
-        msgSucces.classList.remove("active");
-        form.reset();
-    }, 3000);
   }
 });
 
@@ -184,7 +178,6 @@ if (buttonContact) {
 
 /* Hiper Link Especialidades*/
 document.querySelectorAll(".btn-social a").forEach((link) => {
-  console.log("Adding click event listener to link:", link);
   link.addEventListener("click", function (event) {
     event.preventDefault();
     console.log("Link clicked:", this.href);
