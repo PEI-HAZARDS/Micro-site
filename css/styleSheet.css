@@ -32,7 +32,7 @@ body {
     border: 0;
     border-radius: 30px;
     cursor: pointer;
-    transition: .3s;
+    transition: .5s;
 }
 
 .btn-contacto button:hover {
@@ -393,7 +393,7 @@ section.projetos .flex {
 .img-proj {
     margin-top: 25px;
     position: relative;
-    border-radius: 5%;
+    border-radius: 10px;
     width: 360px;
     height: 460px;
     background-size: cover;
@@ -405,6 +405,7 @@ section.projetos .flex {
 .img-proj:hover {
     background-position: 100% 100%;
 }
+
 #p1 {
     background-image: url(../images/python.png);
 }
@@ -424,7 +425,7 @@ section.projetos .flex {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.512);
-    border-radius: 5%;
+    border-radius: 10px;
 
     display: flex;
     align-items: center;
@@ -434,8 +435,6 @@ section.projetos .flex {
 
     color: aliceblue;
     opacity: 0;
-
-    transition: .3s;
 }
 
 .overlay:hover {
@@ -489,6 +488,7 @@ form .btn-enviar input[type=submit] {
     background-color: #292ccd;
     font-weight: 700;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 form .btn-enviar input[type=submit]:hover {
@@ -843,6 +843,7 @@ footer .btn-social button:hover {
     .topo-site .txt-topo > p {
         font-size: 16px;
         text-align: center; 
+        padding: 10px 0;
     }
 
     #sp1 {
@@ -852,6 +853,10 @@ footer .btn-social button:hover {
 
     .btn-contacto  {
         transform: scale(0.8);
+    }
+
+    .btn-contacto > #btn-contacto-Click {
+        font-size: 25px;
     }
 
     .topo-site .img-top {
