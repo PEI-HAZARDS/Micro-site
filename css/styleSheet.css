@@ -391,6 +391,7 @@ section.projetos .flex {
 }
 
 .img-proj {
+    position: relative;
     margin-top: 25px;
     position: relative;
     border-radius: 10px;
@@ -400,6 +401,7 @@ section.projetos .flex {
     background-position: 100% 0%;
     transition: 8s;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .img-proj:hover {
@@ -416,6 +418,16 @@ section.projetos .flex {
 
 #p3 {
     background-image: url(../images/JAVA.png);
+}
+
+.img-proj a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    z-index: 2;
 }
 
 .overlay {
@@ -435,9 +447,11 @@ section.projetos .flex {
 
     color: aliceblue;
     opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
 }
 
-.overlay:hover {
+.img-proj:hover .overlay {
     opacity: 1;
 }
 
@@ -943,3 +957,24 @@ footer .btn-social button:hover {
     }
 }
 
+/* TIC-TAC-TOE */
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+}
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.cell.taken {
+    pointer-events: none;
+}
