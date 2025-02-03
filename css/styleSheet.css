@@ -84,6 +84,8 @@ header {
     transition: padding 0.3s ease;
 
     background-color: rgba(0, 0, 0, 0.985);
+    opacity: 95%;
+
     box-shadow: #ffffffaf 0 0 10px 1px;
     position: fixed;
     z-index: 99999999;
@@ -93,7 +95,7 @@ header {
 }
 
 header:hover {
-    padding: 20px 10%;
+    padding: 15px 10%;
 }
 
 header > .interface {
