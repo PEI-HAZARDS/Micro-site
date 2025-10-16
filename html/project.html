@@ -10,10 +10,16 @@
   <header class="site-header">
     <div class="container">
       <a href="../index.html" class="brand">Intelligent Logistics</a>
+      <!-- Simple back-only navbar for detail pages -->
+      <nav class="detail-nav">
+        <ul class="nav-list">
+          <li><a href="../index.html#project" class="nav-link back-link">← Voltar</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container page-container">
     <h1>Projeto</h1>
     <p>Detalhes do projeto, objetivos, metodologia e entregáveis. Esta página é um espaço para descrever em profundidade o trabalho desenvolvido no âmbito do PEI.</p>
 
@@ -31,5 +37,23 @@
       </div>
     </div>
   </footer>
+  <script>
+    // Back link behavior: prefer history.back() to stay in same tab
+    (function(){
+      var back = document.querySelector('.back-link');
+      if (!back) return;
+      back.addEventListener('click', function(e){
+        // If there is a history to go back to, use it
+        e.preventDefault();
+        if (window.history && window.history.length > 1) {
+          window.history.back();
+          return;
+        }
+        // fallback: replace location in same tab (no new tab)
+        var href = back.getAttribute('href') || '../index.html';
+        window.location.replace(href);
+      }, {passive:false});
+    })();
+  </script>
 </body>
 </html>
