@@ -1,1 +1,2 @@
-./conteudos/*.md
+# Ignore all files in the conteudos directory
+conteudos/*
