@@ -33,7 +33,6 @@
           <li><a href="#repository" class="nav-link">Repositório</a></li>
           <li><a href="#team" class="nav-link">Equipa</a></li>
           <li><a href="#private" class="nav-link">Área Privada</a></li>
-          <li><a href="#contact" class="nav-link">Contacto</a></li>
         </ul>
       </nav>
       
@@ -55,7 +54,6 @@
     
     <ul class="nav-list">
       <li><a href="#project" class="nav-link">Projeto</a></li>
-      <li><a href="./html/project.html" class="nav-link project-details-link">Detalhes do Projeto</a></li>
       <li><a href="#resources" class="nav-link">Recursos</a></li>
       <li><a href="#repository" class="nav-link">Repositório</a></li>
       <li><a href="#team" class="nav-link">Equipa</a></li>
@@ -133,7 +131,7 @@
             </div>
             <h3 class="card-title">Plano do Projeto</h3>
             <p class="card-text">Página com o plano do projeto, incluindo objetivos, cronograma e recursos necessários.</p>
-            <a href="html/project.html" class="btn btn-primary btn-project" target="_blank" rel="noopener">
+            <a href="html/project.html" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
               <i class="bi bi-file-earmark-text"></i>
               Ver Plano do Projeto
             </a>
@@ -283,7 +281,7 @@
               <a href="#" class="team-social-link linkedin">
                 <i class="bi bi-linkedin"></i> LinkedIn
               </a>
-              <a href="#" class="team-social-link github">
+              <a href="https://github.com/Paul-Y5" class="team-social-link github">
                 <i class="bi bi-github"></i> GitHub
               </a>
             </div>
@@ -345,15 +343,15 @@
         <div class="section-subtitle animate-on-scroll fade-in">Estatísticas do Projeto</div>
         <div class="stats-container">
           <div class="text-center animate-on-scroll fade-in">
-            <div class="counter stats-counter" data-target="345" data-duration="2000">0</div>
+            <div class="counter stats-counter" id="commits" data-target="0" data-duration="2000">0</div>
             <div class="stats-label">Commits</div>
           </div>
           <div class="text-center animate-on-scroll fade-in">
-            <div class="counter stats-counter" data-target="42" data-duration="1500">0</div>
+            <div class="counter stats-counter" id="issues" data-target="0" data-duration="1500">0</div>
             <div class="stats-label">Issues Resolvidos</div>
           </div>
           <div class="text-center animate-on-scroll fade-in">
-            <div class="counter stats-counter" data-target="12" data-duration="1000">0</div>
+            <div class="counter stats-counter" id="releases" data-target="0" data-duration="1000">0</div>
             <div class="stats-label">Releases</div>
           </div>
         </div>
@@ -375,53 +373,9 @@
           <p class="card-text">Esta área contém contactos internos, notas de planeamento e outras informações privadas. Acesso disponível apenas para a equipa, supervisores e docente do curso.</p>
           
           <h4>Método de Acesso</h4>
-          <p>Para aceder à área privada, envie um email de solicitação de acesso utilizando o botão abaixo. A equipa de gestão do projeto irá analisar o seu pedido e conceder acesso se necessário.</p>
-          
-          <div class="private-controls text-center">
-            <button id="request-access-btn" class="btn btn-primary">
-              <i class="bi bi-envelope"></i>
-              Solicitar Acesso via Email
-            </button>
-          </div>
-          
-          <div id="private-panel" class="private-panel">
-            <h5 class="mb-2"><i class="bi bi-shield-lock"></i> Informação Privada</h5>
-            
-            <div class="mb-2">
-              <strong><i class="bi bi-people"></i> Contactos:</strong>
-              <ul class="mb-2 compact-list">
-                <li><strong>Supervisor:</strong> [email do supervisor]</li>
-                <li><strong>Docente:</strong> [email do docente]</li>
-              </ul>
-            </div>
-            
-            <div class="mb-2">
-              <strong><i class="bi bi-journal-text"></i> Docs:</strong>
-              <ul class="resource-links mb-2 compact-list">
-                <li><a href="#"><i class="bi bi-file-earmark-text"></i> Relatório Interno</a></li>
-                <li><a href="#"><i class="bi bi-file-earmark-excel"></i> Planeamento</a></li>
-              </ul>
-            </div>
-            
-            <div class="alert alert-warning py-1 px-2">
-              <i class="bi bi-exclamation-triangle"></i>
-              <small>Informação confidencial</small>
-            </div>
-          </div>
+          <p>Para aceder à área privada, envie uma <strong>solicitação de acesso</strong> utilizando o formulário abaixo. A equipa de gestão do projeto irá analisar o seu pedido e conceder acesso se necessário.</p>
         </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Contact Form Section -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="section-heading text-center">
-        <h2 class="section-title animate-on-scroll fade-in">Contacto</h2>
-        <p class="section-subtitle animate-on-scroll fade-in">Entre em contacto connosco para mais informações sobre o projeto</p>
-      </div>
-      
-      <div class="card animate-on-scroll fade-in">
+
         <div class="card-body">
           <form id="contact-form" class="form">
             <div class="form-group">
@@ -475,7 +429,6 @@
             <li><a href="#repository">Repositório</a></li>
             <li><a href="#team">Equipa</a></li>
             <li><a href="#private">Área Privada</a></li>
-            <li><a href="#contact">Contacto</a></li>
           </ul>
         </div>
         
@@ -514,8 +467,6 @@
       </div>
     </div>
   </footer>
-  
-  <script src="./js/script.js"></script>
   
   <!-- Scripts -->
   <script src="./js/script.js"></script>

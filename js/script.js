@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPrivateAccess();
   initContactForm();
   initParticlesEffect();
+  initDetailPageNavigation();
   
   // Initial check if private panel is active in CSS
   const privatePanel = document.getElementById('private-panel');
@@ -336,3 +337,78 @@ function initParticlesEffect() {
     particlesContainer.appendChild(particle);
   }
 }
+
+// Detail page navigation (prevent opening in new tab)
+function initDetailPageNavigation() {
+  // Links from index to detail pages - replace current page instead of opening new tab
+  const projectDetailLinks = document.querySelectorAll('.project-details-link');
+  
+  projectDetailLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.replace(this.getAttribute('href'));
+    });
+  });
+  
+  // Back links from detail pages
+  const backLinks = document.querySelectorAll('.back-link');
+  
+  backLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // If there is a history to go back to, use it
+      e.preventDefault();
+      
+      if (window.history && window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+      
+      // fallback: replace location in same tab (no new tab)
+      const href = this.getAttribute('href') || '/index.html';
+      window.location.replace(href);
+    });
+  });
+}
+
+async function fetchGitHubStats(owner, repo) {
+  const commitsRes = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/commits`
+  );
+  const commits = await commitsRes.json();
+
+  const issuesRes = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/issues?state=closed`
+  );
+  const issues = await issuesRes.json();
+
+  const releasesRes = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/releases`
+  );
+  const releases = await releasesRes.json();
+
+  document.getElementById("commits").dataset.target = commits.length;
+  document.getElementById("issues").dataset.target = issues.length;
+  document.getElementById("releases").dataset.target = releases.length;
+
+  animateCounters();
+}
+
+function animateCounters() {
+  const counters = document.querySelectorAll(".counter");
+  counters.forEach((counter) => {
+    const updateCount = () => {
+      const target = +counter.dataset.target;
+      const current = +counter.innerText;
+      const increment = target / (counter.dataset.duration / 50);
+      if (current < target) {
+        counter.innerText = Math.ceil(current + increment);
+        setTimeout(updateCount, 50);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    updateCount();
+  });
+}
+
+fetchGitHubStats("Paul-Y5", "SPORTSLINK");
