@@ -272,31 +272,27 @@ function initContactForm() {
       
       try {
         // Enviar dados para o Apps Script
-        const response = await fetch(SCRIPT_URL, {
+        await fetch(SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formValues)
+          body: JSON.stringify(formValues),
         });
 
-        // Interpretar resposta
-        const result = await response.json();
-
-        if (result.status === "OK") {
-          showFormMessage('success', 'Mensagem enviada com sucesso! Obrigado pelo contacto.');
-          contactForm.reset();
-        } else {
-          showFormMessage('error', 'Erro ao enviar: ' + result.message);
-        }
-
+        // Considera que funcionou
+        showFormMessage(
+          "success",
+          "Mensagem enviada com sucesso! Obrigado pelo contacto."
+        );
+        contactForm.reset();
       } catch (error) {
-        console.error('Erro ao enviar para o Apps Script:', error);
-        showFormMessage('error', 'Ocorreu um erro. Tente novamente mais tarde.');
-      } finally {
-        // Restaurar botão
-        submitBtn.innerHTML = originalBtnText;
-        submitBtn.disabled = false;
+        console.error("Erro ao enviar para o Apps Script:", error);
+        showFormMessage(
+          "error",
+          "Ocorreu um erro. Tente novamente mais tarde."
+        );
       }
+
 
       // Função auxiliar para mensagens
       function showFormMessage(type, message) {
