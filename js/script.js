@@ -274,6 +274,7 @@ function initContactForm() {
         // Enviar dados para o Apps Script
         const response = await fetch(SCRIPT_URL, {
           method: "POST",
+          mode: "cors",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formValues)
         });
