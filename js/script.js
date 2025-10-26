@@ -230,19 +230,23 @@ function initPrivateAccess() {
   }
 }
 
-// Contact form handling
+// Contact form functionality
+// ======= CONFIGURAÇÃO =======
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxsisjvxNTJYM3Mo9mRSL0SFWrlB8k24fVPFZv4aeeGOttE95RlJagMokY0gEiKukee4g/exec";
+// ======= FORMULÁRIO DE CONTACTO =======
 function initContactForm() {
   const contactForm = document.getElementById('contact-form');
   
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
-      // Get form data
+      // Obter dados do formulário
       const formData = new FormData(contactForm);
       const formValues = Object.fromEntries(formData.entries());
       
-      // Simple validation
+      // Validação simples
       let valid = true;
       const requiredFields = contactForm.querySelectorAll('[required]');
       
@@ -260,22 +264,40 @@ function initContactForm() {
         return;
       }
       
-      // Show loading state
+      // Mostrar estado de envio
       const submitBtn = contactForm.querySelector('[type="submit"]');
       const originalBtnText = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
       
-      // Simulate form submission (replace with actual submission)
-      setTimeout(() => {
-        // Success response
+      try {
+        // Enviar dados para o Apps Script
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formValues)
+        });
+
+        // Interpretar resposta
+        const result = await response.json();
+
+        if (result.status === "OK") {
+          showFormMessage('success', 'Mensagem enviada com sucesso! Obrigado pelo contacto.');
+          contactForm.reset();
+        } else {
+          showFormMessage('error', 'Erro ao enviar: ' + result.message);
+        }
+
+      } catch (error) {
+        console.error('Erro ao enviar para o Apps Script:', error);
+        showFormMessage('error', 'Ocorreu um erro. Tente novamente mais tarde.');
+      } finally {
+        // Restaurar botão
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
-        
-        showFormMessage('success', 'Mensagem enviada com sucesso! Obrigado pelo contacto.');
-        contactForm.reset();
-      }, 1500);
-      
+      }
+
+      // Função auxiliar para mensagens
       function showFormMessage(type, message) {
         const messageEl = document.createElement('div');
         messageEl.className = `alert alert-${type}`;
@@ -284,9 +306,7 @@ function initContactForm() {
           : `<i class="bi bi-x-circle-fill"></i> ${message}`;
         
         const existingMessage = contactForm.querySelector('.alert');
-        if (existingMessage) {
-          existingMessage.remove();
-        }
+        if (existingMessage) existingMessage.remove();
         
         contactForm.appendChild(messageEl);
         
@@ -298,6 +318,10 @@ function initContactForm() {
   }
 }
 
+// Inicializar o formulário ao carregar a página
+document.addEventListener('DOMContentLoaded', initContactForm);
+
+
 // Decorative particles effect
 function initParticlesEffect() {
   const particlesContainer = document.querySelector('.particles-container');
@@ -305,7 +329,7 @@ function initParticlesEffect() {
   if (!particlesContainer) return;
   
   // Create particles
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 80; i++) {
     createParticle();
   }
   
@@ -318,13 +342,13 @@ function initParticlesEffect() {
     const posY = Math.random() * 100;
     
     // Random size
-    const size = Math.random() * 5 + 1;
+    const size = Math.random() * 10 + 1;
     
     // Random opacity
     const opacity = Math.random() * 0.5 + 0.1;
     
     // Random animation duration
-    const duration = Math.random() * 20 + 10;
+    const duration = Math.random() * 8 + 5;
     
     // Apply styles
     particle.style.left = `${posX}%`;
