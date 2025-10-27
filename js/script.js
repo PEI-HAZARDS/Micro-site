@@ -237,83 +237,40 @@ const SCRIPT_URL =
 // ======= FORMULÁRIO DE CONTACTO =======
 function initContactForm() {
   const contactForm = document.getElementById('contact-form');
-  
+  const formMessage = document.getElementById('form-message');
+
   if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      // Obter dados do formulário
+
       const formData = new FormData(contactForm);
-      const formValues = Object.fromEntries(formData.entries());
-      
-      // Validação simples
-      let valid = true;
-      const requiredFields = contactForm.querySelectorAll('[required]');
-      
-      requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-          valid = false;
-          field.classList.add('error');
-        } else {
-          field.classList.remove('error');
-        }
-      });
-      
-      if (!valid) {
-        showFormMessage('error', 'Por favor preencha todos os campos obrigatórios.');
-        return;
-      }
-      
-      // Mostrar estado de envio
-      const submitBtn = contactForm.querySelector('[type="submit"]');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
-      
+      const data = Object.fromEntries(formData.entries());
+
       try {
-        // Enviar dados para o Apps Script
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formValues),
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         });
 
-        // Considera que funcionou
-        showFormMessage(
-          "success",
-          "Mensagem enviada com sucesso! Obrigado pelo contacto."
-        );
-        contactForm.reset();
+        if (response.ok) {
+          formMessage.innerHTML =
+            '<div class="alert alert-success"><i class="bi bi-check-circle-fill"></i> Mensagem enviada com sucesso! Obrigado pelo seu contacto.</div>';
+          contactForm.reset();
+        } else {
+          throw new Error('Erro ao enviar a mensagem.');
+        }
       } catch (error) {
-        console.error("Erro ao enviar:", error);
-        showFormMessage(
-          "error",
-          "Ocorreu um erro. Tente novamente mais tarde."
-        );
-      }
-
-
-      // Função auxiliar para mensagens
-      function showFormMessage(type, message) {
-        const messageEl = document.createElement('div');
-        messageEl.className = `alert alert-${type}`;
-        messageEl.innerHTML = type === 'success' 
-          ? `<i class="bi bi-check-circle-fill"></i> ${message}`
-          : `<i class="bi bi-x-circle-fill"></i> ${message}`;
-        
-        const existingMessage = contactForm.querySelector('.alert');
-        if (existingMessage) existingMessage.remove();
-        
-        contactForm.appendChild(messageEl);
-        
-        setTimeout(() => {
-          messageEl.remove();
-        }, 5000);
+        formMessage.innerHTML =
+          '<div class="alert alert-danger"><i class="bi bi-exclamation-triangle-fill"></i> Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.</div>';
+        console.error('Error:', error);
       }
     });
   }
 }
-
 // Inicializar o formulário ao carregar a página
 document.addEventListener('DOMContentLoaded', initContactForm);
 
