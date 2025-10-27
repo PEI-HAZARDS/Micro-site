@@ -234,43 +234,56 @@ function initPrivateAccess() {
 // ======= CONFIGURAÇÃO =======
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxsisjvxNTJYM3Mo9mRSL0SFWrlB8k24fVPFZv4aeeGOttE95RlJagMokY0gEiKukee4g/exec";
+
 // ======= FORMULÁRIO DE CONTACTO =======
 function initContactForm() {
-  const contactForm = document.getElementById('contact-form');
-  const formMessage = document.getElementById('form-message');
+  const contactForm = document.getElementById("contact-form");
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  if (!contactForm || contactForm.dataset.initialized) return;
+  contactForm.dataset.initialized = "true"; // evita duplicação
 
-      const formData = new FormData(contactForm);
-      const data = Object.fromEntries(formData.entries());
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          body: JSON.stringify(data),
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+    const formData = new FormData(contactForm);
+    const formValues = Object.fromEntries(formData.entries());
 
-        if (response.ok) {
-          formMessage.innerHTML =
-            '<div class="alert alert-success"><i class="bi bi-check-circle-fill"></i> Mensagem enviada com sucesso! Obrigado pelo seu contacto.</div>';
-          contactForm.reset();
-        } else {
-          throw new Error('Erro ao enviar a mensagem.');
-        }
-      } catch (error) {
-        formMessage.innerHTML =
-          '<div class="alert alert-danger"><i class="bi bi-exclamation-triangle-fill"></i> Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.</div>';
-        console.error('Error:', error);
-      }
-    });
+    const submitBtn = contactForm.querySelector('[type="submit"]');
+    if (submitBtn.disabled) return; // bloqueia segundo clique
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formValues),
+      });
+
+      showFormMessage("success", "Mensagem enviada com sucesso!");
+      contactForm.reset();
+    } catch (error) {
+      showFormMessage("error", "Erro ao enviar. Tente novamente.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = "Enviar";
+    }
+  });
+
+  function showFormMessage(type, message) {
+    const existingMessage = contactForm.querySelector(".alert");
+    if (existingMessage) existingMessage.remove();
+
+    const messageEl = document.createElement("div");
+    messageEl.className = `alert alert-${type}`;
+    messageEl.innerHTML = message;
+    contactForm.appendChild(messageEl);
+    setTimeout(() => messageEl.remove(), 5000);
   }
 }
+
 // Inicializar o formulário ao carregar a página
 document.addEventListener('DOMContentLoaded', initContactForm);
 
@@ -388,4 +401,4 @@ function animateCounters() {
   });
 }
 
-fetchGitHubStats("Paul-Y5", "SPORTSLINK");
+fetchGitHubStats("Paul-Y5", "IntelligentLogistics");
