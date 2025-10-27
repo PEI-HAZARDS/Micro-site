@@ -266,7 +266,6 @@ function initContactForm() {
       
       // Mostrar estado de envio
       const submitBtn = contactForm.querySelector('[type="submit"]');
-      const originalBtnText = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
       
@@ -286,7 +285,7 @@ function initContactForm() {
         );
         contactForm.reset();
       } catch (error) {
-        console.error("Erro ao enviar para o Apps Script:", error);
+        console.error("Erro ao enviar:", error);
         showFormMessage(
           "error",
           "Ocorreu um erro. Tente novamente mais tarde."
