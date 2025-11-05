@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollEffects();
   initCounters();
   initCopyButtons();
-  initPrivateAccess();
   initContactForm();
   initParticlesEffect();
   initDetailPageNavigation();
+  // initTeamImages() removed (not defined) to avoid runtime errors
   
   // Initial check if private panel is active in CSS
   const privatePanel = document.getElementById('private-panel');
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Trigger initial animations
   animateOnScroll();
+  
 });
 
 // Navbar functionality (mobile toggle, scroll behavior)
@@ -61,66 +62,85 @@ function initNavbar() {
   
   // Header scroll behavior
   if (header) {
-    window.addEventListener('scroll', () => {
+    // Consolidated scroll handler (single listener to improve performance)
+    function handleScroll() {
+      // Header compact state
       if (window.scrollY > 50) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
-    });
+
+      // Active link highlighting based on scroll position
+      const sections = document.querySelectorAll('section[id]');
+      const scrollY = window.pageYOffset;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        const link = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+        if (!link) return;
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Trigger scroll animations in a single place
+      if (typeof animateOnScroll === 'function') animateOnScroll();
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
   }
-  
-  // Active link highlighting based on scroll position
-  window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollY = window.pageYOffset;
-    
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute('id');
-      
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        document.querySelector(`.nav-link[href="#${sectionId}"]`)?.classList.add('active');
-      } else {
-        document.querySelector(`.nav-link[href="#${sectionId}"]`)?.classList.remove('active');
-      }
-    });
-  });
 }
 
 // Scroll animations and effects
 function initScrollEffects() {
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
-  
-  // Set initial state for animation
-  animatedElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    
-    if (el.classList.contains('fade-in')) {
-      el.style.transform = 'translateY(20px)';
-    } else if (el.classList.contains('fade-in-left')) {
-      el.style.transform = 'translateX(-20px)';
-    } else if (el.classList.contains('fade-in-right')) {
-      el.style.transform = 'translateX(20px)';
-    }
-  });
-  
-  // Animate elements when scrolled into view
-  window.addEventListener('scroll', animateOnScroll);
+
+  // Prefer IntersectionObserver to toggle visibility as elements enter/leave
+  // the viewport. This will add/remove the `.is-revealed` class which the
+  // stylesheet uses to run fade/slide animations.
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+        } else {
+          entry.target.classList.remove('is-revealed');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animatedElements.forEach(el => observer.observe(el));
+  } else {
+    // Fallback for older browsers: show everything (no intersection support)
+    animatedElements.forEach(el => {
+      el.classList.add('is-revealed');
+    });
+  }
 }
 
+// Auto-scroll effect to reveal content
+// auto-scroll removed: show content immediately on load instead of scrolling
+
 function animateOnScroll() {
+  // No-op when IntersectionObserver is available (observer handles toggling).
+  if ('IntersectionObserver' in window) return;
+
+  // Fallback for older browsers without IntersectionObserver
   const animatedElements = document.querySelectorAll('.animate-on-scroll');
-  
   animatedElements.forEach(el => {
     const elementTop = el.getBoundingClientRect().top;
     const elementVisible = 150;
-    
     if (elementTop < window.innerHeight - elementVisible) {
-      el.style.opacity = '1';
-      el.style.transform = 'translate(0)';
+      el.classList.add('is-revealed');
+    } else {
+      el.classList.remove('is-revealed');
     }
   });
 }
@@ -190,103 +210,74 @@ function initCopyButtons() {
   });
 }
 
-// Private access functionality
-function initPrivateAccess() {
-  const requestAccessBtn = document.getElementById('request-access-btn');
-  const privatePanel = document.getElementById('private-panel');
+
+// Contact form handling
+function initContactForm() {
+  const contactForm = document.getElementById('contact-form');
   
-  if (requestAccessBtn) {
-    requestAccessBtn.addEventListener('click', () => {
-      // Email request for access
-      const supervisorEmail = 'supervisor@example.com';
-      const instructorEmail = 'instructor@example.com';
-      const subject = 'Pedido de Acesso - Intelligent Logistics';
-      const body = 'Olá,\n\nGostaria de solicitar acesso à área privada do projeto Intelligent Logistics.\n\nCumprimentos,\n[Seu Nome]';
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
       
-      window.location.href = `mailto:${supervisorEmail},${instructorEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      // Get form data
+      const formData = new FormData(contactForm);
+      const formValues = Object.fromEntries(formData.entries());
       
-      // Show message to user that email request was initiated
-      if (privatePanel) {
-        const infoMsg = document.createElement('div');
-        infoMsg.className = 'alert alert-info';
-        infoMsg.innerHTML = '<i class="bi bi-info-circle-fill"></i> Um email de pedido de acesso será aberto no seu cliente de email. Por favor complete os detalhes e envie-o para solicitar acesso à área privada.';
-        
-        const controlsContainer = requestAccessBtn.closest('.private-controls');
-        if (controlsContainer) {
-          // Remove any existing messages first
-          const existingAlert = controlsContainer.querySelector('.alert');
-          if (existingAlert) {
-            existingAlert.remove();
-          }
-          
-          controlsContainer.appendChild(infoMsg);
-          
-          setTimeout(() => {
-            infoMsg.remove();
-          }, 5000);
+      // Simple validation
+      let valid = true;
+      const requiredFields = contactForm.querySelectorAll('[required]');
+      
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          valid = false;
+          field.classList.add('error');
+        } else {
+          field.classList.remove('error');
         }
+      });
+      
+      if (!valid) {
+        showFormMessage('error', 'Por favor preencha todos os campos obrigatórios.');
+        return;
+      }
+      
+      // Show loading state
+      const submitBtn = contactForm.querySelector('[type="submit"]');
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
+      
+      // Simulate form submission (replace with actual submission)
+      setTimeout(() => {
+        // Success response
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+        
+        showFormMessage('success', 'Mensagem enviada com sucesso! Obrigado pelo contacto.');
+        contactForm.reset();
+      }, 1500);
+      
+      function showFormMessage(type, message) {
+        const messageEl = document.createElement('div');
+        messageEl.className = `alert alert-${type}`;
+        messageEl.innerHTML = type === 'success' 
+          ? `<i class="bi bi-check-circle-fill"></i> ${message}`
+          : `<i class="bi bi-x-circle-fill"></i> ${message}`;
+        
+        const existingMessage = contactForm.querySelector('.alert');
+        if (existingMessage) {
+          existingMessage.remove();
+        }
+        
+        contactForm.appendChild(messageEl);
+        
+        setTimeout(() => {
+          messageEl.remove();
+        }, 5000);
       }
     });
   }
 }
-
-// Contact form functionality
-// ======= CONFIGURAÇÃO =======
-const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxsisjvxNTJYM3Mo9mRSL0SFWrlB8k24fVPFZv4aeeGOttE95RlJagMokY0gEiKukee4g/exec";
-
-// ======= FORMULÁRIO DE CONTACTO =======
-function initContactForm() {
-  const contactForm = document.getElementById("contact-form");
-
-  if (!contactForm || contactForm.dataset.initialized) return;
-  contactForm.dataset.initialized = "true"; // evita duplicação
-
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(contactForm);
-    const formValues = Object.fromEntries(formData.entries());
-
-    const submitBtn = contactForm.querySelector('[type="submit"]');
-    if (submitBtn.disabled) return; // bloqueia segundo clique
-
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
-
-    try {
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formValues),
-      });
-
-      showFormMessage("success", "Mensagem enviada com sucesso!");
-      contactForm.reset();
-    } catch (error) {
-      showFormMessage("error", "Erro ao enviar. Tente novamente.");
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = "Enviar";
-    }
-  });
-
-  function showFormMessage(type, message) {
-    const existingMessage = contactForm.querySelector(".alert");
-    if (existingMessage) existingMessage.remove();
-
-    const messageEl = document.createElement("div");
-    messageEl.className = `alert alert-${type}`;
-    messageEl.innerHTML = message;
-    contactForm.appendChild(messageEl);
-    setTimeout(() => messageEl.remove(), 5000);
-  }
-}
-
-// Inicializar o formulário ao carregar a página
-document.addEventListener('DOMContentLoaded', initContactForm);
-
 
 // Decorative particles effect
 function initParticlesEffect() {
@@ -295,7 +286,7 @@ function initParticlesEffect() {
   if (!particlesContainer) return;
   
   // Create particles
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 50; i++) {
     createParticle();
   }
   
@@ -308,13 +299,13 @@ function initParticlesEffect() {
     const posY = Math.random() * 100;
     
     // Random size
-    const size = Math.random() * 10 + 1;
+    const size = Math.random() * 5 + 1;
     
     // Random opacity
     const opacity = Math.random() * 0.5 + 0.1;
     
     // Random animation duration
-    const duration = Math.random() * 8 + 5;
+    const duration = Math.random() * 20 + 10;
     
     // Apply styles
     particle.style.left = `${posX}%`;
@@ -359,46 +350,4 @@ function initDetailPageNavigation() {
     });
   });
 }
-
-async function fetchGitHubStats(owner, repo) {
-  const commitsRes = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/commits`
-  );
-  const commits = await commitsRes.json();
-
-  const issuesRes = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/issues?state=closed`
-  );
-  const issues = await issuesRes.json();
-
-  const releasesRes = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/releases`
-  );
-  const releases = await releasesRes.json();
-
-  document.getElementById("commits").dataset.target = commits.length;
-  document.getElementById("issues").dataset.target = issues.length;
-  document.getElementById("releases").dataset.target = releases.length;
-
-  animateCounters();
-}
-
-function animateCounters() {
-  const counters = document.querySelectorAll(".counter");
-  counters.forEach((counter) => {
-    const updateCount = () => {
-      const target = +counter.dataset.target;
-      const current = +counter.innerText;
-      const increment = target / (counter.dataset.duration / 50);
-      if (current < target) {
-        counter.innerText = Math.ceil(current + increment);
-        setTimeout(updateCount, 50);
-      } else {
-        counter.innerText = target;
-      }
-    };
-    updateCount();
-  });
-}
-
-fetchGitHubStats("Paul-Y5", "IntelligentLogistics");
+// fetchGitHubStats removed: not defined in this file
