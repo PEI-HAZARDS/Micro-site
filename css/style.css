@@ -1571,154 +1571,79 @@ ul, ol {
 }
 
 @media (max-width: 768px) {
-  .nav-desktop {
-    display: none;
-  }
-  
-  .nav-mobile-toggle {
+  /* header / nav */
+  .nav-desktop { display: none !important; }
+  .nav-mobile-toggle { display: inline-flex; }
+
+  /* mobile panel (visível para animar) */
+  .nav-mobile {
     display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 92%;
+    max-width: 420px;
+    transform: translateX(100%);
+    transition: transform .32s cubic-bezier(.2,.9,.2,1);
+    background: var(--surface, #fff);
+    z-index: 1200;
+    padding: 1.25rem;
+    box-shadow: 0 12px 40px rgba(8,8,20,0.12);
+    overflow-y: auto;
+    border-radius: 12px 0 0 12px;
   }
-  
-  .hero {
-    padding-top: calc(var(--header-height) + 2rem);
-    padding-bottom: 3rem;
+  .nav-mobile.active { transform: translateX(0); }
+
+  /* overlay */
+  .nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.48);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+    z-index: 1190;
   }
-  
-  .hero-content {
-    max-width: 100%;
-    text-align: center;
+  .nav-overlay.active { opacity: 1; visibility: visible; }
+
+  /* mobile nav list */
+  .nav-mobile .nav-list {
+    margin-top: 1rem;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
   }
-  
-  .team-grid {
-    gap: 1.5rem;
+  .nav-mobile .nav-list .nav-link {
+    display: block;
+    padding: .85rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
   }
-  
-  .team-grid .team-card {
-    flex: 0 0 calc(50% - 0.75rem);
-    min-width: 250px;
-  }
-  
-  .team-card {
-    min-height: 200px;
-  }
-  
-  .team-card:hover .team-card-icon {
-    width: 100px;
-  }
-  
-  .hero-buttons {
-    justify-content: center;
-  }
-  
-  .hero-image {
-    position: relative;
-    top: auto;
-    right: auto;
-    transform: none;
-    width: 80%;
-    max-width: 400px;
-    margin: 3rem auto 0;
-  }
-  
-  .footer-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  
-  .footer-title::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .social-links {
-    justify-content: center;
-  }
+
+  /* team: single column */
+  .team-grid { grid-template-columns: 1fr !important; gap: 1.25rem; }
+  .team-bottom-row { flex-direction: column; gap: 1.25rem; align-items: stretch; }
+  .team-card { max-width: 100%; }
+
+  /* footer stacked */
+  .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 1.25rem; }
+  .footer-logo-image { margin: 0 auto 0.6rem; width: 64px; }
+
+  /* small adjustments */
+  .hero { padding: 2rem 0; }
+  .partner-logos img { height: 44px; max-height: 48px; }
 }
 
-@media (max-width: 576px) {
-  .container {
-    padding-inline: 1rem;
-  }
-  
-  h1 {
-    font-size: 2rem;
-  }
-  
-  h2 {
-    font-size: 1.75rem;
-  }
-  
-  .resources-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .resource-card .card-body {
-    padding: 1.5rem;
-  }
-  
-  .hero-title {
-    font-size: 2.25rem;
-  }
-  
-  .section-title {
-    font-size: 1.75rem;
-  }
-  
-  .section {
-    padding: 3rem 0;
-  }
-  
-  .btn {
-    padding: 0.6rem 1.25rem;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-  }
-  
-  .private-controls {
-    flex-direction: column;
-  }
-  
-  .private-panel {
-    max-height: 160px;
-    padding: 0.75rem;
-    max-width: 100%;
-    font-size: 0.9rem;
-  }
-  
-  .resources-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .team-grid {
-    gap: 1.5rem;
-  }
-  
-  .team-grid .team-card {
-    flex: 0 0 100%;
-    min-width: 0;
-  }
-  
-  .team-card {
-    min-height: 180px;
-  }
-  
-  .team-card:hover .team-card-icon {
-    width: 90px;
-  }
-  
-  @keyframes shineEffect {
-    0% {
-      transform: translateX(-100%) rotate(45deg);
-    }
-    100% {
-      transform: translateX(100%) rotate(45deg);
-    }
-  }
-  
-  .card {
-    max-width: 100%;
-  }
+/* Very small screens adjustments */
+@media (max-width: 480px) {
+  .hero-title { font-size: 1.6rem; }
+  .partner-logos img { height: 40px; }
+  .team-card .team-member-photo { height: 160px; }
+  .nav-mobile { width: 100%; max-width: 100%; border-radius: 0; }
+  .nav-mobile .nav-list .nav-link { padding: .85rem; font-size: 0.95rem; }
+  .footer-bottom { font-size: 0.85rem; padding-top: 1rem; }
 }

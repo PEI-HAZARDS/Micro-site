@@ -15,26 +15,44 @@
   
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/project-page.css">
+  <link rel="stylesheet" href="../css/project-footer.css">
 </head>
 <body>
   <div class="reading-progress-container">
     <div class="reading-progress-bar"></div>
   </div>
-  <header class="header scrolled">
-    <div class="container">
-      <a href="../index.html" class="logo">
-        <img src="../images/LogoMin-semfundo.png" alt="Intelligent Logistics Logo">
-        <span>IntelligentLogistics</span>
-      </a>
-      <!-- Simple back-only navbar for detail pages -->
-      <nav class="detail-nav">
-        <ul class="nav-list">
-          <li><a href="../index.html#project" class="nav-link back-link"><i class="bi bi-arrow-left"></i> Voltar ao Projeto</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
+  <!-- ======= Header / Navbar (simplified) ======= -->
+  <header class="header">
+    <div class="container header-inner header-centered">
+      <a href="../index.html" class="back-link-simple" title="Voltar">
+        <i class="bi bi-arrow-left"></i>
+      </a>
+      
+      <div class="header-title-wrapper">
+        <a href="../index.html" class="logo header-logo" aria-label="Inicio">
+          <img src="../images/LogoMin-semfundo.png" alt="Logo" class="header-logo-image">
+          <strong class="header-logo-text">IntelligentLogistics</strong>
+        </a>
+      </div>
+      
+      <div class="header-spacer"></div>
+    </div>
+  </header>   <!-- Overlay + mobile panel (kept but minimal markup) -->
+   <div class="nav-overlay" aria-hidden="true"></div>
+
+  <aside class="nav-mobile" role="dialog" aria-label="Navegação móvel">
+     <button class="nav-mobile-close" aria-label="Fechar menu">×</button>
+     <ul class="nav-list">
+       <li><a href="../index.html#project" class="nav-link">Projeto</a></li>
+       <li><a href="../index.html#resources" class="nav-link">Recursos</a></li>
+       <li><a href="../index.html#team" class="nav-link">Equipa</a></li>
+       <li><a href="../index.html#contact" class="nav-link">Contacto</a></li>
+       <li><a href="../index.html" class="nav-link back-link">Voltar</a></li>
+     </ul>
+   </aside>
+
+  <!-- ======= Main content (mantive o teu conteúdo) ======= -->
   <main class="container page-container">
     <section class="section">
       <div class="section-header animate-on-scroll fade-in">
@@ -89,7 +107,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-laptop-code"></i> Arquitetura do Sistema</h2>
         <p>O sistema adota uma <strong>Macro-Arquitetura baseada em Microserviços</strong>, onde cada componente é autónomo, escalável e especializado, implementando internamente uma <strong>Arquitetura em Camadas</strong>, e comunicando entre si através de um modelo <strong>Event-Driven</strong> (baseado em MQTT).</p>
@@ -106,40 +124,275 @@
           </ul>
         </div>
       </div>
-      
       <div class="card animate-on-scroll fade-in">
-        <h2><i class="bi bi-list-check"></i> Requisitos</h2>
+        <h2><i class="bi bi-list-check"></i> Informação Detalhada do Projeto</h2>
         
         <div class="tabs">
-          <div class="tab-header">
-            <button class="tab-btn active" data-tab="functional">Requisitos Funcionais</button>
-            <button class="tab-btn" data-tab="non-functional">Requisitos Não Funcionais</button>
+          <div class="tab-header" role="tablist" aria-label="Secções do projeto">
+            <button class="tab-btn active" data-tab="descricao" role="tab" aria-selected="true" aria-controls="descricao">
+              <i class="bi bi-file-text"></i> Descrição
+            </button>
+            <button class="tab-btn" data-tab="arquitetura" role="tab" aria-controls="arquitetura">
+              <i class="bi bi-diagram-3"></i> Arquitetura
+            </button>
+            <button class="tab-btn" data-tab="requisitos" role="tab" aria-controls="requisitos">
+              <i class="bi bi-list-check"></i> Requisitos
+            </button>
+            <button class="tab-btn" data-tab="personas" role="tab" aria-controls="personas">
+              <i class="bi bi-people"></i> Personas
+            </button>
+            <button class="tab-btn" data-tab="frameworks" role="tab" aria-controls="frameworks">
+              <i class="bi bi-code-square"></i> Tecnologias
+            </button>
           </div>
-          
-          <div class="tab-content active" id="functional">
+
+          <div class="tab-content active" id="descricao" role="tabpanel" aria-labelledby="tab-descricao">
+            <h3><i class="bi bi-info-circle"></i> Visão Geral do Projeto</h3>
+            <p>O <strong>Intelligent Logistics</strong> é uma plataforma inovadora para automatização e optimização da logística portuária, combinando visão computacional, análise de dados em tempo real e orquestração inteligente para gerir a entrada, encaminhamento e gestão de cargas e veículos.</p>
+            
+            <div class="feature-list">
+              <h4>Objetivos Principais:</h4>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> Reduzir tempos de espera e processamento</li>
+                <li><i class="bi bi-check-circle-fill"></i> Minimizar erros de encaminhamento</li>
+                <li><i class="bi bi-check-circle-fill"></i> Apoiar decisões operacionais em tempo real</li>
+                <li><i class="bi bi-check-circle-fill"></i> Disponibilizar dashboards de monitorização</li>
+                <li><i class="bi bi-check-circle-fill"></i> Aumentar a segurança no manuseamento de cargas perigosas</li>
+              </ul>
+            </div>
+
+            <div class="notice">
+              <p><i class="bi bi-lightbulb"></i> Este projeto combina <strong>IA, visão computacional, logística e eficiência energética</strong>, alinhado com os desafios da Indústria 4.0.</p>
+            </div>
+          </div>
+
+          <div class="tab-content" id="arquitetura" role="tabpanel" aria-labelledby="tab-arquitetura">
+            <h3><i class="bi bi-diagram-3"></i> Arquitetura do Sistema</h3>
+            <p>O sistema adota uma <strong>arquitetura baseada em microserviços</strong>, onde cada componente é autónomo, escalável e especializado. A comunicação entre serviços é feita através de um modelo <strong>Event-Driven</strong> usando MQTT para garantir baixa latência.</p>
+            
+            <div class="feature-grid">
+              <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-camera-video"></i></div>
+                <h4>Camada de Captura</h4>
+                <p>Câmaras e sensores IoT na periferia capturam imagens e eventos em tempo real.</p>
+              </div>
+              
+              <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-cpu"></i></div>
+                <h4>Processamento de Visão</h4>
+                <p>Modelos YOLO/TensorFlow para deteção e classificação de veículos, matrículas e símbolos.</p>
+              </div>
+              
+              <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-bezier2"></i></div>
+                <h4>Orquestração</h4>
+                <p>Barramento de eventos MQTT coordena decisões de encaminhamento em tempo real.</p>
+              </div>
+              
+              <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-database"></i></div>
+                <h4>Persistência</h4>
+                <p>Bases SQL/NoSQL para armazenamento analítico e geração de relatórios.</p>
+              </div>
+            </div>
+
+            <div class="feature-list">
+              <h4>Benefícios da Arquitetura:</h4>
+              <ul>
+                <li><i class="bi bi-arrow-up-right-circle"></i> <strong>Escalável:</strong> Adiciona câmaras e sensores sem impacto global</li>
+                <li><i class="bi bi-lightning"></i> <strong>Tempo real:</strong> Latência &lt; 2s entre captura e notificação</li>
+                <li><i class="bi bi-plug"></i> <strong>Integrável:</strong> API REST facilmente consumida por sistemas externos</li>
+                <li><i class="bi bi-shield-check"></i> <strong>Segura:</strong> Proteção de dados e privacidade garantidas</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tab-content" id="requisitos" role="tabpanel" aria-labelledby="tab-requisitos">
+            <h3><i class="bi bi-list-check"></i> Requisitos Funcionais</h3>
             <ul class="check-list">
               <li>Deteção automática de camiões em tempo real</li>
-              <li>Deteção e classificação de matrículas</li>
-              <li>Deteção e classificação de símbolos de mercadorias perigosas</li>
-              <li>Identificação de cargas perigosas através da placa de segurança</li>
-              <li>Gestão de estados de veículos</li>
-              <li>Integração com sistema de gestão logística para tomada de decisão</li>
-              <li>Encaminhamento do veículo para o destino correto dentro do porto</li>
-              <li>Notificação clara ao condutor (via sinalização digital ou aplicação móvel)</li>
+              <li>Deteção e classificação de matrículas de veículos</li>
+              <li>Reconhecimento de símbolos de mercadorias perigosas (ADR)</li>
+              <li>Identificação de cargas através da placa de segurança</li>
+              <li>Gestão de estados de veículos (entrada, processamento, saída)</li>
+              <li>Integração com sistema de gestão logística</li>
+              <li>Encaminhamento automático para destino correto</li>
+              <li>Notificação ao condutor via sinalização digital ou app móvel</li>
               <li>Geração de relatórios estatísticos sobre tráfego e cargas</li>
+              <li>Dashboard em tempo real para operadores</li>
+            </ul>
+
+            <h3 class="section-spacing"><i class="bi bi-gear"></i> Requisitos Não Funcionais</h3>
+            <ul class="check-list">
+              <li><strong>Desempenho:</strong> Tempo de resposta &lt; 2s entre captura e notificação</li>
+              <li><strong>Escalabilidade:</strong> Suportar múltiplas câmaras e milhares de veículos/dia</li>
+              <li><strong>Disponibilidade:</strong> SLA de 99% em ambiente de produção</li>
+              <li><strong>Confiabilidade:</strong> Taxa de precisão &gt; 95% na deteção</li>
+              <li><strong>Segurança:</strong> Encriptação de dados e controlo de acessos</li>
+              <li><strong>Eficiência Energética:</strong> Otimização de recursos computacionais</li>
+              <li><strong>Manutenibilidade:</strong> Arquitetura modular e bem documentada</li>
+              <li><strong>Flexibilidade:</strong> Capacidade de aprender novos símbolos/tipos de carga</li>
             </ul>
           </div>
-          
-          <div class="tab-content" id="non-functional">
-            <ul class="check-list">
-              <li><strong>Eficiência energética:</strong> otimização do uso de recursos computacionais</li>
-              <li><strong>Escalabilidade:</strong> permitir adaptação a diferentes portos e cenários</li>
-              <li><strong>Flexibilidade:</strong> aprendizagem ativa de novos símbolos/tipos de carga</li>
-              <li><strong>Confiabilidade:</strong> sistema robusto com baixa taxa de erro</li>
-              <li><strong>Segurança:</strong> proteção dos dados logísticos e dos veículos monitorizados</li>
-              <li><strong>Tempo de resposta:</strong> A deteção e notificação não devem exceder 2 segundos entre captura e disponibilização ao operador</li>
-              <li><strong>Disponibilidade:</strong> O sistema deve manter uma disponibilidade mínima de 99% no ambiente de produção</li>
-            </ul>
+
+          <div class="tab-content" id="personas" role="tabpanel" aria-labelledby="tab-personas">
+            <h3><i class="bi bi-people"></i> Personas & User Stories</h3>
+            
+            <div class="persona-card">
+              <div class="persona-header">
+                <i class="bi bi-person-badge"></i>
+                <h4>Operador de Portão</h4>
+              </div>
+              <p class="persona-quote">"Como operador, quero ver imediatamente o destino recomendado e estado do veículo para acelerar o processamento de entradas e reduzir filas."</p>
+              <div class="persona-needs">
+                <strong>Necessidades:</strong>
+                <ul>
+                  <li>Interface clara e responsiva</li>
+                  <li>Alertas para cargas perigosas</li>
+                  <li>Histórico de veículos processados</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="persona-card">
+              <div class="persona-header">
+                <i class="bi bi-truck"></i>
+                <h4>Condutor de Camião</h4>
+              </div>
+              <p class="persona-quote">"Como condutor, quero receber instruções claras e simples (via sinalização ou app) para chegar rapidamente ao cais correcto sem perder tempo."</p>
+              <div class="persona-needs">
+                <strong>Necessidades:</strong>
+                <ul>
+                  <li>Indicações visuais claras</li>
+                  <li>Notificações em tempo real</li>
+                  <li>Interface mobile simples</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="persona-card">
+              <div class="persona-header">
+                <i class="bi bi-graph-up"></i>
+                <h4>Gestor Portuário</h4>
+              </div>
+              <p class="persona-quote">"Como gestor, quero dashboards com métricas de performance e relatórios detalhados para otimizar operações e tomar decisões informadas."</p>
+              <div class="persona-needs">
+                <strong>Necessidades:</strong>
+                <ul>
+                  <li>Relatórios estatísticos detalhados</li>
+                  <li>Visualização de tendências</li>
+                  <li>Alertas de anomalias</li>
+                </ul>
+              </div>
+            </div>
+
+            <h4 class="section-spacing"><i class="bi bi-journal-text"></i> User Stories Principais</h4>
+            <div class="user-stories">
+              <div class="story-item">
+                <span class="story-number">01</span>
+                <p>Quando um camião chega à cancela, o sistema deteta automaticamente a matrícula e sugere o destino correto baseado em dados logísticos.</p>
+              </div>
+              <div class="story-item">
+                <span class="story-number">02</span>
+                <p>Se uma carga for classificada como perigosa, o sistema envia alerta imediato ao operador e ajusta o encaminhamento para zona de segurança.</p>
+              </div>
+              <div class="story-item">
+                <span class="story-number">03</span>
+                <p>O gestor acede ao dashboard e visualiza métricas diárias: tempo médio de processamento, volume por tipo de carga e taxas de ocupação.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="frameworks" role="tabpanel" aria-labelledby="tab-frameworks">
+            <h3><i class="bi bi-code-square"></i> Frameworks & Tecnologias</h3>
+            
+            <div class="tech-grid">
+              <div class="tech-card">
+                <div class="tech-icon"><i class="bi bi-eye"></i></div>
+                <h4>Visão Computacional</h4>
+                <ul>
+                  <li>YOLO (You Only Look Once)</li>
+                  <li>OpenCV</li>
+                  <li>TensorFlow / PyTorch</li>
+                  <li>OCR para reconhecimento de texto</li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="tech-icon"><i class="bi bi-broadcast"></i></div>
+                <h4>Mensageria & Eventos</h4>
+                <ul>
+                  <li>MQTT (protocolo IoT)</li>
+                  <li>Mosquitto Broker</li>
+                  <li>WebSockets para real-time</li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="tech-icon"><i class="bi bi-server"></i></div>
+                <h4>Back-end</h4>
+                <ul>
+                  <li>Node.js / Express</li>
+                  <li>Python (FastAPI)</li>
+                  <li>REST APIs</li>
+                  <li>Microserviços</li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="tech-icon"><i class="bi bi-window"></i></div>
+                <h4>Front-end</h4>
+                <ul>
+                  <li>HTML5 / CSS3 / JavaScript</li>
+                  <li>Chart.js para dashboards</li>
+                  <li>Responsive design</li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="tech-icon"><i class="bi bi-database"></i></div>
+                <h4>Persistência</h4>
+                <ul>
+                  <li>PostgreSQL (dados estruturados)</li>
+                  <li>MongoDB (logs e eventos)</li>
+                  <li>Redis (cache)</li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="tech-icon"><i class="bi bi-boxes"></i></div>
+                <h4>Orquestração</h4>
+                <ul>
+                  <li>Docker containers</li>
+                  <li>Kubernetes</li>
+                  <li>CI/CD pipelines</li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="tech-icon"><i class="bi bi-cloud"></i></div>
+                <h4>Integração</h4>
+                <ul>
+                  <li>Google Apps Script</li>
+                  <li>Google Sheets API</li>
+                  <li>Webhooks</li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="tech-icon"><i class="bi bi-shield-check"></i></div>
+                <h4>Segurança</h4>
+                <ul>
+                  <li>JWT authentication</li>
+                  <li>HTTPS / TLS</li>
+                  <li>Rate limiting</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="notice section-spacing">
+              <p><i class="bi bi-info-circle"></i> <strong>Stack Moderno:</strong> Todas as tecnologias selecionadas são open-source ou amplamente adotadas na indústria, garantindo manutenibilidade e evolução contínua do sistema.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -164,54 +417,31 @@
       </div>
       
       <div class="text-center mt-4 animate-on-scroll fade-in">
-        <a href="../index.html" class="btn btn-primary back-link">
+        <a href="../index.html#project" class="btn btn-primary back-link">
           <i class="bi bi-arrow-left"></i> Voltar à Página Principal
         </a>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-branding">
-          <img src="../images/Logo-semfundo.png" alt="Intelligent Logistics" class="footer-logo" width="150">
-          <p>Inovando na área da logística portuária com Inteligência Artificial.</p>
-        </div>
-        <div class="footer-links">
-          <h3>Links Rápidos</h3>
-          <ul>
-            <li><a href="../index.html#project" class="back-link"><i class="bi bi-arrow-left"></i> Voltar ao Projeto</a></li>
-            <li><a href="../index.html#resources"><i class="bi bi-file-earmark-text"></i> Recursos</a></li>
-            <li><a href="../index.html#repository"><i class="bi bi-github"></i> Repositório</a></li>
-            <li><a href="../index.html#team"><i class="bi bi-people"></i> Equipa</a></li>
-          </ul>
-        </div>
-        <div class="footer-contact">
-          <h3>Contacto</h3>
-          <ul class="footer-links">
-            <li>
-              <a href="mailto:intelligentlogistics.pei@gmail.com">
-                <i class="bi bi-envelope"></i>
-                intelligentlogistics.pei@gmail.com
-              </a>
-            </li>
-            <li>
-              <a href="https://www.ua.pt/" target="_blank" rel="noopener">
-                <i class="bi bi-geo-alt"></i>
-                Universidade de Aveiro
-              </a>
-            </li>
-            <li><strong>Orientador:</strong> Daniel Corujo</li>
-          </ul>
-        </div>
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-branding">
+        <img src="../images/Logo-semfundo.png" alt="Intelligent Logistics" class="footer-logo-image">
+        <p class="footer-tagline">Inovando na logística portuária com IA — Universidade de Aveiro</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Intelligent Logistics. Todos os direitos reservados.</p>
+
+      <div class="footer-links-row">
+        <a href="mailto:intelligentlogistics.pei@gmail.com" class="footer-link">Contacto</a>
+      </div>
+
+      <div class="footer-copyright">
+        <small>© 2025 Intelligent Logistics — Todos os direitos reservados.</small>
       </div>
     </div>
   </footer>
 
+  <!-- keep inline page scripts + main script -->
   <script>
     // Tab switching functionality with smooth transition
     document.querySelectorAll('.tab-btn').forEach(button => {

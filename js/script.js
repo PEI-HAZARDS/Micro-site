@@ -126,7 +126,6 @@ function initScrollEffects() {
 }
 
 // Auto-scroll effect to reveal content
-// auto-scroll removed: show content immediately on load instead of scrolling
 
 function animateOnScroll() {
   // No-op when IntersectionObserver is available (observer handles toggling).
@@ -211,73 +210,62 @@ function initCopyButtons() {
 }
 
 
-// Contact form handling
+// Contact form functionality
+// ======= CONFIGURAÇÃO =======
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxsisjvxNTJYM3Mo9mRSL0SFWrlB8k24fVPFZv4aeeGOttE95RlJagMokY0gEiKukee4g/exec";
+
+// ======= FORMULÁRIO DE CONTACTO =======
 function initContactForm() {
-  const contactForm = document.getElementById('contact-form');
-  
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      // Get form data
-      const formData = new FormData(contactForm);
-      const formValues = Object.fromEntries(formData.entries());
-      
-      // Simple validation
-      let valid = true;
-      const requiredFields = contactForm.querySelectorAll('[required]');
-      
-      requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-          valid = false;
-          field.classList.add('error');
-        } else {
-          field.classList.remove('error');
-        }
+  const contactForm = document.getElementById("contact-form");
+
+  if (!contactForm || contactForm.dataset.initialized) return;
+  contactForm.dataset.initialized = "true"; // evita duplicação
+
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const formValues = Object.fromEntries(formData.entries());
+
+    const submitBtn = contactForm.querySelector('[type="submit"]');
+    if (submitBtn.disabled) return; // bloqueia segundo clique
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formValues),
       });
-      
-      if (!valid) {
-        showFormMessage('error', 'Por favor preencha todos os campos obrigatórios.');
-        return;
-      }
-      
-      // Show loading state
-      const submitBtn = contactForm.querySelector('[type="submit"]');
-      const originalBtnText = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
-      
-      // Simulate form submission (replace with actual submission)
-      setTimeout(() => {
-        // Success response
-        submitBtn.innerHTML = originalBtnText;
-        submitBtn.disabled = false;
-        
-        showFormMessage('success', 'Mensagem enviada com sucesso! Obrigado pelo contacto.');
-        contactForm.reset();
-      }, 1500);
-      
-      function showFormMessage(type, message) {
-        const messageEl = document.createElement('div');
-        messageEl.className = `alert alert-${type}`;
-        messageEl.innerHTML = type === 'success' 
-          ? `<i class="bi bi-check-circle-fill"></i> ${message}`
-          : `<i class="bi bi-x-circle-fill"></i> ${message}`;
-        
-        const existingMessage = contactForm.querySelector('.alert');
-        if (existingMessage) {
-          existingMessage.remove();
-        }
-        
-        contactForm.appendChild(messageEl);
-        
-        setTimeout(() => {
-          messageEl.remove();
-        }, 5000);
-      }
-    });
+
+      showFormMessage("success", "Mensagem enviada com sucesso!");
+      contactForm.reset();
+    } catch (error) {
+      showFormMessage("error", "Erro ao enviar. Tente novamente.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = "Enviar";
+    }
+  });
+
+  function showFormMessage(type, message) {
+    const existingMessage = contactForm.querySelector(".alert");
+    if (existingMessage) existingMessage.remove();
+
+    const messageEl = document.createElement("div");
+    messageEl.className = `alert alert-${type}`;
+    messageEl.innerHTML = message;
+    contactForm.appendChild(messageEl);
+    setTimeout(() => messageEl.remove(), 5000);
   }
 }
+
+// Inicializar o formulário ao carregar a página
+document.addEventListener('DOMContentLoaded', initContactForm);
 
 // Decorative particles effect
 function initParticlesEffect() {
@@ -350,4 +338,41 @@ function initDetailPageNavigation() {
     });
   });
 }
-// fetchGitHubStats removed: not defined in this file
+
+// Mobile nav toggle / close behaviour (idempotent: safe to add)
+(function initMobileNavToggle(){
+  document.addEventListener('click', (e) => {
+    const panel = document.querySelector('.nav-mobile');
+    const overlay = document.querySelector('.nav-overlay');
+    if (!panel || !overlay) return;
+
+    // open
+    if (e.target.closest('.nav-mobile-toggle')) {
+      panel.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+
+    // close triggers: close button, overlay click, link click inside panel
+    if (e.target.closest('.nav-mobile-close') || e.target.closest('.nav-overlay') || e.target.closest('.nav-mobile .nav-link')) {
+      panel.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      return;
+    }
+  });
+
+  // close with Escape
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') {
+      const panel = document.querySelector('.nav-mobile');
+      const overlay = document.querySelector('.nav-overlay');
+      if (panel && panel.classList.contains('active')) {
+        panel.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+})();
