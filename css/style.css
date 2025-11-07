@@ -1115,11 +1115,11 @@ ul, ol {
 }
 
 .resource-card:nth-child(2) {
-  border-left-color: var(--secondary);
+  border-left-color: var(--tertiary);
 }
 
 .resource-card:nth-child(3) {
-  border-left-color: var(--tertiary);
+  border-left-color: var(--secondary);
 }
 
 .resource-card:hover {
@@ -1144,11 +1144,11 @@ ul, ol {
 }
 
 .resource-card:nth-child(2) .resource-card-icon {
-  color: var(--secondary);
+  color: var(--tertiary);
 }
 
 .resource-card:nth-child(3) .resource-card-icon {
-  color: var(--tertiary);
+  color: var(--secondary);
 }
 
 .resource-card .card-title {
