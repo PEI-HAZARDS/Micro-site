@@ -2,7 +2,7 @@ name: Update Repo Stats
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # atualiza todos os dias à meia-noite
+    - cron: "0 0 * * *" # Runs daily at midnight UTC
   workflow_dispatch:
 
 jobs:
@@ -13,16 +13,13 @@ jobs:
       actions: read
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
-
-      - name: Install dependencies
-        run: npm install node-fetch@2
 
       - name: Generate stats.json
         run: node scripts/generate-stats.js
