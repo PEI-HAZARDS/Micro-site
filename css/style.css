@@ -180,12 +180,13 @@ ul, ol {
 /* Team grid layout */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 380px);
   gap: 2rem;
   margin-bottom: 4rem;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  justify-content: center;
 }
 
 /* Team grid responsive improvements */
@@ -199,33 +200,38 @@ ul, ol {
 
 .team-grid .team-card {
   max-width: 380px;
-  width: 100%;
+  width: 380px;
 }
 
-/* Para telas maiores, manter layout 3 colunas */
+/* Para telas maiores, manter layout 3 colunas com largura fixa */
 @media (min-width: 900px) {
   .team-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 380px);
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    justify-content: center;
+  }
+
+  .team-grid .team-card {
+    width: 380px;
+    max-width: 380px;
   }
 }
 
 /* Container para os dois últimos cards centralizados */
 .team-bottom-row {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 380px);
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  justify-content: center;
 }
 
 .team-bottom-row .team-card {
-  flex: 0 0 380px;
-  max-width: 380px;
   width: 380px;
+  max-width: 380px;
 }
 
 /* Team Card Styles */
@@ -463,12 +469,15 @@ ul, ol {
 /* Mobile adjustments for team section */
 @media (max-width: 768px) {
   .team-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .team-card {
     min-height: 340px;
+    max-width: 100%;
+    width: 100%;
   }
 
   .team-card-icon {
@@ -507,6 +516,20 @@ ul, ol {
   .team-social-link:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-1px);
+  }
+
+  /* Make bottom team cards full-width and match the team-grid cards on mobile */
+  .team-bottom-row {
+    grid-template-columns: 380px;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  .team-bottom-row .team-card {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -1646,4 +1669,27 @@ ul, ol {
   .nav-mobile { width: 100%; max-width: 100%; border-radius: 0; }
   .nav-mobile .nav-list .nav-link { padding: .85rem; font-size: 0.95rem; }
   .footer-bottom { font-size: 0.85rem; padding-top: 1rem; }
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .resources-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .resource-card {
+    width: 100%;
+  }
+
+  .repo-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .repo-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
