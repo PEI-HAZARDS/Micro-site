@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize all components
   initNavbar();
   initScrollEffects();
+  initRepoStats();        // <-- fetch GitHub stats first so counters get correct targets
   initCounters();
   initCopyButtons();
   initContactForm();
@@ -376,3 +377,30 @@ function initDetailPageNavigation() {
     }
   });
 })();
+
+// New: fetch repository stats from GitHub and populate counters
+async function initRepoStats() {
+  try {
+    const res = await fetch('/stats.json');
+    const data = await res.json();
+
+    const commitsEl = document.getElementById('commits');
+    const issuesEl = document.getElementById('issues');
+    const releasesEl = document.getElementById('releases');
+
+    if (commitsEl) {
+      commitsEl.setAttribute('data-target', String(data.commits || 0));
+      commitsEl.textContent = "0";
+    }
+    if (issuesEl) {
+      issuesEl.setAttribute('data-target', String(data.issues_closed || 0));
+      issuesEl.textContent = "0";
+    }
+    if (releasesEl) {
+      releasesEl.setAttribute('data-target', String(data.releases || 0));
+      releasesEl.textContent = "0";
+    }
+  } catch (e) {
+    console.error("Erro a carregar stats.json", e);
+  }
+}

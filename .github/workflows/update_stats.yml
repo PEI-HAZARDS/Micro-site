@@ -1,0 +1,38 @@
+name: Update Repo Stats
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # atualiza todos os dias à meia-noite
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # permite atualizar o ficheiro stats.json
+      actions: read
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install node-fetch@2
+
+      - name: Generate stats.json
+        run: node scripts/generate-stats.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit stats.json
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add stats.json
+          git commit -m "Update stats" || echo "No changes"
+          git push
