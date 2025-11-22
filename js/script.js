@@ -382,6 +382,9 @@ function initDetailPageNavigation() {
 async function initRepoStats() {
   try {
     const res = await fetch('/stats.json');
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
     const data = await res.json();
 
     const commitsEl = document.getElementById('commits');
@@ -402,5 +405,21 @@ async function initRepoStats() {
     }
   } catch (e) {
     console.error("Erro a carregar stats.json", e);
+    // Set defaults if stats.json fails to load
+    const commitsEl = document.getElementById('commits');
+    const issuesEl = document.getElementById('issues');
+    const releasesEl = document.getElementById('releases');
+    if (commitsEl) {
+      commitsEl.setAttribute('data-target', '0');
+      commitsEl.textContent = "0";
+    }
+    if (issuesEl) {
+      issuesEl.setAttribute('data-target', '0');
+      issuesEl.textContent = "0";
+    }
+    if (releasesEl) {
+      releasesEl.setAttribute('data-target', '0');
+      releasesEl.textContent = "0";
+    }
   }
 }
