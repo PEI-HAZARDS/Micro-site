@@ -2,11 +2,11 @@
    Modern interactive effects, animations and functionality
 */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // Initialize all components
   initNavbar();
   initScrollEffects();
-  initRepoStats();        // <-- fetch GitHub stats first so counters get correct targets
+  await initRepoStats();        // <-- await to ensure stats are loaded before counters
   initCounters();
   initCopyButtons();
   initContactForm();
@@ -170,16 +170,8 @@ function initCounters() {
       }
     }
     
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          window.requestAnimationFrame(countUp);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    
-    observer.observe(counter);
+    // Start animation immediately instead of waiting for intersection
+    window.requestAnimationFrame(countUp);
   });
 }
 
@@ -381,7 +373,7 @@ function initDetailPageNavigation() {
 // New: fetch repository stats from GitHub and populate counters
 async function initRepoStats() {
   try {
-    const res = await fetch('/Micro-site/stats.json');
+    const res = await fetch('../stats.json');
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
