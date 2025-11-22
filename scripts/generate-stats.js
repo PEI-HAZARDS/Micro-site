@@ -1,5 +1,4 @@
 const fs = require("fs");
-const fetch = require("node-fetch");
 
 const owner = "PEI-HAZARDS";
 const repo = "Micro-site";
