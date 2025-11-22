@@ -381,7 +381,7 @@ function initDetailPageNavigation() {
 // New: fetch repository stats from GitHub and populate counters
 async function initRepoStats() {
   try {
-    const res = await fetch('/stats.json');
+    const res = await fetch('/Micro-site/stats.json');
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
