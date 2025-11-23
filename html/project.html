@@ -88,10 +88,10 @@
         <div class="feature-list">
           <h3>O projeto <strong>Intelligent Logistics</strong> propõe:</h3>
           <ul>
-            <li><i class="bi bi-check-circle"></i> Automatizar o &nbsp;<strong> controlo de entrada de camiões </strong>&nbsp; num porto</li>
+            <li><i class="bi bi-check-circle"></i> Automatizar o &nbsp;<strong>controlo de entrada de camiões</strong>&nbsp; num porto</li>
             <li><i class="bi bi-check-circle"></i> Detetar veículos e cargas através de câmeras e algoritmos de visão computacional</li>
-            <li><i class="bi bi-check-circle"></i> Integrar a informação com um &nbsp;<strong> sistema logístico inteligente </strong>&nbsp; que decide a entrada e destino correto</li>
-            <li><i class="bi bi-check-circle"></i> Informar o condutor de forma clara, seja por &nbsp;<strong> sinalização digital </strong>&nbsp; no porto ou &nbsp;<strong>aplicações móveis</strong></li>
+            <li><i class="bi bi-check-circle"></i> Integrar a informação com um &nbsp;<strong>sistema logístico inteligente</strong>&nbsp; que decide a entrada e destino correto</li>
+            <li><i class="bi bi-check-circle"></i> Informar o condutor de forma clara, seja por &nbsp;<strong>sinalização digital</strong>&nbsp; no porto ou &nbsp;<strong>aplicações móveis</strong></li>
           </ul>
         </div>
       </div>
@@ -107,7 +107,7 @@
             <ul>
               <li>Utilização de algoritmos de visão computacional em tempo real (ex: YOLO)</li>
               <li>Reconhecimento de camiões, matrículas e símbolos de mercadorias perigosas</li>
-              <li>Encaminhamento automático para o destino correto dentro do porto</li>
+              <li>Indicação automática para o destino correto dentro do porto</li>
             </ul>
           </div>
           
@@ -117,6 +117,7 @@
             <ul>
               <li>Contabilização de veículos, tipos de carga e tempos de permanência</li>
               <li>Visualização de métricas em diferentes granularidades (diário, mensal, individual)</li>
+              <li>Exportação de dados para análise</li>
             </ul>
           </div>
         </div>
@@ -165,7 +166,7 @@
           </div>
 
           <div class="tab-content" id="arquitetura" role="tabpanel" aria-labelledby="tab-arquitetura">
-            <h3><i class="bi bi-diagram-3"></i> Arquitetura do Sistema</h3>
+            <h3><i class="bi bi-diagram-3"></i> Arquitetura do Sistema</h3> 
             <p>O sistema adota uma <strong>arquitetura baseada em microserviços</strong>, onde cada componente é autónomo, escalável e especializado. A comunicação entre serviços é feita através de um modelo <strong>Event-Driven</strong> para garantir baixa latência.</p>
             
             <div class="feature-grid">
@@ -193,14 +194,23 @@
                 <p>Bases de dados SQL e NoSQL para armazenamento analítico e geração de relatórios.</p>
               </div>
             </div>
-
+            <div class="mockup-grid" aria-hidden="false">
+              <div class="mockup-thumb">
+                <h4>Component-Level Architecture</h4>
+                <img loading="lazy" data-full="../docs/ArchComponent.png" src="../docs/ArchComponent.png" alt="Arch Component" class="mockup-img">
+              </div>
+              <div class="mockup-thumb">
+                <h4>Container-Level Architecture</h4>
+                <img loading="lazy" data-full="../docs/ArchContainer.png" src="../docs/ArchContainer.png" alt="Arch Container" class="mockup-img">
+              </div>
+            </div>
             <div class="feature-list">
               <h4>Benefícios da Arquitetura:</h4>
               <ul>
-                <li><i class="bi bi-arrow-up-right-circle"></i> <strong>Escalável:</strong> Adiciona câmaras e sensores sem impacto global</li>
-                <li><i class="bi bi-lightning"></i> <strong>Tempo real:</strong> Latência &lt; Xs entre captura e notificação</li>
-                <li><i class="bi bi-plug"></i> <strong>Integrável:</strong> API REST facilmente consumida por sistemas externos</li>
-                <li><i class="bi bi-shield-check"></i> <strong>Segura:</strong> Proteção de dados e privacidade garantidas</li>
+                <li><i class="bi bi-arrow-up-right-circle"></i> <strong>Escalável: </strong>  Adiciona câmaras e sensores sem impacto global</li>
+                <li><i class="bi bi-lightning"></i> <strong>Tempo real: </strong>  Latência &lt; 5s entre captura e notificação</li>
+                <li><i class="bi bi-plug"></i> <strong>Integrável: </strong>  API REST facilmente consumida por sistemas externos</li>
+                <li><i class="bi bi-shield-check"></i> <strong>Segura:</strong>  Proteção de dados e privacidade garantidas</li>
               </ul>
             </div>
           </div>
@@ -404,37 +414,31 @@
       
       <div class="card animate-on-scroll fade-in">
 
-      <!-- ======= New: Documentação ======= -->
-      <div id="documentation" class="card animate-on-scroll fade-in">
-        <h2><i class="bi bi-journal-bookmark"></i> Documentação</h2>
-        <p>Documentação técnica e utilizador disponível:</p>
-        <div class="feature-list">
-          <ul>
-            <li><strong>README do Repositório:</strong> visão geral do projecto e passos para deploy (ver repositório).</li>
-            <li><strong>...</strong></li>
-          </ul>
-        </div>
-      </div>
-
       <!-- ======= New: Mockups ======= -->
       <div id="mockups" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-phone"></i> Mockups & Prototótipos</h2>
-        <p>Mockups de interface e screenshots do dashboard e painéis de orientação.</p>
+        <p>Mockups de interface e screenshots do dashboard das diferentes personas.</p>
 
-        <div class="mockup-grid">
+        <div class="mockup-grid" aria-hidden="false">
           <figure class="mockup-item">
-            <img src="../images/mockups/dashboard-01.png" alt="Mockup Dashboard 1" class="mockup-img">
-            <figcaption>Dashboard principal — visão geral</figcaption>
+            <div class="mockup-thumb">
+              <img loading="lazy" data-full="../images/mockups/dashboardOperador.png" src="../images/mockups/dashboardOperador.png" alt="Mockup Dashboard 1" class="mockup-img">
+            </div>
+            <figcaption><strong>Operador de Cancela</strong></figcaption>
           </figure>
 
           <figure class="mockup-item">
-            <img src="../images/mockups/panel-01.png" alt="Mockup Painel de Orientação" class="mockup-img">
-            <figcaption>Painel de orientação para condutores</figcaption>
+            <div class="mockup-thumb">
+              <img loading="lazy" data-full="../images/mockups/dashboardGestor.png" src="../images/mockups/dashboardGestor.png" alt="Mockup Painel de Orientação" class="mockup-img">
+            </div>
+            <figcaption><strong>Gestor de Logistica</strong> </figcaption>
           </figure>
 
           <figure class="mockup-item">
-            <img src="../images/mockups/mobile-01.png" alt="Mockup Mobile" class="mockup-img">
-            <figcaption>Interface móvel para condutores</figcaption>
+            <div class="mockup-thumb">
+              <img loading="lazy" data-full="../images/mockups/dashboardMobile.png" src="../images/mockups/dashboardMobile.png" alt="Mockup Mobile" class="mockup-img">
+            </div>
+            <figcaption><strong>Condutores</strong></figcaption>
           </figure>
         </div>
       </div>
@@ -573,7 +577,73 @@
     document.querySelectorAll('.animate-on-scroll').forEach(element => {
       observer.observe(element);
     });
+    
+    // Mockups toggle: hide grid by default, reveal on button click
+    (function() {
+      const mockupToggleBtn = document.getElementById('toggle-mockups');
+      const mockupGrid = document.querySelector('.mockup-grid');
+      if (mockupToggleBtn && mockupGrid) {
+        mockupToggleBtn.addEventListener('click', () => {
+          mockupGrid.classList.toggle('collapsed');
+          if (mockupGrid.classList.contains('collapsed')) {
+            mockupGrid.setAttribute('aria-hidden', 'true');
+            mockupToggleBtn.textContent = 'Mostrar mockups';
+          } else {
+            mockupGrid.setAttribute('aria-hidden', 'false');
+            mockupToggleBtn.textContent = 'Ocultar mockups';
+            mockupGrid.scrollIntoView({behavior: 'smooth', block: 'start'});
+          }
+        });
+      }
+    })();
+
+    // Mockup lightbox: open modal on click of image or zoom button
+
+    document.addEventListener("DOMContentLoaded", () => {
+    
+      const modal = document.getElementById("mockup-modal");
+      const modalImg = document.getElementById("mockup-modal-img");
+      const closeBtn = document.getElementById("mockup-modal-close");
+    
+      // Debug para confirmar que os elementos existem
+      console.log("Modal:", modal, modalImg);
+    
+      document.querySelectorAll(".mockup-thumb img").forEach(img => {
+        img.addEventListener("click", () => {
+          const full = img.getAttribute("data-full") || img.src;
+        
+          console.log("Abrindo modal:", full);
+        
+          modalImg.src = full;
+          modal.classList.add("open");
+          document.body.style.overflow = "hidden";
+        });
+      });
+    
+      closeBtn.addEventListener("click", () => {
+        modal.classList.remove("open");
+        modalImg.src = "";
+        document.body.style.overflow = "";
+      });
+    
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.remove("open");
+          modalImg.src = "";
+          document.body.style.overflow = "";
+        }
+      });
+    
+    });
   </script>
+
+  
+  <!-- Mockup modal element for full-size previews -->
+  <div class="mockup-modal" id="mockup-modal">
+    <button class="close" id="mockup-modal-close">×</button>
+    <img id="mockup-modal-img" src="" alt="">
+  </div>
+
   <script src="../js/script.js"></script>
 </body>
 </html>
