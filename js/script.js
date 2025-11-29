@@ -379,40 +379,45 @@ async function initRepoStats() {
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
-    const data = await res.json();
 
-    const commitsEl = document.getElementById('commits');
-    const issuesEl = document.getElementById('issues');
-    const releasesEl = document.getElementById('releases');
+    const data = await res.json();
+    const totals = data.totals || {}; // <- novo: total agregado
+
+    const commitsEl = document.getElementById("commits");
+    const issuesEl = document.getElementById("issues");
+    const releasesEl = document.getElementById("releases");
 
     if (commitsEl) {
-      commitsEl.setAttribute('data-target', String(data.commits || 0));
+      commitsEl.setAttribute("data-target", String(totals.commits || 0));
       commitsEl.textContent = "0";
     }
     if (issuesEl) {
-      issuesEl.setAttribute('data-target', String(data.issues_closed || 0));
+      issuesEl.setAttribute("data-target", String(totals.issues_closed || 0));
       issuesEl.textContent = "0";
     }
     if (releasesEl) {
-      releasesEl.setAttribute('data-target', String(data.releases || 0));
+      releasesEl.setAttribute("data-target", String(totals.releases || 0));
       releasesEl.textContent = "0";
     }
+
   } catch (e) {
     console.error("Erro a carregar stats.json", e);
+
     // Set defaults if stats.json fails to load
-    const commitsEl = document.getElementById('commits');
-    const issuesEl = document.getElementById('issues');
-    const releasesEl = document.getElementById('releases');
+    const commitsEl = document.getElementById("commits");
+    const issuesEl = document.getElementById("issues");
+    const releasesEl = document.getElementById("releases");
+
     if (commitsEl) {
-      commitsEl.setAttribute('data-target', '0');
+      commitsEl.setAttribute("data-target", "0");
       commitsEl.textContent = "0";
     }
     if (issuesEl) {
-      issuesEl.setAttribute('data-target', '0');
+      issuesEl.setAttribute("data-target", "0");
       issuesEl.textContent = "0";
     }
     if (releasesEl) {
-      releasesEl.setAttribute('data-target', '0');
+      releasesEl.setAttribute("data-target", "0");
       releasesEl.textContent = "0";
     }
   }

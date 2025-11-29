@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const owner = "PEI-HAZARDS";
-const repo = "Micro-site";
+const repos = ["IntelligentLogistics", "IntelligentLogistics_APP"];
 const token = process.env.GITHUB_TOKEN;
 
 async function getJson(url) {
@@ -14,7 +14,7 @@ async function getJson(url) {
   return res.json();
 }
 
-async function getCommitsCount() {
+async function getCommitsCount(owner, repo) {
   const url = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`;
   const res = await fetch(url, {
     headers: {
@@ -22,42 +22,68 @@ async function getCommitsCount() {
       Accept: "application/vnd.github+json",
     },
   });
+
   const json = await res.json();
-  const link = res.headers.get('link');
+  const link = res.headers.get("link");
+
   if (link) {
-    const lastPageMatch = link.match(/page=(\d+)>; rel="last"/);
-    if (lastPageMatch) {
-      return parseInt(lastPageMatch[1]);
-    }
+    const match = link.match(/page=(\d+)>; rel="last"/);
+    if (match) return parseInt(match[1]);
   }
-  return json.length; // fallback
+
+  return json.length;
+}
+
+async function getRepoStats(repo) {
+  // commits
+  const commits = await getCommitsCount(owner, repo);
+
+  // issues fechadas
+  const issues = await getJson(
+    `https://api.github.com/search/issues?q=repo:${owner}/${repo}+type:issue+state:closed`
+  );
+
+  // releases
+  const releases = await getJson(
+    `https://api.github.com/repos/${owner}/${repo}/releases`
+  );
+
+  return {
+    repo,
+    commits,
+    issues_closed: issues.total_count || 0,
+    releases: releases.length || 0,
+  };
 }
 
 (async () => {
   try {
-    // Total de commits
-    const commits = await getCommitsCount();
+    const results = [];
 
-    // Issues fechadas
-    const issues = await getJson(
-      `https://api.github.com/search/issues?q=repo:${owner}/${repo}+type:issue+state:closed`
+    for (const repo of repos) {
+      const stats = await getRepoStats(repo);
+      results.push(stats);
+    }
+
+    // agregados globais
+    const totals = results.reduce(
+      (acc, r) => {
+        acc.commits += r.commits;
+        acc.issues_closed += r.issues_closed;
+        acc.releases += r.releases;
+        return acc;
+      },
+      { commits: 0, issues_closed: 0, releases: 0 }
     );
 
-    // Releases
-    const releases = await getJson(
-      `https://api.github.com/repos/${owner}/${repo}/releases`
-    );
-
-    // JSON final
-    const stats = {
+    const finalStats = {
       updated_at: new Date().toISOString(),
-      commits: commits,
-      issues_closed: issues.total_count || 0,
-      releases: releases.length || 0,
+      repos: results,
+      totals,
     };
 
-    fs.writeFileSync("stats.json", JSON.stringify(stats, null, 2));
-    console.log("✔ stats.json atualizado");
+    fs.writeFileSync("stats.json", JSON.stringify(finalStats, null, 2));
+    console.log("✔ stats.json atualizado para múltiplos repositórios");
   } catch (error) {
     console.error("Erro ao gerar stats.json:", error);
     process.exit(1);
