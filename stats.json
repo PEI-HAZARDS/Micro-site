@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-12-05T00:54:18.832Z",
+  "updated_at": "2025-12-06T00:51:53.131Z",
   "repos": [
     {
       "repo": "IntelligentLogistics",
@@ -10,13 +10,13 @@
     {
       "repo": "IntelligentLogistics_APP",
       "commits": 4,
-      "issues_closed": 0,
+      "issues_closed": 1,
       "releases": 0
     }
   ],
   "totals": {
     "commits": 130,
-    "issues_closed": 1,
+    "issues_closed": 2,
     "releases": 0
   }
 }
