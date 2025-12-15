@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Milestones — Intelligent Logistics</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&family=Roboto+Mono&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/project-page.css">
+    <link rel="stylesheet" href="../css/project-footer.css">
+    <style>
+        /* Milestone specific styles */
+        .milestone-timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .milestone-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        .milestone-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .milestone-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .milestone-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .milestone-item.completed::before {
+            background: var(--success);
+        }
+
+        .milestone-item.in-progress::before {
+            background: var(--warning);
+        }
+
+        .milestone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .milestone-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0;
+        }
+
+        .milestone-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-completed {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+
+        .badge-in-progress {
+            background: rgba(252, 211, 77, 0.2);
+            color: #b45309;
+        }
+
+        .milestone-date {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .task-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .task-table th {
+            background: var(--light);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--light-dark);
+        }
+
+        .task-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--light-dark);
+        }
+
+        .task-table tr:hover {
+            background: rgba(58, 54, 224, 0.02);
+        }
+
+        .task-id {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .status-completed {
+            color: #059669;
+            font-weight: 500;
+        }
+
+        .status-in-progress {
+            color: #b45309;
+            font-weight: 500;
+        }
+
+        .gantt-section {
+            margin: 3rem 0;
+        }
+
+        .gantt-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .ms-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2rem;
+        }
+
+        .ms-card h2 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .ms-card p {
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 10px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--secondary);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .task-table {
+                font-size: 0.8rem;
+            }
+
+            .task-table th,
+            .task-table td {
+                padding: 0.5rem;
+            }
+
+            .milestone-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner header-centered">
+            <a href="../index.html" class="back-link-simple" title="Voltar">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+
+            <div class="header-title-wrapper">
+                <img src="../images/LogoMin-semfundo.png" alt="Logo" class="header-logo-image">
+            </div>
+
+            <nav class="nav-desktop" aria-label="Menu do projeto">
+                <ul class="nav-list">
+                    <li><a href="#ms1" class="nav-link">MS1 - Inception</a></li>
+                    <li><a href="#ms2" class="nav-link">MS2 - Architecture</a></li>
+                    <li><a href="#ms3" class="nav-link">MS3 - MVP</a></li>
+                    <li><a href="#timeline" class="nav-link">Timeline</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-spacer"></div>
+        </div>
+    </header>
+
+    <div class="nav-overlay" aria-hidden="true"></div>
+
+    <!-- Main content -->
+    <main class="container page-container">
+        <section class="section">
+            <div id="intro" class="section-header animate-on-scroll fade-in">
+                <h1 class="section-title">Calendário de <span class="text-gradient">Objetivos</span></h1>
+                <p class="section-subtitle">Milestones, tarefas e progresso do projeto Intelligent Logistics</p>
+            </div>
+
+            <!-- MS1 - Inception -->
+            <div id="ms1" class="ms-card animate-on-scroll fade-in">
+                <h2><i class="bi bi-1-circle"></i> MS1 - Inception</h2>
+                <p>Definição de requisitos, personas, user stories e calendário inicial do projeto.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 100%"></div>
+                </div>
+            </div>
+
+            <div class="card animate-on-scroll fade-in">
+                <h3><i class="bi bi-list-task"></i> Tarefas do MS1</h3>
+                <p>Período: <strong>Outubro 2025</strong></p>
+
+                <div class="table-responsive">
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tarefa</th>
+                                <th>Estado</th>
+                                <th>Atualizado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="task-id">ILUP-2</span></td>
+                                <td>Requisitos</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-14</span></td>
+                                <td>Definição de Personas</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-15</span></td>
+                                <td>Definição de user stories e respetivos critérios</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-3</span></td>
+                                <td>Calendário de objetivos</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-4</span></td>
+                                <td>Apresentação inicial</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MS2 - Architecture -->
+            <div id="ms2" class="ms-card animate-on-scroll fade-in"
+                style="background: linear-gradient(135deg, #00c8aa, #00957f);">
+                <h2><i class="bi bi-2-circle"></i> MS2 - Presentation of Lifecycle Architecture</h2>
+                <p>Definição da arquitetura, seleção de tecnologias, mockups e validação de componentes.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 100%"></div>
+                </div>
+            </div>
+
+            <div class="card animate-on-scroll fade-in">
+                <h3><i class="bi bi-list-task"></i> Tarefas do MS2</h3>
+                <p>Período: <strong>Outubro - Novembro 2025</strong></p>
+
+                <div class="table-responsive">
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tarefa</th>
+                                <th>Estado</th>
+                                <th>Atualizado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="task-id">ILUP-53</span></td>
+                                <td>Reavaliação dos user stories</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-6</span></td>
+                                <td>Desenhar arquitetura do sistema</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-22</span></td>
+                                <td>Elaborar diagrama de arquitetura de alto nível</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-23</span></td>
+                                <td>Mapear fluxos de dados entre componentes</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-24</span></td>
+                                <td>Selecionar tecnologias e padrões arquiteturais</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-25</span></td>
+                                <td>Definir componentes (partes do sistema)</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-8</span></td>
+                                <td>Validar Tecnologias escolhidas</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-45</span></td>
+                                <td>Comparar tecnologias selecionadas com alternativas de mercado</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-46</span></td>
+                                <td>Verificar compatibilidade das tecnologias com a arquitetura proposta</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-47</span></td>
+                                <td>Documentar justificativa da escolha das tecnologias</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-11</span></td>
+                                <td>Criar Mockups</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-55</span></td>
+                                <td>Apresentação MS2</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MS3 - MVP -->
+            <div id="ms3" class="ms-card animate-on-scroll fade-in"
+                style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                <h2><i class="bi bi-3-circle"></i> MS3 - Minimal Valuable Prototype</h2>
+                <p>Implementação do MVP: deteção de veículos, reconhecimento de matrículas, dashboard operador e app
+                    condutor.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 100%"></div>
+                </div>
+            </div>
+
+            <div class="card animate-on-scroll fade-in">
+                <h3><i class="bi bi-list-task"></i> Tarefas do MS3 - Visão Computacional</h3>
+                <p>Período: <strong>Novembro - Dezembro 2025</strong></p>
+
+                <div class="table-responsive">
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tarefa</th>
+                                <th>Estado</th>
+                                <th>Atualizado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="task-id">ILUP-17</span></td>
+                                <td>Desenvolver módulo de deteção automática de camiões via câmara</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-18</span></td>
+                                <td>Desenvolver módulo de deteção automática de matrículas e placas de segurança</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-19</span></td>
+                                <td>Desenvolver sistema de deteção de texto em imagem</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-21</span></td>
+                                <td>Testar e avaliar a eficácia do conjunto</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-35</span></td>
+                                <td>Implementar validação automática de placas de segurança via câmara</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-36</span></td>
+                                <td>Desenvolver sistema de reconhecimento de símbolos de perigo e envio de alerta</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card animate-on-scroll fade-in">
+                <h3><i class="bi bi-list-task"></i> Tarefas do MS3 - Dashboard Operador</h3>
+
+                <div class="table-responsive">
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tarefa</th>
+                                <th>Estado</th>
+                                <th>Atualizado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="task-id">ILUP-27</span></td>
+                                <td>Design dashboard UI for truck schedule display</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-28</span></td>
+                                <td>Develop frontend components to display truck list and details</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-29</span></td>
+                                <td>Add filtering functionality to dashboard</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-30</span></td>
+                                <td>Implement real-time status updates for truck entries</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-31</span></td>
+                                <td>Implement backend API to provide truck schedule data</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-32</span></td>
+                                <td>Integrate dashboard with truck entry confirmation workflow</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-33</span></td>
+                                <td>Test dashboard functionality and user experience</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-37</span></td>
+                                <td>Exibir notificações de alerta no dashboard em caso de erro ou indecisão</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-49</span></td>
+                                <td>Página Operador Cancela</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Nov 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card animate-on-scroll fade-in">
+                <h3><i class="bi bi-list-task"></i> Tarefas do MS3 - App Condutor & Notificações</h3>
+
+                <div class="table-responsive">
+                    <table class="task-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tarefa</th>
+                                <th>Estado</th>
+                                <th>Atualizado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="task-id">ILUP-38</span></td>
+                                <td>Motorista quer ver para qual cais deve ir</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-39</span></td>
+                                <td>Permitir confirmação visual do destino pelo motorista antes de iniciar o percurso
+                                </td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-40</span></td>
+                                <td>Atualizar dados operador e condutor em tempo real</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-41</span></td>
+                                <td>Motorista, quer receber informação da sua chegada</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-42</span></td>
+                                <td>Registrar evento de autorização de entrada nos logs do sistema</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-43</span></td>
+                                <td>Exibir horário e cais atribuído na notificação de entrada</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                            <tr>
+                                <td><span class="task-id">ILUP-44</span></td>
+                                <td>Notificar motorista e operador em caso de matrícula não reconhecida</td>
+                                <td><span class="status-completed"><i class="bi bi-check-circle-fill"></i>
+                                        Concluído</span></td>
+                                <td>Dez 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Timeline Visual -->
+            <div id="timeline" class="card animate-on-scroll fade-in">
+                <h2><i class="bi bi-calendar3"></i> Timeline do Projeto</h2>
+                <p>Visão geral do cronograma e progresso por sprint.</p>
+
+                <div class="milestone-timeline">
+                    <div class="milestone-item completed">
+                        <div class="milestone-header">
+                            <h4 class="milestone-title">MS1 - Inception</h4>
+                            <span class="milestone-badge badge-completed"><i class="bi bi-check-circle-fill"></i>
+                                Concluído</span>
+                        </div>
+                        <p class="milestone-date"><i class="bi bi-calendar"></i> Outubro 2025</p>
+                        <p>Requisitos, personas, user stories e calendário inicial definidos.</p>
+                    </div>
+
+                    <div class="milestone-item completed">
+                        <div class="milestone-header">
+                            <h4 class="milestone-title">MS2 - Lifecycle Architecture</h4>
+                            <span class="milestone-badge badge-completed"><i class="bi bi-check-circle-fill"></i>
+                                Concluído</span>
+                        </div>
+                        <p class="milestone-date"><i class="bi bi-calendar"></i> Outubro - Novembro 2025</p>
+                        <p>Arquitetura de microserviços, seleção de tecnologias e mockups validados.</p>
+                    </div>
+
+                    <div class="milestone-item completed">
+                        <div class="milestone-header">
+                            <h4 class="milestone-title">MS3 - Minimal Valuable Prototype</h4>
+                            <span class="milestone-badge badge-completed"><i class="bi bi-check-circle-fill"></i>
+                                Concluído</span>
+                        </div>
+                        <p class="milestone-date"><i class="bi bi-calendar"></i> Novembro - Dezembro 2025</p>
+                        <p>MVP implementado: deteção de veículos, OCR de matrículas, dashboard operador e app condutor
+                            funcionais.</p>
+                    </div>
+
+                    <div class="milestone-item">
+                        <div class="milestone-header">
+                            <h4 class="milestone-title">MS4 - Segundo Semestre</h4>
+                            <span class="milestone-badge badge-in-progress"><i class="bi bi-hourglass-split"></i>
+                                Próximo</span>
+                        </div>
+                        <p><em>Coming soon...</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4 animate-on-scroll fade-in">
+                <a href="../index.html#resources" class="btn btn-primary back-link">
+                    <i class="bi bi-arrow-left"></i> Voltar à Página Principal
+                </a>
+                <a href="project.html" class="btn btn-outline" style="margin-left: 1rem;">
+                    <i class="bi bi-file-text"></i> Ver Detalhes do Projeto
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-container">
+            <div class="footer-branding">
+                <img src="../images/LogoMin-semfundo.png" alt="Intelligent Logistics" class="footer-logo-image">
+                <p class="footer-tagline">A inovar na logística portuária com IA — Universidade de Aveiro</p>
+            </div>
+
+            <div class="footer-links-row">
+                <a href="#ms1" class="footer-link">MS1</a>
+                <a href="#ms2" class="footer-link">MS2</a>
+                <a href="#ms3" class="footer-link">MS3</a>
+                <a href="#timeline" class="footer-link">Timeline</a>
+                <a href="mailto:intelligentlogistics.pei@gmail.com" class="footer-link">Contacto</a>
+            </div>
+
+            <div class="footer-copyright">
+                <small>© 2025 Intelligent Logistics — Todos os direitos reservados.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reading progress bar
+        const progressBar = document.querySelector('.reading-progress-bar');
+
+        function updateReadingProgress() {
+            const scrollPosition = window.scrollY;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollPosition / scrollHeight) * 100;
+
+            progressBar.style.width = `${progress}%`;
+        }
+
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        updateReadingProgress();
+
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
