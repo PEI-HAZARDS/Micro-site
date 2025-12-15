@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initParticlesEffect();
   initDetailPageNavigation();
   // initTeamImages() removed (not defined) to avoid runtime errors
-  
+
   // Initial check if private panel is active in CSS
   const privatePanel = document.getElementById('private-panel');
   if (privatePanel && getComputedStyle(privatePanel).visibility === 'visible') {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Trigger initial animations
   animateOnScroll();
-  
+
 });
 
 // Navbar functionality (mobile toggle, scroll behavior)
@@ -33,7 +33,7 @@ function initNavbar() {
   const mobileClose = document.querySelector('.nav-mobile-close');
   const navOverlay = document.querySelector('.nav-overlay');
   const navLinks = document.querySelectorAll('.nav-link');
-  
+
   // Toggle mobile menu
   if (mobileToggle && mobileNav && mobileClose && navOverlay) {
     mobileToggle.addEventListener('click', () => {
@@ -41,16 +41,16 @@ function initNavbar() {
       navOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
-    
+
     function closeMobileNav() {
       mobileNav.classList.remove('active');
       navOverlay.classList.remove('active');
       document.body.style.overflow = '';
     }
-    
+
     mobileClose.addEventListener('click', closeMobileNav);
     navOverlay.addEventListener('click', closeMobileNav);
-    
+
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
@@ -60,7 +60,7 @@ function initNavbar() {
       });
     });
   }
-  
+
   // Header scroll behavior
   if (header) {
     // Consolidated scroll handler (single listener to improve performance)
@@ -148,28 +148,28 @@ function animateOnScroll() {
 // Animated counters
 function initCounters() {
   const counters = document.querySelectorAll('.counter');
-  
+
   counters.forEach(counter => {
     const target = parseInt(counter.getAttribute('data-target'));
     const duration = parseInt(counter.getAttribute('data-duration') || '2000');
     let startTime = null;
-    
+
     function countUp(timestamp) {
       if (!startTime) startTime = timestamp;
-      
+
       const progress = timestamp - startTime;
       const percentage = Math.min(progress / duration, 1);
-      
+
       const value = Math.floor(percentage * target);
       counter.textContent = value;
-      
+
       if (percentage < 1) {
         window.requestAnimationFrame(countUp);
       } else {
         counter.textContent = target;
       }
     }
-    
+
     // Start animation immediately instead of waiting for intersection
     window.requestAnimationFrame(countUp);
   });
@@ -178,17 +178,17 @@ function initCounters() {
 // Copy button functionality for code snippets
 function initCopyButtons() {
   const copyButtons = document.querySelectorAll('.copy-btn');
-  
+
   copyButtons.forEach(button => {
     button.addEventListener('click', () => {
       const codeBlock = button.closest('.card').querySelector('.repo-clone');
-      
+
       if (codeBlock) {
         navigator.clipboard.writeText(codeBlock.textContent.trim())
           .then(() => {
             button.classList.add('copied');
             button.querySelector('.copy-text').textContent = 'Copiado!';
-            
+
             setTimeout(() => {
               button.classList.remove('copied');
               button.querySelector('.copy-text').textContent = 'Copiar';
@@ -263,31 +263,31 @@ document.addEventListener('DOMContentLoaded', initContactForm);
 // Decorative particles effect
 function initParticlesEffect() {
   const particlesContainer = document.querySelector('.particles-container');
-  
+
   if (!particlesContainer) return;
-  
+
   // Create particles
   for (let i = 0; i < 50; i++) {
     createParticle();
   }
-  
+
   function createParticle() {
     const particle = document.createElement('div');
     particle.className = 'particle';
-    
+
     // Random position
     const posX = Math.random() * 100;
     const posY = Math.random() * 100;
-    
+
     // Random size
     const size = Math.random() * 5 + 1;
-    
+
     // Random opacity
     const opacity = Math.random() * 0.5 + 0.1;
-    
+
     // Random animation duration
     const duration = Math.random() * 20 + 10;
-    
+
     // Apply styles
     particle.style.left = `${posX}%`;
     particle.style.top = `${posY}%`;
@@ -295,7 +295,7 @@ function initParticlesEffect() {
     particle.style.height = `${size}px`;
     particle.style.opacity = opacity;
     particle.style.animationDuration = `${duration}s`;
-    
+
     particlesContainer.appendChild(particle);
   }
 }
@@ -304,36 +304,28 @@ function initParticlesEffect() {
 function initDetailPageNavigation() {
   // Links from index to detail pages - replace current page instead of opening new tab
   const projectDetailLinks = document.querySelectorAll('.project-details-link');
-  
+
   projectDetailLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function (e) {
       e.preventDefault();
       window.location.replace(this.getAttribute('href'));
     });
   });
-  
-  // Back links from detail pages
+
+  // Back links from detail pages - navigate directly to href
   const backLinks = document.querySelectorAll('.back-link');
-  
+
   backLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      // If there is a history to go back to, use it
+    link.addEventListener('click', function (e) {
       e.preventDefault();
-      
-      if (window.history && window.history.length > 1) {
-        window.history.back();
-        return;
-      }
-      
-      // fallback: replace location in same tab (no new tab)
-      const href = this.getAttribute('href') || '/index.html';
-      window.location.replace(href);
+      const href = this.getAttribute('href') || '../index.html';
+      window.location.href = href;
     });
   });
 }
 
 // Mobile nav toggle / close behaviour (idempotent: safe to add)
-(function initMobileNavToggle(){
+(function initMobileNavToggle() {
   document.addEventListener('click', (e) => {
     const panel = document.querySelector('.nav-mobile');
     const overlay = document.querySelector('.nav-overlay');

@@ -252,28 +252,41 @@
           </div>
 
           <div class="tab-content" id="bd" role="tabpanel" aria-labelledby="tab-bd">
-            <h3><i class="bi bi-database"></i> Base de dados do Sistema</h3> 
-            <p>A BD estrutura todo o ciclo de uma visita: um <strong>Appointment/Booking</strong> liga camião, motorista, empresa e terminal/gates, recebe uma carga, é concretizado como <strong>Visit</strong> (entrada/saída) num turno (<strong>Shift</strong>) e pode gerar <strong>Alerts</strong> associados. Os modelos DER/ER mostram como camiões, motoristas, cargas, agendamentos, turnos e alertas se relacionam para garantir rastreabilidade ponta-a-ponta.</p>
-            
+            <h3><i class="bi bi-database"></i> Base de dados do Sistema</h3>
+            <p>A BD estrutura todo o ciclo de uma visita: um <strong>Appointment/Booking</strong> liga camião,
+              motorista, empresa e terminal/gates, recebe uma carga, é concretizado como <strong>Visit</strong>
+              (entrada/saída) num turno (<strong>Shift</strong>) e pode gerar <strong>Alerts</strong> associados. Os
+              modelos DER/ER mostram como camiões, motoristas, cargas, agendamentos, turnos e alertas se relacionam para
+              garantir rastreabilidade ponta-a-ponta.</p>
+
             <div class="mockup-grid" aria-hidden="false">
               <div class="mockup-thumb">
                 <h4>DER</h4>
-                <img loading="lazy" data-full="../docs/DER-BD-IntelligentLogistics.png" src="../docs/DER-BD-IntelligentLogistics.png" alt="DER" class="mockup-img">
+                <img loading="lazy" data-full="../docs/DER-BD-IntelligentLogistics.png"
+                  src="../docs/DER-BD-IntelligentLogistics.png" alt="DER" class="mockup-img">
               </div>
               <div class="mockup-thumb">
                 <h4>ER</h4>
-                <img loading="lazy" data-full="../docs/ER-BD-IntelligentLogistics.png" src="../docs/ER-BD-IntelligentLogistics.png" alt="ER" class="mockup-img">
+                <img loading="lazy" data-full="../docs/ER-BD-IntelligentLogistics.png"
+                  src="../docs/ER-BD-IntelligentLogistics.png" alt="ER" class="mockup-img">
               </div>
             </div>
             <div class="feature-list">
               <h4>Elementos-chave da BD:</h4>
               <ul>
-                <li><i class="bi bi-calendar-check"></i> <strong>Appointment/Booking</strong>: agendamento com referências de camião, motorista, empresa, terminal e gates (in/out), horário esperado, duração e estado.</li>
-                <li><i class="bi bi-truck"></i> <strong>Truck & Driver</strong>: matrícula (PK), marca, licença do condutor, empresa (NIF) e credenciais do motorista.</li>
-                <li><i class="bi bi-box-seam"></i> <strong>Cargo & Dock</strong>: carga ligada ao booking (quantidade, estado, descrição) e baía com localização (latitude/longitude) e uso atual.</li>
-                <li><i class="bi bi-door-open"></i> <strong>Visit & Gate</strong>: a visita materializa o appointment num gate/turno, registando entrada/saída e estado; os gates têm label e coordenadas.</li>
-                <li><i class="bi bi-clock-history"></i> <strong>Shift</strong>: turnos por gate/tipo/data, com operador e gestor responsáveis.</li>
-                <li><i class="bi bi-exclamation-triangle"></i> <strong>Alert & History</strong>: alertas ligados à visita (tipo, timestamp, descrição, URL de evidência) e histórico por turno/gate para auditoria.</li>
+                <li><i class="bi bi-calendar-check"></i> <strong>Appointment/Booking</strong>: agendamento com
+                  referências de camião, motorista, empresa, terminal e gates (in/out), horário esperado, duração e
+                  estado.</li>
+                <li><i class="bi bi-truck"></i> <strong>Truck & Driver</strong>: matrícula (PK), marca, licença do
+                  condutor, empresa (NIF) e credenciais do motorista.</li>
+                <li><i class="bi bi-box-seam"></i> <strong>Cargo & Dock</strong>: carga ligada ao booking (quantidade,
+                  estado, descrição) e baía com localização (latitude/longitude) e uso atual.</li>
+                <li><i class="bi bi-door-open"></i> <strong>Visit & Gate</strong>: a visita materializa o appointment
+                  num gate/turno, registando entrada/saída e estado; os gates têm label e coordenadas.</li>
+                <li><i class="bi bi-clock-history"></i> <strong>Shift</strong>: turnos por gate/tipo/data, com operador
+                  e gestor responsáveis.</li>
+                <li><i class="bi bi-exclamation-triangle"></i> <strong>Alert & History</strong>: alertas ligados à
+                  visita (tipo, timestamp, descrição, URL de evidência) e histórico por turno/gate para auditoria.</li>
               </ul>
             </div>
           </div>
@@ -524,26 +537,31 @@
 
       <div id="dashboard" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-phone"></i> Resultados finais </h2>
-        <p>Resultados finais do dashboard do MVP para o <strong>operador de cancela</strong> e para os <strong>condutores</strong>.</p>
+        <p>Resultados finais do dashboard do MVP para o <strong>operador de cancela</strong> e para os
+          <strong>condutores</strong>.
+        </p>
 
         <div class="mockup-grid" aria-hidden="false">
           <figure class="mockup-item">
             <div class="mockup-thumb">
-              <img loading="lazy" data-full="../images/dashboards/dashOperatorMain.png" src="../images/dashboards/dashOperatorMain.png" alt="Dashboard 1" class="mockup-img">
+              <img loading="lazy" data-full="../images/dashboards/dashOperatorMain.png"
+                src="../images/dashboards/dashOperatorMain.png" alt="Dashboard 1" class="mockup-img">
             </div>
             <figcaption><strong>Operador de Cancela - Main</strong></figcaption>
           </figure>
 
           <figure class="mockup-item">
             <div class="mockup-thumb">
-              <img loading="lazy" data-full="../images/dashboards/dashOperatorDetails.png" src="../images/dashboards/dashOperatorDetails.png" alt="Dashboard Detalhes" class="mockup-img">
+              <img loading="lazy" data-full="../images/dashboards/dashOperatorDetails.png"
+                src="../images/dashboards/dashOperatorDetails.png" alt="Dashboard Detalhes" class="mockup-img">
             </div>
             <figcaption><strong>Operador de Cancela - Detalhes</strong> </figcaption>
           </figure>
 
           <figure class="mockup-item">
             <div class="mockup-thumb">
-              <img loading="lazy" data-full="../images/dashboards/dashDriver.png" src="../images/dashboards/dashDriver.png" alt="Dashboard Mobile" class="mockup-img">
+              <img loading="lazy" data-full="../images/dashboards/dashDriver.png"
+                src="../images/dashboards/dashDriver.png" alt="Dashboard Mobile" class="mockup-img">
             </div>
             <figcaption><strong>Condutores</strong></figcaption>
           </figure>
@@ -580,8 +598,11 @@
       </div>
 
       <div class="text-center mt-4 animate-on-scroll fade-in">
-        <a href="../index.html#project" class="btn btn-primary back-link">
+        <a href="../index.html" class="btn btn-primary back-link">
           <i class="bi bi-arrow-left"></i> Voltar à Página Principal
+        </a>
+        <a href="milestones.html" class="btn btn-outline" style="margin-left: 1rem;">
+          <i class="bi bi-calendar3"></i> Milestones
         </a>
       </div>
     </section>
@@ -660,18 +681,12 @@
     // Update on page load
     updateReadingProgress();
 
-    // Back link behavior: prefer history.back() to stay in same tab
+    // Back link behavior: navigate to href directly
     document.querySelectorAll('.back-link').forEach(link => {
       link.addEventListener('click', function (e) {
-        // If there is a history to go back to, use it
         e.preventDefault();
-        if (window.history && window.history.length > 1) {
-          window.history.back();
-          return;
-        }
-        // fallback: replace location in same tab (no new tab)
         var href = this.getAttribute('href') || '../index.html';
-        window.location.replace(href);
+        window.location.href = href;
       });
     });
 
