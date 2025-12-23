@@ -576,10 +576,12 @@
         <div class="demo-videos-grid">
           <!-- Video 1: Fluxo Completo -->
           <figure class="demo-video-item">
-            <div class="video-wrapper">
-              <iframe src="https://drive.google.com/file/d/1MsvpqpAnyrzYISzbVKBpuk18QOZ3GmA4/preview"
-                allow="autoplay; encrypted-media" allowfullscreen>
-              </iframe>
+            <div class="video-wrapper video-placeholder"
+              data-video-src="https://drive.google.com/file/d/1MsvpqpAnyrzYISzbVKBpuk18QOZ3GmA4/preview">
+              <div class="video-play-overlay">
+                <i class="bi bi-play-circle-fill"></i>
+                <span>Clique para reproduzir</span>
+              </div>
             </div>
             <figcaption>
               <strong>Fluxo Completo</strong>
@@ -590,10 +592,12 @@
 
           <!-- Video 2: Aceitação Automática -->
           <figure class="demo-video-item">
-            <div class="video-wrapper">
-              <iframe src="https://drive.google.com/file/d/10tlTsihoxebEj9csR9AI-AsLa7yTqYvO/preview"
-                allow="autoplay; encrypted-media" allowfullscreen>
-              </iframe>
+            <div class="video-wrapper video-placeholder"
+              data-video-src="https://drive.google.com/file/d/10tlTsihoxebEj9csR9AI-AsLa7yTqYvO/preview">
+              <div class="video-play-overlay">
+                <i class="bi bi-play-circle-fill"></i>
+                <span>Clique para reproduzir</span>
+              </div>
             </div>
             <figcaption>
               <strong>Aceitação Automática</strong>
@@ -603,10 +607,12 @@
 
           <!-- Video 3: Revisão Manual -->
           <figure class="demo-video-item">
-            <div class="video-wrapper">
-              <iframe src="https://drive.google.com/file/d/1wtxCEfKGNfm1_OuMybk3YKQKbdTxl5B6/preview"
-                allow="autoplay; encrypted-media" allowfullscreen>
-              </iframe>
+            <div class="video-wrapper video-placeholder"
+              data-video-src="https://drive.google.com/file/d/1wtxCEfKGNfm1_OuMybk3YKQKbdTxl5B6/preview">
+              <div class="video-play-overlay">
+                <i class="bi bi-play-circle-fill"></i>
+                <span>Clique para reproduzir</span>
+              </div>
             </div>
             <figcaption>
               <strong>Revisão Manual</strong>
@@ -616,10 +622,12 @@
 
           <!-- Video 4: Rejeição -->
           <figure class="demo-video-item">
-            <div class="video-wrapper">
-              <iframe src="https://drive.google.com/file/d/1MUdRHEI3oBYklmvEP-yAeUz7fPBk0Lly/preview"
-                allow="autoplay; encrypted-media" allowfullscreen>
-              </iframe>
+            <div class="video-wrapper video-placeholder"
+              data-video-src="https://drive.google.com/file/d/1MUdRHEI3oBYklmvEP-yAeUz7fPBk0Lly/preview">
+              <div class="video-play-overlay">
+                <i class="bi bi-play-circle-fill"></i>
+                <span>Clique para reproduzir</span>
+              </div>
             </div>
             <figcaption>
               <strong>Rejeição</strong>
@@ -830,6 +838,32 @@
           modalImg.src = "";
           document.body.style.overflow = "";
         }
+      });
+
+      // Lazy load videos - only load when user clicks
+      document.querySelectorAll('.video-placeholder').forEach(placeholder => {
+        placeholder.addEventListener('click', function () {
+          const videoSrc = this.getAttribute('data-video-src');
+          if (!videoSrc) return;
+
+          // Show loading state
+          this.classList.remove('video-placeholder');
+          this.classList.add('video-loading');
+
+          // Remove play overlay
+          const overlay = this.querySelector('.video-play-overlay');
+          if (overlay) overlay.remove();
+
+          // Create and load iframe
+          const iframe = document.createElement('iframe');
+          iframe.src = videoSrc;
+          iframe.setAttribute('allow', 'autoplay; encrypted-media');
+          iframe.setAttribute('allowfullscreen', '');
+          iframe.onload = () => {
+            this.classList.remove('video-loading');
+          };
+          this.appendChild(iframe);
+        });
       });
 
     });
