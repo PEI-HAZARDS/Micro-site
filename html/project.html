@@ -43,8 +43,8 @@
           <li><a href="#motivacao" class="nav-link">Motivação</a></li>
           <li><a href="#concepcao" class="nav-link">Concepção</a></li>
           <li><a href="#detalhes" class="nav-link">Detalhes</a></li>
+          <li><a href="#demo-mvp" class="nav-link">Demo MVP</a></li>
           <li><a href="#future-work" class="nav-link">Future Work</a></li>
-          <li><a href="#documentation" class="nav-link">Documentação</a></li>
           <li><a href="#mockups" class="nav-link">Mockups</a></li>
         </ul>
       </nav>
@@ -63,8 +63,8 @@
       <li><a href="#motivacao" class="nav-link">Motivação</a></li>
       <li><a href="#concepcao" class="nav-link">Concepção</a></li>
       <li><a href="#detalhes" class="nav-link">Detalhes</a></li>
+      <li><a href="#demo-mvp" class="nav-link">Demo MVP</a></li>
       <li><a href="#future-work" class="nav-link">Future Work</a></li>
-      <li><a href="#documentation" class="nav-link">Documentação</a></li>
       <li><a href="#mockups" class="nav-link">Mockups</a></li>
       <li><a href="../index.html" class="nav-link back-link">Voltar</a></li>
     </ul>
@@ -203,7 +203,7 @@
               <div class="feature-card">
                 <div class="feature-icon"><i class="bi bi-camera-video"></i></div>
                 <h4>Camada de Captura</h4>
-                <p>Câmaras na periferia capturam imagens e eventos em tempo real.</p>
+                <p>Câmaras capturam imagens e eventos em tempo real.</p>
               </div>
 
               <div class="feature-card">
@@ -302,7 +302,7 @@
               <li>Gestão de estados de veículos (entrada, processamento, saída)</li>
               <li>Integração com sistema de gestão logística</li>
               <li>Encaminhamento automático para destino correto</li>
-              <li>Notificação ao condutor via sinalização digital ou app móvel</li>
+              <li>Notificação ao condutor via sinalização digital/app mobile</li>
               <li>Geração de relatórios estatísticos sobre tráfego e cargas</li>
               <li>Dashboard em tempo real para operadores</li>
             </ul>
@@ -402,7 +402,7 @@
                 <div class="tech-icon"><i class="bi bi-eye"></i></div>
                 <h4>Visão Computacional</h4>
                 <ul>
-                  <li>YOLOv8 (Deteção de objetos)</li>
+                  <li>YOLOv11 (Deteção de objetos)</li>
                   <li>OpenCV</li>
                   <li>PaddleOCR (Reconhecimento de texto)</li>
                   <li>Algoritmo de Consenso (Multi-frame)</li>
@@ -424,19 +424,17 @@
                 <ul>
                   <li>React 19 + TypeScript</li>
                   <li>Vite (Build tool)</li>
-                  <li>TailwindCSS</li>
-                  <li>TanStack Router</li>
                 </ul>
               </div>
 
               <div class="tech-card">
                 <div class="tech-icon"><i class="bi bi-phone"></i></div>
-                <h4>App Móvel</h4>
+                <h4>App MObile</h4>
                 <ul>
                   <li>React + Capacitor</li>
                   <li>Leaflet (Mapas)</li>
                   <li>HLS.js (Video streaming)</li>
-                  <li>Android / iOS</li>
+                  <li>Android (Android Auto)</li>
                 </ul>
               </div>
 
@@ -446,14 +444,14 @@
                 <ul>
                   <li>Python (FastAPI)</li>
                   <li>REST APIs + WebSocket</li>
-                  <li>Microserviços (Agentes A/B/C)</li>
+                  <li>Microserviços (Agentes A, B, C, D, Decision Engine, Data Module)</li>
                   <li>MinIO (Object Storage)</li>
                 </ul>
               </div>
 
               <div class="tech-card">
                 <div class="tech-icon"><i class="bi bi-database"></i></div>
-                <h4>Persistência</h4>
+                <h4>Persistência (Data Module)</h4>
                 <ul>
                   <li><strong></strong>PostgreSQL:</strong> Simulação de estrutura de dados portuária (agendamentos,
                     motoristas,
@@ -469,7 +467,7 @@
                 <ul>
                   <li>Docker containers</li>
                   <li>Kubernetes</li>
-                  <li>CI/CD pipelines</li>
+                  <li>CI/CD pipelines com Jenkins</li>
                 </ul>
               </div>
 
@@ -477,8 +475,10 @@
                 <div class="tech-icon"><i class="bi bi-cloud"></i></div>
                 <h4>Integração</h4>
                 <ul>
-                  <li>Google Apps Script</li>
-                  <li>Google Sheets API</li>
+                  <li>APIs RESTful</li>
+                  <li>Grafana para visualização de métricas</li>
+                  <li>Webhooks para notificações</li>
+                  <li></li>
                 </ul>
               </div>
 
@@ -486,7 +486,7 @@
                 <div class="tech-icon"><i class="bi bi-shield-check"></i></div>
                 <h4>Segurança</h4>
                 <ul>
-                  <li>HTTPS / TLS</li>
+                  <li>JWT para autenticação</li>
                   <li>Rate limiting</li>
                 </ul>
               </div>
@@ -565,6 +565,72 @@
             </div>
             <figcaption><strong>Condutores</strong></figcaption>
           </figure>
+        </div>
+      </div>
+      <!-- ======= Demo MVP - Videos ======= -->
+      <div id="demo-mvp" class="card animate-on-scroll fade-in">
+        <h2><i class="bi bi-play-circle"></i> Demo MVP</h2>
+        <p>Vídeos de demonstração do MVP do projeto <strong>Intelligent Logistics</strong>, mostrando as principais
+          funcionalidades implementadas.</p>
+
+        <div class="demo-videos-grid">
+          <!-- Video 1: Fluxo Completo -->
+          <figure class="demo-video-item">
+            <div class="video-wrapper">
+              <iframe src="https://drive.google.com/file/d/1MsvpqpAnyrzYISzbVKBpuk18QOZ3GmA4/preview"
+                allow="autoplay; encrypted-media" allowfullscreen>
+              </iframe>
+            </div>
+            <figcaption>
+              <strong>Fluxo Completo</strong>
+              <span>Demonstração do fluxo de eventos do sistema por ordem cronológica, desde a deteção até à saída do
+                veículo.</span>
+            </figcaption>
+          </figure>
+
+          <!-- Video 2: Aceitação Automática -->
+          <figure class="demo-video-item">
+            <div class="video-wrapper">
+              <iframe src="https://drive.google.com/file/d/10tlTsihoxebEj9csR9AI-AsLa7yTqYvO/preview"
+                allow="autoplay; encrypted-media" allowfullscreen>
+              </iframe>
+            </div>
+            <figcaption>
+              <strong>Aceitação Automática</strong>
+              <span>Entrada automática de veículo quando a matrícula é reconhecida e validada pelo sistema.</span>
+            </figcaption>
+          </figure>
+
+          <!-- Video 3: Revisão Manual -->
+          <figure class="demo-video-item">
+            <div class="video-wrapper">
+              <iframe src="https://drive.google.com/file/d/1wtxCEfKGNfm1_OuMybk3YKQKbdTxl5B6/preview"
+                allow="autoplay; encrypted-media" allowfullscreen>
+              </iframe>
+            </div>
+            <figcaption>
+              <strong>Revisão Manual</strong>
+              <span>Operador de cancela revê e aprova manualmente a entrada de um veículo.</span>
+            </figcaption>
+          </figure>
+
+          <!-- Video 4: Rejeição -->
+          <figure class="demo-video-item">
+            <div class="video-wrapper">
+              <iframe src="https://drive.google.com/file/d/1MUdRHEI3oBYklmvEP-yAeUz7fPBk0Lly/preview"
+                allow="autoplay; encrypted-media" allowfullscreen>
+              </iframe>
+            </div>
+            <figcaption>
+              <strong>Rejeição</strong>
+              <span>Demonstração do processo de recusa de entrada quando o veículo não tem autorização.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="notice">
+          <p><i class="bi bi-info-circle"></i> Os vídeos demonstram as funcionalidades do MVP, incluindo deteção
+            automática, encaminhamento e notificações em tempo real.</p>
         </div>
       </div>
 
