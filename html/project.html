@@ -120,26 +120,26 @@
 
       <div id="arquitetura-section" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-diagram-3"></i> Concepção do Sistema</h2>
-        <p>O sistema é baseado em dois módulos principais:</p>
+        <p>O sistema é organizado em dois domínios de aplicação principais:</p>
 
         <div class="feature-grid">
           <div class="feature-card">
-            <div class="feature-icon"><i class="bi bi-camera-video"></i></div>
-            <h3>Deteção e Encaminhamento de Cargas</h3>
+            <div class="feature-icon"><i class="bi bi-cpu"></i></div>
+            <h3>Domínio de Inteligência Artificial</h3>
             <ul>
-              <li>Utilização de algoritmos de visão computacional em tempo real (ex: YOLO)</li>
-              <li>Reconhecimento de camiões, matrículas e símbolos de mercadorias perigosas</li>
-              <li>Indicação automática para o destino correto dentro do porto</li>
+              <li>Agentes Python especializados em visão computacional (YOLO, OCR)</li>
+              <li>Deteção de camiões, reconhecimento de matrículas e símbolos de mercadorias perigosas</li>
+              <li>Processamento em tempo real isolado do núcleo operacional</li>
             </ul>
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon"><i class="bi bi-graph-up"></i></div>
-            <h3>Análise Estatística</h3>
+            <div class="feature-icon"><i class="bi bi-diagram-3"></i></div>
+            <h3>Domínio de Validação e Operações</h3>
             <ul>
-              <li>Contabilização de veículos, tipos de carga e tempos de permanência</li>
-              <li>Visualização de métricas em diferentes granularidades (diário, mensal, individual)</li>
-              <li>Exportação de dados para análise</li>
+              <li>Motor de decisão com regras de negócio portuárias</li>
+              <li>Gestão de dados e persistência com PostgreSQL, Redis e MongoDB</li>
+              <li>Análise estatística e relatórios de operações</li>
             </ul>
           </div>
         </div>
@@ -197,34 +197,32 @@
 
           <div class="tab-content" id="arquitetura" role="tabpanel" aria-labelledby="tab-arquitetura">
             <h3><i class="bi bi-diagram-3"></i> Arquitetura do Sistema</h3>
-            <p>O sistema adota uma <strong>arquitetura baseada em microserviços</strong>, onde cada componente é
-              autónomo, escalável e especializado. A comunicação entre serviços é feita através de um modelo
-              <strong>Event-Driven</strong> para garantir baixa latência.
+            <p>O sistema utiliza uma <strong>arquitetura modular e event-driven</strong>, separando claramente o processamento de inteligência artificial das decisões operacionais. Dois domínios de aplicação isolados comunicam através de <strong>fluxos de eventos assíncronos</strong> (Apache Kafka), garantindo baixa latência e escalabilidade. Acesso externo é controlado através de gateways dedicados.
             </p>
 
             <div class="feature-grid">
               <div class="feature-card">
-                <div class="feature-icon"><i class="bi bi-camera-video"></i></div>
-                <h4>Camada de Captura</h4>
-                <p>Câmaras capturam imagens e eventos em tempo real.</p>
-              </div>
-
-              <div class="feature-card">
                 <div class="feature-icon"><i class="bi bi-cpu"></i></div>
-                <h4>Processamento Visual</h4>
-                <p>Modelos YOLO/TensorFlow para deteção e classificação de veículos, matrículas e símbolos.</p>
+                <h4>Domínio de IA</h4>
+                <p>Agentes Python especializados em deteção, OCR e reconhecimento de símbolos (YOLO, PaddleOCR).</p>
               </div>
 
               <div class="feature-card">
-                <div class="feature-icon"><i class="bi bi-bezier2"></i></div>
-                <h4>Orquestração</h4>
-                <p>Barramento de eventos coordena decisões de encaminhamento em tempo real.</p>
+                <div class="feature-icon"><i class="bi bi-diagram-2"></i></div>
+                <h4>Domínio de Operações</h4>
+                <p>Motor de decisão que aplica regras de negócio e orquestração de processos portuários.</p>
               </div>
 
               <div class="feature-card">
-                <div class="feature-icon"><i class="bi bi-database"></i></div>
-                <h4>Persistência</h4>
-                <p>Bases de dados SQL e NoSQL para armazenamento analítico e geração de relatórios.</p>
+                <div class="feature-icon"><i class="bi bi-shield"></i></div>
+                <h4>Gateways de Acesso</h4>
+                <p>Interfaces controladas para aplicações móveis, dashboards web e sistemas externos.</p>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-broadcast"></i></div>
+                <h4>Comunicação Assíncrona</h4>
+                <p>Apache Kafka gerencia fluxos de eventos entre domínios, garantindo desacoplamento e confiabilidade.</p>
               </div>
             </div>
             <div class="mockup-grid" aria-hidden="false">
@@ -447,7 +445,8 @@
                 <ul>
                   <li>Python (FastAPI)</li>
                   <li>REST APIs + WebSocket</li>
-                  <li>Microserviços (Agentes A, B, C, D, Decision Engine, Data Module)</li>
+                  <li>Agentes de IA (A, B, C), Motor de Decisão e Módulo de Dados</li>
+                  <li>Apache Kafka (Message Broker)</li>
                   <li>MinIO (Object Storage)</li>
                 </ul>
               </div>
