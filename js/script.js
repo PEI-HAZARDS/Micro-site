@@ -187,11 +187,11 @@ function initCopyButtons() {
         navigator.clipboard.writeText(codeBlock.textContent.trim())
           .then(() => {
             button.classList.add('copied');
-            button.querySelector('.copy-text').textContent = 'Copied!';
+            button.querySelector('.copy-text').textContent = 'Copiado!';
 
             setTimeout(() => {
               button.classList.remove('copied');
-              button.querySelector('.copy-text').textContent = 'Copy';
+              button.querySelector('.copy-text').textContent = 'Copiar';
             }, 2000);
           })
           .catch(err => {
@@ -225,7 +225,7 @@ function initContactForm() {
     if (submitBtn.disabled) return; // bloqueia segundo clique
 
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Sending...';
+    submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
 
     try {
       await fetch(SCRIPT_URL, {
@@ -235,13 +235,13 @@ function initContactForm() {
         body: JSON.stringify(formValues),
       });
 
-      showFormMessage("success", "Message sent successfully!");
+      showFormMessage("success", "Mensagem enviada com sucesso!");
       contactForm.reset();
     } catch (error) {
-      showFormMessage("error", "Error sending message. Please try again.");
+      showFormMessage("error", "Erro ao enviar. Tente novamente.");
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = "Send";
+      submitBtn.innerHTML = "Enviar";
     }
   });
 
