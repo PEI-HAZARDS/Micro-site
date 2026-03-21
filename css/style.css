@@ -847,6 +847,26 @@ ol {
   align-items: center;
 }
 
+.lang-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 1rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--light-dark);
+  color: var(--dark);
+  background: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all var(--transition-fast);
+}
+
+.lang-toggle-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
 .nav-list {
   display: flex;
   list-style: none;
@@ -1680,6 +1700,16 @@ ol {
 
   .nav-mobile-toggle {
     display: inline-flex;
+  }
+
+  .lang-toggle-btn {
+    margin-left: auto;
+    margin-right: 0.5rem;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .lang-toggle-btn span {
+    display: none;
   }
 
   /* mobile panel (visível para animar) */
