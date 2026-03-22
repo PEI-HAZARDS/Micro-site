@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,9 +45,9 @@
       <!-- Project section links (desktop) -->
       <nav class="nav-desktop" aria-label="Project menu">
         <ul class="nav-list">
-          <li><a href="#motivacao" class="nav-link">Motivation</a></li>
-          <li><a href="#concepcao" class="nav-link">Concept</a></li>
-          <li><a href="#porto-trial" class="nav-link">Aveiro Trial</a></li>
+          <li><a href="#motivation" class="nav-link">Motivation</a></li>
+          <li><a href="#concept" class="nav-link">Concept</a></li>
+          <li><a href="#aveiro-trial" class="nav-link">Aveiro Trial</a></li>
           <li><a href="#details" class="nav-link">Details</a></li>
           <li><a href="#demo-mvp" class="nav-link">Demo MVP</a></li>
           <li><a href="#future-work" class="nav-link">Future Work</a></li>
@@ -71,9 +71,9 @@
   <aside class="nav-mobile" role="dialog" aria-label="Mobile navigation">
     <button class="nav-mobile-close" aria-label="Close menu">&times;</button>
     <ul class="nav-list">
-      <li><a href="#motivacao" class="nav-link">Motivation</a></li>
-      <li><a href="#concepcao" class="nav-link">Concept</a></li>
-      <li><a href="#porto-trial" class="nav-link">Aveiro Trial</a></li>
+      <li><a href="#motivation" class="nav-link">Motivation</a></li>
+      <li><a href="#concept" class="nav-link">Concept</a></li>
+      <li><a href="#aveiro-trial" class="nav-link">Aveiro Trial</a></li>
       <li><a href="#details" class="nav-link">Details</a></li>
       <li><a href="#demo-mvp" class="nav-link">Demo MVP</a></li>
       <li><a href="#future-work" class="nav-link">Future Work</a></li>
@@ -91,7 +91,7 @@
         <p class="section-subtitle">Automation and optimization of port logistics with Artificial Intelligence</p>
       </div>
 
-      <div id="motivacao" class="card animate-on-scroll fade-in">
+      <div id="motivation" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-info-circle"></i> Introduction</h2>
         <p>We live in an era where logistics is invisible but essential: our packages arrive the next day with a
           single click, but behind that process there are millions of containers and complex operations. In 2023
@@ -103,7 +103,7 @@
           wrong destination, causing <strong>losses in time and money</strong>.</p>
       </div>
 
-      <div id="concepcao" class="card animate-on-scroll fade-in">
+      <div id="concept" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-rocket-takeoff"></i> Motivation</h2>
         <p>To increase <strong>efficiency</strong> and reduce costs, port authorities are adopting
           <strong>Information and Communication Technologies (ICT)</strong> and <strong>Industry 4.0</strong> concepts.
@@ -124,18 +124,9 @@
           </ul>
         </div>
 
-        <div class="notice section-spacing">
-          <div style="margin-bottom: 0.75rem; text-align: center;">
-            <img src="../images/6G-Versus.png" alt="6G-VERSUS" style="max-width: 320px; width: 100%; height: auto;">
-          </div>
-          <p><i class="bi bi-globe-europe-africa"></i> Our trial is integrated within the scope of European R&I initiatives for smart networks and services.
-            Institutional framework: <a href="https://digital-strategy.ec.europa.eu/en/policies/smart-networks-and-services-joint-undertaking" target="_blank" rel="noopener noreferrer">Smart Networks and Services Joint Undertaking</a>
-            and <a href="https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en" target="_blank" rel="noopener noreferrer">Horizon Europe</a>.
-          </p>
-        </div>
       </div>
 
-      <div id="arquitetura-section" class="card animate-on-scroll fade-in">
+      <div id="architecture-section" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-diagram-3"></i> System Design</h2>
         <p>The system is organized into two main application domains:</p>
 
@@ -162,7 +153,7 @@
         </div>
       </div>
 
-      <div id="porto-trial" class="card animate-on-scroll fade-in">
+      <div id="aveiro-trial" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-building"></i> Port of Aveiro Trials (6G-VERSUS)</h2>
 
         <div class="tabs">
@@ -216,7 +207,11 @@
             </div>
 
             <div class="notice section-spacing">
-              <p><i class="bi bi-globe-europe-africa"></i> Institutional framework: <a href="https://digital-strategy.ec.europa.eu/en/policies/smart-networks-and-services-joint-undertaking" target="_blank" rel="noopener noreferrer">Smart Networks and Services Joint Undertaking</a>
+              <div style="margin-bottom: 0.75rem; text-align: center;">
+                <img src="../images/6G-Versus.png" alt="6G-VERSUS" style="max-width: 320px; width: 100%; height: auto;">
+              </div>
+              <p><i class="bi bi-globe-europe-africa"></i> Our trial is integrated within the scope of European R&I initiatives for smart networks and services.
+                Institutional framework: <a href="https://digital-strategy.ec.europa.eu/en/policies/smart-networks-and-services-joint-undertaking" target="_blank" rel="noopener noreferrer">Smart Networks and Services Joint Undertaking</a>
                 and <a href="https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en" target="_blank" rel="noopener noreferrer">Horizon Europe</a>.
               </p>
             </div>
@@ -256,13 +251,13 @@
               aria-controls="description">
               <i class="bi bi-file-text"></i> Description
             </button>
-            <button id="tab-arquitetura" class="tab-btn" data-tab="arquitetura" role="tab" aria-controls="arquitetura">
+            <button id="tab-architecture" class="tab-btn" data-tab="architecture" role="tab" aria-controls="architecture">
               <i class="bi bi-diagram-3"></i> Architecture
             </button>
-            <button id="tab-bd" class="tab-btn" data-tab="bd" role="tab" aria-controls="bd">
+            <button id="tab-database" class="tab-btn" data-tab="database" role="tab" aria-controls="database">
               <i class="bi bi-database"></i> Database
             </button>
-            <button id="tab-requisitos" class="tab-btn" data-tab="requisitos" role="tab" aria-controls="requisitos">
+            <button id="tab-requirements" class="tab-btn" data-tab="requirements" role="tab" aria-controls="requirements">
               <i class="bi bi-list-check"></i> Requirements
             </button>
             <button id="tab-personas" class="tab-btn" data-tab="personas" role="tab" aria-controls="personas">
@@ -297,7 +292,7 @@
             </div>
           </div>
 
-          <div class="tab-content" id="arquitetura" role="tabpanel" aria-labelledby="tab-arquitetura">
+          <div class="tab-content" id="architecture" role="tabpanel" aria-labelledby="tab-architecture">
             <h3><i class="bi bi-diagram-3"></i> System Architecture</h3>
             <p>The system uses a <strong>modular, event-driven architecture</strong>, clearly separating artificial
               intelligence processing from operational decisions. Two isolated application domains communicate through
@@ -352,7 +347,7 @@
             </div>
           </div>
 
-          <div class="tab-content" id="bd" role="tabpanel" aria-labelledby="tab-bd">
+          <div class="tab-content" id="database" role="tabpanel" aria-labelledby="tab-database">
             <p>The database structures the full lifecycle of a visit: an <strong>Appointment/Booking</strong> links a
               truck, driver, company, and terminal/gates, receives a cargo, and is materialized as a <strong>Visit</strong>
               (entry/exit) in a <strong>Shift</strong>, potentially generating related <strong>Alerts</strong>. The
@@ -414,7 +409,7 @@
           </div>
 
 
-          <div class="tab-content" id="requisitos" role="tabpanel" aria-labelledby="tab-requisitos">
+          <div class="tab-content" id="requirements" role="tabpanel" aria-labelledby="tab-requirements">
             <h3><i class="bi bi-list-check"></i> Functional Requirements</h3>
             <ul class="check-list">
               <li>Automatic real-time truck detection</li>
@@ -632,16 +627,16 @@
         <div class="mockup-grid" aria-hidden="false">
           <figure class="mockup-item">
             <div class="mockup-thumb">
-              <img loading="lazy" data-full="../images/mockups/dashboardOperador.png"
-                src="../images/mockups/dashboardOperador.png" alt="Mockup Dashboard 1" class="mockup-img">
+              <img loading="lazy" data-full="../images/mockups/dashboardOperator.png"
+                src="../images/mockups/dashboardOperator.png" alt="Mockup Dashboard 1" class="mockup-img">
             </div>
             <figcaption><strong>Gate Operator</strong></figcaption>
           </figure>
 
           <figure class="mockup-item">
             <div class="mockup-thumb">
-              <img loading="lazy" data-full="../images/mockups/dashboardGestor.png"
-                src="../images/mockups/dashboardGestor.png" alt="Mockup Guidance Panel" class="mockup-img">
+              <img loading="lazy" data-full="../images/mockups/dashboardManager.png"
+                src="../images/mockups/dashboardManager.png" alt="Mockup Guidance Panel" class="mockup-img">
             </div>
             <figcaption><strong>Logistics Manager</strong> </figcaption>
           </figure>
