@@ -47,6 +47,7 @@
         <ul class="nav-list">
           <li><a href="#motivacao" class="nav-link">Motivação</a></li>
           <li><a href="#concepcao" class="nav-link">Concepção</a></li>
+          <li><a href="#porto-trial" class="nav-link">Trial Aveiro</a></li>
           <li><a href="#detalhes" class="nav-link">Detalhes</a></li>
           <li><a href="#demo-mvp" class="nav-link">Demo MVP</a></li>
           <li><a href="#future-work" class="nav-link">Future Work</a></li>
@@ -72,6 +73,7 @@
     <ul class="nav-list">
       <li><a href="#motivacao" class="nav-link">Motivação</a></li>
       <li><a href="#concepcao" class="nav-link">Concepção</a></li>
+      <li><a href="#porto-trial" class="nav-link">Trial Aveiro</a></li>
       <li><a href="#detalhes" class="nav-link">Detalhes</a></li>
       <li><a href="#demo-mvp" class="nav-link">Demo MVP</a></li>
       <li><a href="#future-work" class="nav-link">Future Work</a></li>
@@ -158,6 +160,91 @@
               <li>Gestão de dados e persistência com PostgreSQL, Redis e MongoDB</li>
               <li>Análise estatística e relatórios de operações</li>
             </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="porto-trial" class="card animate-on-scroll fade-in">
+        <h2><i class="bi bi-building"></i> Trials no Porto de Aveiro (6G-VERSUS)</h2>
+        <div class="tabs">
+          <div class="tab-header" role="tablist" aria-label="Secoes do trial">
+            <button id="trial-tab-visao" class="tab-btn active" data-tab="trial-visao" role="tab" aria-selected="true"
+              aria-controls="trial-visao">
+              <i class="bi bi-file-text"></i> Visao Geral
+            </button>
+            <button id="trial-tab-dashboards" class="tab-btn" data-tab="trial-dashboards" role="tab" aria-selected="false"
+              aria-controls="trial-dashboards">
+              <i class="bi bi-speedometer2"></i> Dashboards
+            </button>
+          </div>
+
+          <div class="tab-content active" id="trial-visao" role="tabpanel" aria-labelledby="trial-tab-visao">
+            <p>Esta secção apresenta a validação em contexto real e as atualizações dos trials no Porto de Aveiro,
+              no âmbito do 6G-VERSUS.</p>
+
+            <div class="notice">
+              <p><i class="bi bi-clock-history"></i> <strong>Última atualização:</strong> atividades de pré-trial
+                concluídas em ambiente controlado. O planeamento da validação no local com os stakeholders operacionais
+                está em curso.</p>
+            </div>
+
+            <div class="feature-grid">
+              <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-geo-alt"></i></div>
+                <h4>Contexto do Trial</h4>
+                <p>O trial consiste num percurso instrumentado com duas câmaras. A primeira câmara está focada na deteção
+                  de camiões e na identificação de mercadorias perigosas através da placa ADR. Caso sejam detetados
+                  materiais perigosos, é ativada uma sinalização de proibição para esse tipo de carga.</p>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon"><i class="bi bi-bullseye"></i></div>
+                <h4>Alvos de Validação</h4>
+                <p>A segunda câmara simula a entrada no Porto de Aveiro, onde o camião para e é feita a validação completa
+                  para decidir se o veículo pode ou não entrar no porto. Os alvos principais incluem latência end-to-end,
+                  desempenho de OCR e reconhecimento de símbolos de perigo, fiabilidade dos alertas de materiais perigosos
+                  e usabilidade para os operadores.</p>
+              </div>
+            </div>
+
+            <div class="feature-list section-spacing">
+              <h3>Quadro de Atualizações</h3>
+              <ul>
+                <li><i class="bi bi-check-circle"></i> <strong>Fase:</strong> Pré-trial e piloto controlado concluídos</li>
+                <li><i class="bi bi-hourglass-split"></i> <strong>Atual:</strong> Preparação de janelas de trial supervisionado no local</li>
+                <li><i class="bi bi-graph-up-arrow"></i> <strong>KPIs monitorizados:</strong> Latência, precisão de deteção, taxa de intervenção manual e throughput de processamento</li>
+                <li><i class="bi bi-flag"></i> <strong>Próximo marco:</strong> Trial completo no Porto de Aveiro com relatório de avaliação pós-trial</li>
+              </ul>
+            </div>
+
+            <div class="notice section-spacing">
+              <p><i class="bi bi-globe-europe-africa"></i> Enquadramento institucional: <a href="https://digital-strategy.ec.europa.eu/en/policies/smart-networks-and-services-joint-undertaking" target="_blank" rel="noopener noreferrer">Smart Networks and Services Joint Undertaking</a>
+                e <a href="https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en" target="_blank" rel="noopener noreferrer">Horizon Europe</a>.
+              </p>
+            </div>
+          </div>
+
+          <div class="tab-content" id="trial-dashboards" role="tabpanel" aria-labelledby="trial-tab-dashboards">
+            <h3><i class="bi bi-speedometer2"></i> Dashboards do Trial</h3>
+            <p>Dashboards adicionais dedicados ao acompanhamento e validação operacional do trial no Porto de Aveiro.</p>
+
+            <div class="mockup-grid" aria-hidden="false">
+              <figure class="mockup-item">
+                <div class="mockup-thumb">
+                  <img loading="lazy" data-full="../images/dashboards/dashOperatorMain.png"
+                    src="../images/dashboards/dashOperatorMain.png" alt="Dashboard Trial A" class="mockup-img">
+                </div>
+                <figcaption><strong>Sinal de Alerta</strong> </figcaption>
+              </figure>
+
+              <figure class="mockup-item">
+                <div class="mockup-thumb">
+                  <img loading="lazy" data-full="../images/dashboards/energyGraph.png"
+                    src="../images/dashboards/energyGraph.png" alt="Dashboard Trial B" class="mockup-img">
+                </div>
+                <figcaption><strong>Métricas de Energia</strong></figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </div>
@@ -605,6 +692,7 @@
           </figure>
         </div>
       </div>
+
       <!-- ======= Demo MVP - Videos ======= -->
       <div id="demo-mvp" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-play-circle"></i> Demo MVP</h2>
@@ -744,43 +832,49 @@
   <!-- keep inline page scripts + main script -->
   <script>
     // Tab switching functionality with smooth transition
-    document.querySelectorAll('.tab-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const tabId = button.getAttribute('data-tab');
+    document.querySelectorAll('.tabs').forEach(tabsContainer => {
+      const buttons = tabsContainer.querySelectorAll('.tab-btn');
+      const contents = tabsContainer.querySelectorAll('.tab-content');
 
-        // Remove active class from all buttons and contents
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(content => {
-          content.classList.remove('active');
-          content.style.opacity = '0';
-        });
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          const tabId = button.getAttribute('data-tab');
 
-        // Add active class to current button and content with fade effect
-        button.classList.add('active');
-        const activeContent = document.getElementById(tabId);
-        activeContent.classList.add('active');
+          buttons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+          });
 
-        setTimeout(() => {
-          activeContent.style.opacity = '1';
-          if (tabId === 'bd') {
-            initRadarChart();
-            if (radarChartInstance) {
-              radarChartInstance.reset();
-              radarChartInstance.update();
+          contents.forEach(content => {
+            content.classList.remove('active');
+            content.style.opacity = '0';
+          });
+
+          button.classList.add('active');
+          button.setAttribute('aria-selected', 'true');
+
+          const activeContent = tabsContainer.querySelector(`#${tabId}`);
+          if (!activeContent) return;
+
+          activeContent.classList.add('active');
+
+          setTimeout(() => {
+            activeContent.style.opacity = '1';
+            if (tabId === 'bd') {
+              initRadarChart();
+              if (radarChartInstance) {
+                radarChartInstance.reset();
+                radarChartInstance.update();
+              }
             }
-          }
-        }, 10);
+          }, 10);
+        });
       });
-    });
 
-    // Inicializar opacidade das tabs
-    document.querySelectorAll('.tab-content').forEach(content => {
-      if (content.classList.contains('active')) {
-        content.style.opacity = '1';
-      } else {
-        content.style.opacity = '0';
-      }
-      content.style.transition = 'opacity 0.3s ease';
+      contents.forEach(content => {
+        content.style.opacity = content.classList.contains('active') ? '1' : '0';
+        content.style.transition = 'opacity 0.3s ease';
+      });
     });
 
     // Reading progress bar
