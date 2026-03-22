@@ -351,14 +351,12 @@
           <div class="tab-content" id="bd" role="tabpanel" aria-labelledby="tab-bd">
             <p>A BD estrutura todo o ciclo de uma visita: um <strong>Appointment/Booking</strong> liga camião,
               motorista, empresa e terminal/gates, recebe uma carga, é concretizado como <strong>Visit</strong>
-              (entrada/saída) num turno (<strong>Shift</strong>) e pode gerar <strong>Alerts</strong> associados. Os
-              modelos DER/ER mostram como camiões, motoristas, cargas, agendamentos, turnos e alertas se relacionam para
-              garantir rastreabilidade ponta-a-ponta.</p>
+              (entrada/saída) num turno (<strong>Shift</strong>) e pode gerar <strong>Alerts</strong> associados.
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <section class="col-span-1 p-6 md:p-8">
                 <h2 class="text-2xl font-bold mb-4 text-center">Mapeamento por Dominio</h2>
-                <p class="text-brand-muted text-sm text-center mb-6">Comparacao das capacidades da triade de bases de dados.
+                <p class="text-brand-muted text-sm text-center mb-6">Comparação das capacidades da triade de bases de dados.
                 </p>
                 <div class="chart-container">
                   <canvas id="radarChart"></canvas>
@@ -384,20 +382,19 @@
 
               <section class="col-span-1 p-6 md:p-8">
                 <h2 class="text-2xl font-bold mb-4">Padroes de Consistencia</h2>
-                <p class="text-brand-muted text-sm mb-6">Manter sistemas poliglotas sincronizados requer coordenacao
+                <p class="text-brand-muted text-sm mb-6">Manter sistemas poliglotas sincronizados requer coordenação
                   rigorosa da aplicacao, aceitando consistencia eventual e transacoes distribuidas.</p>
 
                 <div class="space-y-4">
                   <div class="p-4 bg-slate-800 rounded-lg border-l-4 border-brand-rd">
                     <h3 class="font-bold mb-1 text-brand-text">1. Write-through Cache</h3>
-                    <p class="text-xs text-brand-muted">PostgreSQL ↔ Redis. Resultados de validacao (ex:
-                      certificacao ADR) sao cacheados no Redis com TTL. Reduz latencia na barreira (gate) para
+                    <p class="text-xs text-brand-muted">PostgreSQL ↔ Redis. Resultados de validacao (ex: infracoes) sao cahced no Redis com TTL. Reduz latencia na entrada no porto (gate) para
                       sub-milissegundos.</p>
                   </div>
                   <div class="p-4 bg-slate-800 rounded-lg border-l-4 border-brand-mg">
                     <h3 class="font-bold mb-1 text-brand-text">2. Outbox Pattern</h3>
                     <p class="text-xs text-brand-muted">PostgreSQL → MongoDB → Redis. Mudancas de estado criam um
-                      registo 'outbox'. Um worker Debezium le o WAL e propaga para MongoDB e Redis Streams. Evita
+                      registo 'outbox'. Um worker le e propaga para MongoDB e Redis Streams. Evita
                       eventos perdidos.</p>
                   </div>
                   <div class="p-4 bg-slate-800 rounded-lg border-l-4 border-brand-pg">
@@ -658,17 +655,39 @@
 
       <div id="dashboard" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-phone"></i> Resultados finais </h2>
-        <p>Resultados finais do dashboard do MVP para o <strong>operador de cancela</strong> e para os
+        <p>Dashboards reais para o <strong>Operador de Cancela</strong>, <strong>Gestor de Logística</strong> e para os
           <strong>condutores</strong>.
         </p>
 
+
+        <!-- Dashboards reais Gestor -->
+        <h3 style="margin-top:2.5rem; margin-bottom:0.5rem; color:#3a36e0; font-size:1.15rem;">Gestor Logístico</h3>
+        <div class="mockup-grid" aria-hidden="false">
+          <figure class="mockup-item">
+            <div class="mockup-thumb">
+              <img loading="lazy" data-full="../images/dashboards/gestor_logi.png"
+                src="../images/dashboards/gestor_logi.png" alt="Dashboard Analytics - Intelligent Logistics" class="mockup-img">
+            </div>
+            <figcaption><strong>Dashboard Principal</strong></figcaption>
+          </figure>
+          <figure class="mockup-item">
+            <div class="mockup-thumb">
+              <img loading="lazy" data-full="../images/dashboards/gestor_logi2.png"
+                src="../images/dashboards/gestor_logi2.png" alt="Dashboard Analytics - Intelligent Logistics" class="mockup-img">
+            </div>
+            <figcaption><strong>Dashboard Analytics</strong></figcaption>
+          </figure>
+        </div>
+
+        <!-- Dashboards reais Operador -->
+        <h3 style="margin-top:2.5rem; margin-bottom:0.5rem; color:#3a36e0; font-size:1.15rem;">Operador de Cancela</h3>
         <div class="mockup-grid" aria-hidden="false">
           <figure class="mockup-item">
             <div class="mockup-thumb">
               <img loading="lazy" data-full="../images/dashboards/dashOperatorMain.png"
                 src="../images/dashboards/dashOperatorMain.png" alt="Dashboard 1" class="mockup-img">
             </div>
-            <figcaption><strong>Operador de Cancela - Main</strong></figcaption>
+            <figcaption><strong>Main Dashboard</strong></figcaption>
           </figure>
 
           <figure class="mockup-item">
@@ -678,15 +697,19 @@
             </div>
             <figcaption><strong>Operador de Cancela - Detalhes</strong> </figcaption>
           </figure>
+        </div>
 
+        <!-- Condutores -->
+        <h3 style="margin-top:2.5rem; margin-bottom:0.5rem; color:#3a36e0; font-size:1.15rem;">Condutores</h3>
+        <div class="mockup-grid" aria-hidden="false">
           <figure class="mockup-item">
             <div class="mockup-thumb">
               <img loading="lazy" data-full="../images/dashboards/dashDriver.png"
                 src="../images/dashboards/dashDriver.png" alt="Dashboard Mobile" class="mockup-img">
             </div>
-            <figcaption><strong>Condutores</strong></figcaption>
+            <figcaption><strong>Dashboard Mobile</strong></figcaption>
           </figure>
-        </div>
+        </div>  
       </div>
 
       <!-- ======= Demo MVP - Videos ======= -->

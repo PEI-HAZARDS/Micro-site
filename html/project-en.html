@@ -27,6 +27,43 @@
 </head>
 
 <body>
+
+<script>
+// Força animação do grid ao ativar a tab 'Database' (robusto para clique, hash e load direto)
+function animateDatabaseTabGrid() {
+  const tabContent = document.querySelector('#database');
+  if (!tabContent) return;
+  tabContent.querySelectorAll('.grid, .chart-container, .animate-on-scroll').forEach(el => {
+    el.classList.add('is-revealed');
+    el.classList.add('visible');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const tabBtn = document.querySelector('#tab-database');
+  if (tabBtn) {
+    tabBtn.addEventListener('click', function () {
+      setTimeout(animateDatabaseTabGrid, 120);
+    });
+    // Se a tab já estiver ativa ao carregar
+    if (tabBtn.classList.contains('active')) {
+      animateDatabaseTabGrid();
+    }
+  }
+
+  // Se o utilizador navegar por hash (#database), anima após load
+  if (window.location.hash === '#database') {
+    setTimeout(animateDatabaseTabGrid, 200);
+  }
+
+  // Observa mudanças de hash (navegação interna)
+  window.addEventListener('hashchange', function() {
+    if (window.location.hash === '#database') {
+      setTimeout(animateDatabaseTabGrid, 120);
+    }
+  });
+});
+</script>
   <div class="reading-progress-container">
     <div class="reading-progress-bar"></div>
   </div>
@@ -348,11 +385,7 @@
           </div>
 
           <div class="tab-content" id="database" role="tabpanel" aria-labelledby="tab-database">
-            <p>The database structures the full lifecycle of a visit: an <strong>Appointment/Booking</strong> links a
-              truck, driver, company, and terminal/gates, receives a cargo, and is materialized as a <strong>Visit</strong>
-              (entry/exit) in a <strong>Shift</strong>, potentially generating related <strong>Alerts</strong>. The
-              DER/ER models show how trucks, drivers, cargo, appointments, shifts, and alerts relate to ensure
-              end-to-end traceability.</p>
+            <p>The database structures the full lifecycle of a visit: an <strong>Appointment/Booking</strong> links a truck, driver, company, and terminal/gates, receives a cargo, is materialized as a <strong>Visit</strong> (entry/exit) in a <strong>Shift</strong>, and can generate related <strong>Alerts</strong>.
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <section class="col-span-1 p-6 md:p-8">
@@ -382,26 +415,20 @@
 
               <section class="col-span-1 p-6 md:p-8">
                 <h2 class="text-2xl font-bold mb-4">Consistency Patterns</h2>
-                <p class="text-brand-muted text-sm mb-6">Keeping polyglot systems synchronized requires rigorous
-                  application coordination, accepting eventual consistency and distributed transactions.</p>
+                <p class="text-brand-muted text-sm mb-6">Keeping polyglot systems synchronized requires rigorous application coordination, accepting eventual consistency and distributed transactions.</p>
 
                 <div class="space-y-4">
                   <div class="p-4 bg-slate-800 rounded-lg border-l-4 border-brand-rd">
                     <h3 class="font-bold mb-1 text-brand-text">1. Write-through Cache</h3>
-                    <p class="text-xs text-brand-muted">PostgreSQL ↔ Redis. Validation results (e.g., ADR
-                      certification) are cached in Redis with TTL. Reduces gate latency to sub-millisecond.</p>
+                    <p class="text-xs text-brand-muted">PostgreSQL ↔ Redis. Validation results (e.g., infractions) are cached in Redis with TTL. Reduces latency at the port gate to sub-millisecond.</p>
                   </div>
                   <div class="p-4 bg-slate-800 rounded-lg border-l-4 border-brand-mg">
                     <h3 class="font-bold mb-1 text-brand-text">2. Outbox Pattern</h3>
-                    <p class="text-xs text-brand-muted">PostgreSQL → MongoDB → Redis. State changes create an
-                      outbox record. A Debezium worker reads the WAL and propagates to MongoDB and Redis Streams.
-                      Prevents lost events.</p>
+                    <p class="text-xs text-brand-muted">PostgreSQL → MongoDB → Redis. State changes create an outbox record. A worker reads and propagates to MongoDB and Redis Streams. Prevents lost events.</p>
                   </div>
                   <div class="p-4 bg-slate-800 rounded-lg border-l-4 border-brand-pg">
                     <h3 class="font-bold mb-1 text-brand-text">3. Saga Pattern</h3>
-                    <p class="text-xs text-brand-muted">Distributed transaction. (1) Validate manifest (PG), (2)
-                      Check compatibility (Mongo), (3) Analyze position (Redis). Failures trigger compensating
-                      transactions.</p>
+                    <p class="text-xs text-brand-muted">Distributed Transaction. (1) Validate manifest (PG), (2) Check compatibility (Mongo), (3) Analyze position (Redis). Failures trigger compensating transactions.</p>
                   </div>
                 </div>
               </section>
@@ -654,32 +681,55 @@
 
       <div id="dashboard" class="card animate-on-scroll fade-in">
         <h2><i class="bi bi-phone"></i> Final Results </h2>
-        <p>Final MVP dashboard results for the <strong>gate operator</strong> and <strong>drivers</strong>.
-        </p>
+        <p>Real dashboards for the <strong>Logistics Manager</strong>, <strong>Gate Operator</strong>, and <strong>Drivers</strong>.</p>
 
+        <!-- Logistics Manager Dashboards -->
+        <h3 style="margin-top:2.5rem; margin-bottom:0.5rem; color:#3a36e0; font-size:1.15rem;">Logistics Manager</h3>
+        <div class="mockup-grid" aria-hidden="false">
+          <figure class="mockup-item">
+            <div class="mockup-thumb">
+              <img loading="lazy" data-full="../images/dashboards/gestor_logi.png"
+                src="../images/dashboards/gestor_logi.png" alt="Dashboard Analytics - Intelligent Logistics" class="mockup-img">
+            </div>
+            <figcaption><strong>Main Dashboard</strong></figcaption>
+          </figure>
+          <figure class="mockup-item">
+            <div class="mockup-thumb">
+              <img loading="lazy" data-full="../images/dashboards/gestor_logi2.png"
+                src="../images/dashboards/gestor_logi2.png" alt="Dashboard Main - Intelligent Logistics" class="mockup-img">
+            </div>
+            <figcaption><strong>Analytics Dashboard</strong></figcaption>
+          </figure>
+        </div>
+
+        <!-- Gate Operator Dashboards -->
+        <h3 style="margin-top:2.5rem; margin-bottom:0.5rem; color:#3a36e0; font-size:1.15rem;">Gate Operator</h3>
         <div class="mockup-grid" aria-hidden="false">
           <figure class="mockup-item">
             <div class="mockup-thumb">
               <img loading="lazy" data-full="../images/dashboards/dashOperatorMain.png"
-                src="../images/dashboards/dashOperatorMain.png" alt="Dashboard 1" class="mockup-img">
+                src="../images/dashboards/dashOperatorMain.png" alt="Gate Operator Main" class="mockup-img">
             </div>
-            <figcaption><strong>Gate Operator - Main</strong></figcaption>
+            <figcaption><strong>Main Dashboard</strong></figcaption>
           </figure>
-
           <figure class="mockup-item">
             <div class="mockup-thumb">
               <img loading="lazy" data-full="../images/dashboards/dashOperatorDetails.png"
-                src="../images/dashboards/dashOperatorDetails.png" alt="Dashboard Details" class="mockup-img">
+                src="../images/dashboards/dashOperatorDetails.png" alt="Gate Operator Details" class="mockup-img">
             </div>
-            <figcaption><strong>Gate Operator - Details</strong> </figcaption>
+            <figcaption><strong>Details Dashboard</strong></figcaption>
           </figure>
+        </div>
 
+        <!-- Drivers Dashboards -->
+        <h3 style="margin-top:2.5rem; margin-bottom:0.5rem; color:#3a36e0; font-size:1.15rem;">Drivers</h3>
+        <div class="mockup-grid" aria-hidden="false">
           <figure class="mockup-item">
             <div class="mockup-thumb">
               <img loading="lazy" data-full="../images/dashboards/dashDriver.png"
-                src="../images/dashboards/dashDriver.png" alt="Dashboard Mobile" class="mockup-img">
+                src="../images/dashboards/dashDriver.png" alt="Drivers Dashboard" class="mockup-img">
             </div>
-            <figcaption><strong>Drivers</strong></figcaption>
+            <figcaption><strong>Drivers Dashboard</strong></figcaption>
           </figure>
         </div>
       </div>
@@ -848,7 +898,7 @@
 
           setTimeout(() => {
             activeContent.style.opacity = '1';
-            if (tabId === 'bd') {
+            if (tabId === 'bd' || tabId === 'database') {
               initRadarChart();
               if (radarChartInstance) {
                 radarChartInstance.reset();
@@ -1106,6 +1156,43 @@
 
   <script src="../js/script.js"></script>
 </body>
+
+<script>
+// Força animação do grid ao ativar a tab 'Database' (robusto para clique, hash e load direto)
+function animateDatabaseTabGrid() {
+  const tabContent = document.querySelector('#database');
+  if (!tabContent) return;
+  tabContent.querySelectorAll('.grid, .chart-container, .animate-on-scroll').forEach(el => {
+    el.classList.add('is-revealed');
+    el.classList.add('visible');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const tabBtn = document.querySelector('#tab-database');
+  if (tabBtn) {
+    tabBtn.addEventListener('click', function () {
+      setTimeout(animateDatabaseTabGrid, 120);
+    });
+    // Se a tab já estiver ativa ao carregar
+    if (tabBtn.classList.contains('active')) {
+      animateDatabaseTabGrid();
+    }
+  }
+
+  // Se o utilizador navegar por hash (#database), anima após load
+  if (window.location.hash === '#database') {
+    setTimeout(animateDatabaseTabGrid, 200);
+  }
+
+  // Observa mudanças de hash (navegação interna)
+  window.addEventListener('hashchange', function() {
+    if (window.location.hash === '#database') {
+      setTimeout(animateDatabaseTabGrid, 120);
+    }
+  });
+});
+</script>
 
 </html>
 
