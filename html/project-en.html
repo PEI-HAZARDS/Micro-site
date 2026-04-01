@@ -284,14 +284,12 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="tab-content" id="trial-demo" role="tabpanel" aria-labelledby="trial-tab-demo">
             <h3><i class="bi bi-play-circle"></i> Demo</h3>
             <p>Demonstration video of the Port of Aveiro trial.</p>
-            <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
-              <iframe
-                src="https://drive.google.com/file/d/1ML41fnfd8BmnwDGQKE_ITdH8n89izxeF/preview"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                title="Port of Aveiro Trial Demo">
-              </iframe>
+            <div class="video-wrapper video-placeholder"
+              data-video-src="https://drive.google.com/file/d/1ML41fnfd8BmnwDGQKE_ITdH8n89izxeF/preview">
+              <div class="video-play-overlay">
+                <i class="bi bi-play-circle-fill"></i>
+                <span>Click to play</span>
+              </div>
             </div>
           </div>
         </div>
