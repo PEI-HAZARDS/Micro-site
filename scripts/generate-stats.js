@@ -76,14 +76,32 @@ async function getRepoStats(repo) {
       { commits: 0, issues_closed: 0, releases: 0 }
     );
 
+    const newData = { repos: results, totals };
+
+    // Only update the timestamp when actual stats change
+    let previousUpdatedAt = null;
+    let previousData = null;
+    try {
+      const existing = JSON.parse(fs.readFileSync("stats.json", "utf-8"));
+      previousUpdatedAt = existing.updated_at;
+      previousData = JSON.stringify({ repos: existing.repos, totals: existing.totals });
+    } catch (_) {
+      // first run or missing file
+    }
+
+    const changed = previousData !== JSON.stringify(newData);
+
     const finalStats = {
-      updated_at: new Date().toISOString(),
-      repos: results,
-      totals,
+      updated_at: changed ? new Date().toISOString() : (previousUpdatedAt || new Date().toISOString()),
+      ...newData,
     };
 
     fs.writeFileSync("stats.json", JSON.stringify(finalStats, null, 2));
-    console.log("✔ stats.json atualizado para múltiplos repositórios");
+    console.log(
+      changed
+        ? "✔ stats.json atualizado (dados alterados)"
+        : "✔ stats.json sem alterações nos dados"
+    );
   } catch (error) {
     console.error("Erro ao gerar stats.json:", error);
     process.exit(1);

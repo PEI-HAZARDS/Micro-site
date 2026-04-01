@@ -59,6 +59,13 @@ function initNavbar() {
         }
       });
     });
+
+    // Close with Escape key
+    window.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape' && mobileNav.classList.contains('active')) {
+        closeMobileNav();
+      }
+    });
   }
 
   // Header scroll behavior
@@ -257,8 +264,6 @@ function initContactForm() {
   }
 }
 
-// Inicializar o formulário ao carregar a página
-document.addEventListener('DOMContentLoaded', initContactForm);
 
 // Decorative particles effect
 function initParticlesEffect() {
@@ -324,50 +329,11 @@ function initDetailPageNavigation() {
   });
 }
 
-// Mobile nav toggle / close behaviour (idempotent: safe to add)
-(function initMobileNavToggle() {
-  document.addEventListener('click', (e) => {
-    const panel = document.querySelector('.nav-mobile');
-    const overlay = document.querySelector('.nav-overlay');
-    if (!panel || !overlay) return;
-
-    // open
-    if (e.target.closest('.nav-mobile-toggle')) {
-      panel.classList.add('active');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      return;
-    }
-
-    // close triggers: close button, overlay click, link click inside panel
-    if (e.target.closest('.nav-mobile-close') || e.target.closest('.nav-overlay') || e.target.closest('.nav-mobile .nav-link')) {
-      panel.classList.remove('active');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-      return;
-    }
-  });
-
-  // close with Escape
-  window.addEventListener('keydown', (ev) => {
-    if (ev.key === 'Escape') {
-      const panel = document.querySelector('.nav-mobile');
-      const overlay = document.querySelector('.nav-overlay');
-      if (panel && panel.classList.contains('active')) {
-        panel.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    }
-  });
-})();
 
 // New: fetch repository stats from GitHub and populate counters
 async function initRepoStats() {
   try {
-    const res = await fetch(
-      "https://pei-hazards.github.io/Micro-site/stats.json"
-    );
+    const res = await fetch("./stats.json");
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
