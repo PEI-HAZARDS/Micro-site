@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initContactForm();
   initParticlesEffect();
   initDetailPageNavigation();
+  initSectionVideoAutoplay();
   // initTeamImages() removed (not defined) to avoid runtime errors
 
   // Initial check if private panel is active in CSS
@@ -150,6 +151,30 @@ function animateOnScroll() {
       el.classList.remove('is-revealed');
     }
   });
+}
+
+// Play the press video only when its section scrolls into view (not on page load).
+// The iframe loads muted with enablejsapi=1, so we drive it via the YouTube
+// IFrame API postMessage commands instead of the autoplay URL param.
+function initSectionVideoAutoplay() {
+  const iframe = document.getElementById('press-video');
+  if (!iframe || !('IntersectionObserver' in window)) return;
+
+  const command = (func) => {
+    if (!iframe.contentWindow) return;
+    iframe.contentWindow.postMessage(
+      JSON.stringify({ event: 'command', func: func, args: [] }),
+      '*'
+    );
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      command(entry.isIntersecting ? 'playVideo' : 'pauseVideo');
+    });
+  }, { threshold: 0.5 });
+
+  observer.observe(iframe);
 }
 
 // Animated counters
