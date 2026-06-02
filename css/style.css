@@ -1937,3 +1937,131 @@ ol {
     justify-content: center;
   }
 }
+
+/* =====================================================
+   RESPONSIVE OPTIMISATION — mobile fit & formatting
+   Appended last so equal-specificity rules win over the
+   scattered defaults above. Targets phones & small tablets.
+   ===================================================== */
+
+/* Prevent accidental horizontal scroll. `clip` (unlike `hidden`)
+   does not create a scroll container, so fixed/sticky stays intact. */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* Never let media or embeds push the layout wider than the screen */
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+
+  /* Tighter vertical rhythm on phones/tablets */
+  .section {
+    padding: 3.25rem 0;
+  }
+
+  .section-heading {
+    margin-bottom: 2rem;
+  }
+
+  .hero {
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+  }
+
+  /* Stack CTA buttons full-width so they are easy to tap */
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  /* Partner logos wrap instead of shrinking off-screen */
+  .partner-logos {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .stats-wrapper {
+    gap: 2rem;
+  }
+
+  /* Fix fixed-width (380px) team cards that overflowed narrow screens.
+     Specificity matches `.team-grid .team-card` so the override sticks. */
+  .team-grid .team-card,
+  .team-bottom-row .team-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .team-bottom-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-inline: 1rem;
+  }
+
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .counter {
+    font-size: 2rem;
+  }
+
+  .stats-wrapper {
+    gap: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.7rem 1.1rem;
+  }
+}
+
+/* Smallest phones (e.g. 320px-wide devices) */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.4rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .partner-logos img {
+    height: 34px;
+  }
+}
