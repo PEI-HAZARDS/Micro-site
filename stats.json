@@ -1,22 +1,22 @@
 {
-  "updated_at": "2026-05-28T01:58:40.675Z",
+  "updated_at": "2026-06-02T02:35:29.854Z",
   "repos": [
     {
       "repo": "IntelligentLogistics",
-      "commits": 620,
+      "commits": 708,
       "issues_closed": 49,
-      "releases": 1
+      "releases": 2
     },
     {
       "repo": "IntelligentLogistics_APP",
-      "commits": 168,
+      "commits": 179,
       "issues_closed": 22,
       "releases": 0
     }
   ],
   "totals": {
-    "commits": 788,
+    "commits": 887,
     "issues_closed": 71,
-    "releases": 1
+    "releases": 2
   }
 }
