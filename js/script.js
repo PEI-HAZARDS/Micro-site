@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   initCopyButtons();
   initContactForm();
   initParticlesEffect();
-  initDetailPageNavigation();
   initSectionVideoAutoplay();
   // initTeamImages() removed (not defined) to avoid runtime errors
 
@@ -115,12 +114,13 @@ function initScrollEffects() {
   // the viewport. This will add/remove the `.is-revealed` class which the
   // stylesheet uses to run fade/slide animations.
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed');
-        } else {
-          entry.target.classList.remove('is-revealed');
+          // Reveal once: stop observing so content doesn't hide/re-animate
+          // when the user scrolls back up.
+          obs.unobserve(entry.target);
         }
       });
     }, { threshold: 0.15 });
@@ -140,15 +140,13 @@ function animateOnScroll() {
   // No-op when IntersectionObserver is available (observer handles toggling).
   if ('IntersectionObserver' in window) return;
 
-  // Fallback for older browsers without IntersectionObserver
-  const animatedElements = document.querySelectorAll('.animate-on-scroll');
+  // Fallback for older browsers without IntersectionObserver (reveal once)
+  const animatedElements = document.querySelectorAll('.animate-on-scroll:not(.is-revealed)');
   animatedElements.forEach(el => {
     const elementTop = el.getBoundingClientRect().top;
     const elementVisible = 150;
     if (elementTop < window.innerHeight - elementVisible) {
       el.classList.add('is-revealed');
-    } else {
-      el.classList.remove('is-revealed');
     }
   });
 }
@@ -177,34 +175,49 @@ function initSectionVideoAutoplay() {
   observer.observe(iframe);
 }
 
-// Animated counters
+// Animated counters: start when they scroll into view, with ease-out
 function initCounters() {
   const counters = document.querySelectorAll('.counter');
+  if (!counters.length) return;
 
-  counters.forEach(counter => {
-    const target = parseInt(counter.getAttribute('data-target'));
+  function startCounter(counter) {
+    if (counter.dataset.counted) return;
+    counter.dataset.counted = 'true';
+
+    const target = parseInt(counter.getAttribute('data-target')) || 0;
     const duration = parseInt(counter.getAttribute('data-duration') || '2000');
     let startTime = null;
 
     function countUp(timestamp) {
       if (!startTime) startTime = timestamp;
 
-      const progress = timestamp - startTime;
-      const percentage = Math.min(progress / duration, 1);
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
 
-      const value = Math.floor(percentage * target);
-      counter.textContent = value;
+      counter.textContent = Math.round(eased * target);
 
-      if (percentage < 1) {
+      if (progress < 1) {
         window.requestAnimationFrame(countUp);
-      } else {
-        counter.textContent = target;
       }
     }
 
-    // Start animation immediately instead of waiting for intersection
     window.requestAnimationFrame(countUp);
-  });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startCounter(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+  } else {
+    counters.forEach(startCounter);
+  }
 }
 
 // Copy button functionality for code snippets
@@ -256,24 +269,26 @@ function initContactForm() {
     const submitBtn = contactForm.querySelector('[type="submit"]');
     if (submitBtn.disabled) return; // bloqueia segundo clique
 
+    const originalBtnHTML = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> A enviar...';
 
     try {
+      // no-cors: a resposta é opaca e os headers personalizados são ignorados;
+      // o Apps Script lê o JSON de e.postData.contents na mesma.
       await fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formValues),
       });
 
       showFormMessage("success", "Mensagem enviada com sucesso!");
       contactForm.reset();
     } catch (error) {
-      showFormMessage("error", "Erro ao enviar. Tente novamente.");
+      showFormMessage("danger", "Erro ao enviar. Tente novamente.");
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = "Enviar";
+      submitBtn.innerHTML = originalBtnHTML;
     }
   });
 
@@ -329,31 +344,6 @@ function initParticlesEffect() {
     particlesContainer.appendChild(particle);
   }
 }
-
-// Detail page navigation (prevent opening in new tab)
-function initDetailPageNavigation() {
-  // Links from index to detail pages - replace current page instead of opening new tab
-  const projectDetailLinks = document.querySelectorAll('.project-details-link');
-
-  projectDetailLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.location.replace(this.getAttribute('href'));
-    });
-  });
-
-  // Back links from detail pages - navigate directly to href
-  const backLinks = document.querySelectorAll('.back-link');
-
-  backLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const href = this.getAttribute('href') || '../index.html';
-      window.location.href = href;
-    });
-  });
-}
-
 
 // New: fetch repository stats from GitHub and populate counters
 async function initRepoStats() {

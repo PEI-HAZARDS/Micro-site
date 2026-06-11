@@ -23,7 +23,6 @@
 
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/project-page.css">
-  <link rel="stylesheet" href="../css/project-footer.css">
 </head>
 
 <body>
@@ -367,7 +366,7 @@
           <div class="tab-content" id="bd" role="tabpanel" aria-labelledby="tab-bd">
             <p>A BD estrutura todo o ciclo de uma visita: um <strong>Appointment/Booking</strong> liga camião,
               motorista, empresa e terminal/gates, recebe uma carga, é concretizado como <strong>Visit</strong>
-              (entrada/saída) num turno (<strong>Shift</strong>) e pode gerar <strong>Alerts</strong> associados.
+              (entrada/saída) num turno (<strong>Shift</strong>) e pode gerar <strong>Alerts</strong> associados.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <section class="col-span-1 p-6 md:p-8">
@@ -587,7 +586,7 @@
                 <div class="tech-icon"><i class="bi bi-database"></i></div>
                 <h4>Persistência (Data Module)</h4>
                 <ul>
-                  <li><strong></strong>PostgreSQL:</strong> Simulação de estrutura de dados portuária (agendamentos,
+                  <li><strong>PostgreSQL:</strong> Simulação de estrutura de dados portuária (agendamentos,
                     motoristas,
                     cargas, terminais)</li>
                   <li><strong>MongoDB:</strong> Logs de deteções, eventos de OCR e falhas de reconhecimento</li>
@@ -928,15 +927,6 @@
 
     // Update on page load
     updateReadingProgress();
-
-    // Back link behavior: navigate to href directly
-    document.querySelectorAll('.back-link').forEach(link => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        var href = this.getAttribute('href') || '../index.html';
-        window.location.href = href;
-      });
-    });
 
     // Animation on scroll functionality
     const observerOptions = {

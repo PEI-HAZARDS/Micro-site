@@ -23,7 +23,6 @@
 
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/project-page.css">
-  <link rel="stylesheet" href="../css/project-footer.css">
 </head>
 
 <body>
@@ -401,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </div>
 
           <div class="tab-content" id="database" role="tabpanel" aria-labelledby="tab-database">
-            <p>The database structures the full lifecycle of a visit: an <strong>Appointment/Booking</strong> links a truck, driver, company, and terminal/gates, receives a cargo, is materialized as a <strong>Visit</strong> (entry/exit) in a <strong>Shift</strong>, and can generate related <strong>Alerts</strong>.
+            <p>The database structures the full lifecycle of a visit: an <strong>Appointment/Booking</strong> links a truck, driver, company, and terminal/gates, receives a cargo, is materialized as a <strong>Visit</strong> (entry/exit) in a <strong>Shift</strong>, and can generate related <strong>Alerts</strong>.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <section class="col-span-1 p-6 md:p-8">
@@ -947,15 +946,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Update on page load
     updateReadingProgress();
-
-    // Back link behavior: navigate to href directly
-    document.querySelectorAll('.back-link').forEach(link => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        var href = this.getAttribute('href') || '../index-en.html';
-        window.location.href = href;
-      });
-    });
 
     // Animation on scroll functionality
     const observerOptions = {
